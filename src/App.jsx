@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import { CaretDownFilled, CaretUpFilled, DeleteOutlined, DownloadOutlined, EditOutlined, LeftOutlined, RightOutlined } from '@ant-design/icons';
 import { Workspace } from './Workspace.jsx';
+import { RoomDetail } from './RoomDetail.jsx';
 
 const initialRows = [
   { id: 1, name: '海尔洗衣机专场复盘', file: '2026-08-09_海尔洗衣机晚场.mp4', mode: '自有直播', account: '海尔宛瑾专卖店', anchor: '董佳楠、石嘉慧', product: '海尔云溪洗烘套装', duration: '02:46:38', status: '分析完成', progress: 100, uploaded: '2026/08/09 23:18', reports: 6 },
@@ -39,36 +40,26 @@ function LogoCrop() {
 }
 
 function UploadModal({ onClose, onSubmit }) {
-  const [mode, setMode] = useState('自有直播');
   const [file, setFile] = useState('');
   const [name, setName] = useState('');
-  const [account, setAccount] = useState('');
   const [anchor, setAnchor] = useState('');
   const [product, setProduct] = useState('');
-  const canSubmit = file && name && (mode === '竞品直播' || (account && anchor && product));
+  const canSubmit = file && name && anchor && product;
 
   return <div className="modal-mask" onMouseDown={e => e.target === e.currentTarget && onClose()}>
     <section className="upload-modal" role="dialog" aria-modal="true" aria-label="上传直播视频">
       <header><div><h2>上传直播视频</h2><p>上传完成后系统将自动进行口播、弹幕与内容分析</p></div><button className="close" onClick={onClose}>×</button></header>
       <div className="modal-body">
-        <div className="field"><label>分析模式 <b>*</b></label><div className="segmented"><button className={mode === '自有直播' ? 'active' : ''} onClick={() => setMode('自有直播')}>自有直播</button><button className={mode === '竞品直播' ? 'active' : ''} onClick={() => setMode('竞品直播')}>竞品直播</button></div></div>
         <div className="field"><label>视频文件 <b>*</b></label><label className={'dropzone ' + (file ? 'has-file' : '')}><input type="file" accept="video/*" onChange={e => { const f = e.target.files?.[0]; if (f) { setFile(f.name); if (!name) setName(f.name.replace(/\.[^.]+$/, '')); } }} /><span className="upload-mark">↑</span><strong>{file || '点击或拖拽上传直播视频'}</strong><small>{file ? '文件已就绪，最长支持 3 小时' : '支持 MP4、MOV、FLV、MKV，单个视频最长 3 小时'}</small></label></div>
         <div className="form-grid">
           <div className="field full"><label>复盘名称 <b>*</b></label><input value={name} onChange={e => setName(e.target.value)} placeholder="默认使用文件名称，可修改" maxLength={100}/></div>
-          {mode === '自有直播' ? <>
-            <div className="field"><label>关联抖音号 <b>*</b></label><select value={account} onChange={e => setAccount(e.target.value)}><option value="">请选择抖音号</option><option>海尔宛瑾专卖店</option><option>苏泊尔全能机皇洗地机</option></select></div>
-            <div className="field"><label>关联主播 <b>*</b></label><select value={anchor} onChange={e => setAnchor(e.target.value)}><option value="">请选择主播，可多选</option><option>董佳楠</option><option>石嘉慧</option><option>曹婷婷</option></select></div>
-            <div className="field full"><label>关联主推产品 <b>*</b></label><select value={product} onChange={e => setProduct(e.target.value)}><option value="">请选择产品或“暂无明确主推产品”</option><option>海尔云溪洗烘套装</option><option>苏泊尔洗地机A9</option><option>暂无明确主推产品</option></select></div>
-          </> : <>
-            <div className="field"><label>竞品直播间</label><input value={account} onChange={e => setAccount(e.target.value)} placeholder="请输入账号或直播间名称" /></div>
-            <div className="field"><label>竞品主播</label><input value={anchor} onChange={e => setAnchor(e.target.value)} placeholder="输入后回车添加标签" /></div>
-            <div className="field full"><label>竞品主推产品</label><input value={product} onChange={e => setProduct(e.target.value)} placeholder="输入后回车添加标签" /></div>
-          </>}
-          <div className="field"><label>直播日期</label><input type="date" /></div><div className="field"><label>行业 / 品类</label><select><option>请选择行业或品类</option><option>家用电器</option><option>美妆护肤</option></select></div>
+          <div className="field"><label>关联主播 <b>*</b></label><select value={anchor} onChange={e => setAnchor(e.target.value)}><option value="">请选择主播，可多选</option><option>董佳楠</option><option>石嘉慧</option><option>曹婷婷</option></select></div>
+          <div className="field full"><label>关联主推产品 <b>*</b></label><select value={product} onChange={e => setProduct(e.target.value)}><option value="">请选择产品或“暂无明确主推产品”</option><option>海尔云溪洗烘套装</option><option>苏泊尔洗地机A9</option><option>暂无明确主推产品</option></select></div>
+          <div className="field"><label>直播日期</label><input type="date" /></div>
           <div className="field full"><label>备注</label><textarea placeholder="填写仅供内部查看的补充信息，不进入 AI 分析上下文" maxLength={1000}></textarea></div>
         </div>
       </div>
-      <footer><span>单次仅上传一个视频，可同时建立多个任务</span><div><button className="secondary" onClick={onClose}>取消</button><button className="primary" disabled={!canSubmit} onClick={() => { onSubmit({ name, file, mode, account: account || '未填写', anchor: anchor || '未填写', product: product || '未填写' }); onClose(); }}>开始上传</button></div></footer>
+      <footer><span>单次仅上传一个视频，可同时建立多个任务</span><div><button className="secondary" onClick={onClose}>取消</button><button className="primary" disabled={!canSubmit} onClick={() => { onSubmit({ name, file, account: '创维生活电器旗舰店', anchor: anchor || '未填写', product: product || '未填写' }); onClose(); }}>开始上传</button></div></footer>
     </section>
   </div>;
 }
@@ -85,10 +76,8 @@ function RetryDetailModal({ row, onClose, onRetry }) {
 
 export function App() {
   const [activeTab, setActiveTab] = useState('全部');
-  const [mode, setMode] = useState('全部模式');
   const [status, setStatus] = useState('全部状态');
   const [keyword, setKeyword] = useState('');
-  const [showAdvanced, setShowAdvanced] = useState(false);
   const [showUpload, setShowUpload] = useState(false);
   const [rows, setRows] = useState(initialRows);
   const [toast, setToast] = useState('');
@@ -101,17 +90,16 @@ export function App() {
 
   const visibleRows = useMemo(() => rows.filter(row => {
     const tabOk = activeTab === '全部' || row.status === activeTab;
-    const modeOk = mode === '全部模式' || row.mode === mode;
     const statusOk = status === '全部状态' || row.status === status;
     const q = keyword.trim().toLowerCase();
     const keywordOk = !q || [row.name,row.file,row.account,row.anchor,row.product].some(v => v.toLowerCase().includes(q));
-    return tabOk && modeOk && statusOk && keywordOk;
+    return tabOk && statusOk && keywordOk;
   }).sort((a, b) => {
     const normalize = row => sortKey === 'uploaded' ? (row.uploaded === '刚刚' ? '9999/99/99 99:99' : row.uploaded) : sortKey === 'reports' ? row.reports : row.duration;
     const left = normalize(a); const right = normalize(b);
     const result = left > right ? 1 : left < right ? -1 : 0;
     return sortDir === 'asc' ? result : -result;
-  }), [rows, activeTab, mode, status, keyword, sortKey, sortDir]);
+  }), [rows, activeTab, status, keyword, sortKey, sortDir]);
 
   const changeSort = field => {
     if (sortKey === field) setSortDir(value => value === 'asc' ? 'desc' : 'asc');
@@ -126,32 +114,31 @@ export function App() {
   const retryTask = row => { setRows(items => items.map(item => item.id === row.id ? {...item, status:'分析中', progress:Math.max(8, Math.min(item.progress, 85)), stage:row.retryStage, detail:undefined, retryStage:undefined} : item)); setRetryRow(null); setActiveTab('全部'); notify('已重新提交任务，将从异常环节继续处理'); };
 
   if (view === 'workspace') return <Workspace video={activeVideo} onBack={() => setView('list')}/>;
+  if (view === 'room') return <RoomDetail onOpenReview={() => setView('list')}/>;
 
   return <div className="app-shell">
     <header className="topbar">
       <div className="brand"><LogoCrop /></div>
-      <nav>{['首页','兴趣电商','一类电商','直播','退货','财务','广告','库存','订单','店铺','弹幕'].map(item => <button key={item} className={item === '直播' ? 'active' : ''}>{item}</button>)}</nav>
+      <nav>{['首页','兴趣电商','一类电商','直播','退货','财务','广告','库存','订单','店铺','弹幕'].map(item => <button key={item} className={item === '直播' ? 'active' : ''}>{item}{['兴趣电商','一类电商'].includes(item) && <CaretDownFilled/>}</button>)}</nav>
       <div className="profile"><div className="avatar">陈</div><span>陈旭光</span><span className="chev">⌄</span></div>
     </header>
     <main>
-      <div className="subnav"><button>总览</button><button>直播间</button><button>主播</button><button className="active">AI直播复盘</button><span className="mini-app">小程序</span></div>
+      <section className="review-room-summary"><div className="review-room-cover"></div><div className="review-room-basic"><strong>创维静享循环扇A</strong><span>● 抖音</span></div><div className="review-room-kpis"><em>推</em><span>秉方</span><em className="green">目标</em><span>5.04</span><em className="orange">考核</em><span>4.70</span><em className="pink">盈亏</em><span>4.55</span></div><div className="review-room-account"><i>SKYWORTH<br/>直播中</i><div><strong>创维生活电器旗舰店</strong><span>抖音号：79108397655</span></div></div></section>
+      <section className="review-room-tabs"><div>{['当日投产','引流分析','直播分析','直播场次','直播榜单'].map(tab=><button key={tab}>{tab}</button>)}<button onClick={() => setView('room')}>时段分析</button><button className="active">AI直播复盘</button></div><button className="primary review-upload" onClick={() => setShowUpload(true)}>＋ 上传视频</button></section>
       <section className="page-card">
-        <div className="page-heading"><div><h1>AI直播复盘</h1><p>上传直播视频，快速完成内容识别、AI分析与复盘沉淀</p></div><button className="primary upload-button" onClick={() => setShowUpload(true)}>＋ 上传视频</button></div>
         <div className="filter-panel">
           <div className="filter-row">
-            <label className="search"><span>关键词</span><input value={keyword} onChange={e => setKeyword(e.target.value)} placeholder="搜索复盘名称、文件、主播或产品"/></label>
-            <label><span>分析模式</span><select value={mode} onChange={e => setMode(e.target.value)}><option>全部模式</option><option>自有直播</option><option>竞品直播</option></select></label>
-            <label><span>视频状态</span><select value={status} onChange={e => setStatus(e.target.value)}><option>全部状态</option>{tabs.slice(1).map(t => <option key={t}>{t}</option>)}</select></label>
-            <label><span>上传日期</span><div className="date-range">2026/08/01 <i>至</i> 2026/08/10</div></label>
-            <div className="filter-actions"><button className="primary" onClick={() => notify(`已找到 ${visibleRows.length} 条记录`)}>查询</button><button className="secondary" onClick={() => { setKeyword(''); setMode('全部模式'); setStatus('全部状态'); setActiveTab('全部'); }}>重置</button><button className="link" onClick={() => setShowAdvanced(v => !v)}>{showAdvanced ? '收起筛选' : '更多筛选'}⌄</button></div>
+            <label className="search"><input value={keyword} onChange={e => setKeyword(e.target.value)} placeholder="搜索复盘名称、文件、主播或产品"/></label>
+            <label><select value={status} onChange={e => setStatus(e.target.value)}><option>全部状态</option>{tabs.slice(1).map(t => <option key={t}>{t}</option>)}</select></label>
+            <label><div className="date-range">2026/08/01 <i>至</i> 2026/08/10</div></label>
+            <div className="filter-actions"><button className="primary" onClick={() => notify(`已找到 ${visibleRows.length} 条记录`)}>查询</button><button className="secondary" onClick={() => { setKeyword(''); setStatus('全部状态'); setActiveTab('全部'); }}>重置</button></div>
           </div>
-          {showAdvanced && <div className="filter-row advanced"><label><span>抖音号 / 竞品</span><select><option>全部账号</option><option>海尔宛瑾专卖店</option></select></label><label><span>关联主播</span><select><option>全部主播</option><option>董佳楠</option></select></label><label><span>主推产品</span><select><option>全部产品</option><option>海尔云溪洗烘套装</option></select></label></div>}
         </div>
         <div className="status-tabs">{tabs.map(t => <button key={t} className={activeTab === t ? 'active' : ''} onClick={() => setActiveTab(t)}>{t}<em>{t === '全部' ? rows.length : rows.filter(r => r.status === t).length}</em></button>)}</div>
         <div className="table-toolbar"><span>共 <b>{visibleRows.length}</b> 个视频任务</span><div><button className="secondary" onClick={() => notify('列表已刷新')}>刷新</button></div></div>
-        <div className="table-wrap"><table><thead><tr><th className="review">复盘视频</th><th>分析模式</th><th>关联信息</th><th><SortableHeader label="视频时长" field="duration" sortKey={sortKey} sortDir={sortDir} onSort={changeSort}/></th><th>分析状态</th><th><SortableHeader label="上传时间" field="uploaded" sortKey={sortKey} sortDir={sortDir} onSort={changeSort}/></th><th><SortableHeader label="AI报告" field="reports" sortKey={sortKey} sortDir={sortDir} onSort={changeSort}/></th><th className="ops">操作</th></tr></thead><tbody>
-          {visibleRows.map(row => <tr key={row.id}><td><div className="video-cell"><div className={'thumb ' + (row.mode === '竞品直播' ? 'competitor' : '')}></div><div><strong title={row.name}>{row.name}</strong><small title={row.file}>{row.file}</small></div></div></td><td><span className={'mode-tag ' + (row.mode === '竞品直播' ? 'purple' : '')}>{row.mode}</span></td><td><div className="info-stack"><strong>{row.account}</strong><span>主播：{row.anchor}</span><span>产品：{row.product}</span></div></td><td>{row.duration}</td><td><div className={'status ' + statusTone[row.status]}><span></span>{row.status}</div>{['上传中','分析中'].includes(row.status) && <div className="progress"><i style={{width: row.progress+'%'}}></i><small>{row.progress}% · {row.stage}</small></div>}{['部分异常','分析失败'].includes(row.status) && <small className={'status-note '+(row.status === '分析失败' ? 'danger-text' : '')}>{row.stage}</small>}</td><td>{row.uploaded}</td><td><b>{row.reports || '--'}</b></td><td><div className="operation-list">{['分析完成','部分异常'].includes(row.status) && <button onClick={() => { setActiveVideo(row); setView('workspace'); }}>进入复盘</button>}{['分析失败','部分异常'].includes(row.status) && <button onClick={() => setRetryRow(row)}>重试</button>}<MoreMenu row={row} open={openMenuId === row.id} onToggle={() => setOpenMenuId(openMenuId === row.id ? null : row.id)} onAction={action => { setOpenMenuId(null); notify(`${action}：${row.name}`); }}/></div></td></tr>)}
-          {visibleRows.length === 0 && <tr><td colSpan="8"><div className="empty"><strong>没有找到匹配的视频</strong><span>调整筛选条件，或上传一段新的直播视频</span><button className="primary" onClick={() => setShowUpload(true)}>上传视频</button></div></td></tr>}
+        <div className="table-wrap"><table><thead><tr><th className="review">复盘视频</th><th>关联信息</th><th><SortableHeader label="视频时长" field="duration" sortKey={sortKey} sortDir={sortDir} onSort={changeSort}/></th><th>分析状态</th><th><SortableHeader label="上传时间" field="uploaded" sortKey={sortKey} sortDir={sortDir} onSort={changeSort}/></th><th><SortableHeader label="AI报告" field="reports" sortKey={sortKey} sortDir={sortDir} onSort={changeSort}/></th><th className="ops">操作</th></tr></thead><tbody>
+          {visibleRows.map(row => <tr key={row.id}><td><div className="video-cell"><div className="thumb"></div><div><strong title={row.name}>{row.name}</strong><small title={row.file}>{row.file}</small></div></div></td><td><div className="info-stack"><strong>{row.account}</strong><span>主播：{row.anchor}</span><span>产品：{row.product}</span></div></td><td>{row.duration}</td><td><div className={'status ' + statusTone[row.status]}><span></span>{row.status}</div>{['上传中','分析中'].includes(row.status) && <div className="progress"><i style={{width: row.progress+'%'}}></i><small>{row.progress}% · {row.stage}</small></div>}{['部分异常','分析失败'].includes(row.status) && <small className={'status-note '+(row.status === '分析失败' ? 'danger-text' : '')}>{row.stage}</small>}</td><td>{row.uploaded}</td><td><b>{row.reports || '--'}</b></td><td><div className="operation-list">{['分析完成','部分异常'].includes(row.status) && <button onClick={() => { setActiveVideo(row); setView('workspace'); }}>进入复盘</button>}{['分析失败','部分异常'].includes(row.status) && <button onClick={() => setRetryRow(row)}>重试</button>}<MoreMenu row={row} open={openMenuId === row.id} onToggle={() => setOpenMenuId(openMenuId === row.id ? null : row.id)} onAction={action => { setOpenMenuId(null); notify(`${action}：${row.name}`); }}/></div></td></tr>)}
+          {visibleRows.length === 0 && <tr><td colSpan="7"><div className="empty"><strong>没有找到匹配的视频</strong><span>调整筛选条件，或上传一段新的直播视频</span><button className="primary" onClick={() => setShowUpload(true)}>上传视频</button></div></td></tr>}
         </tbody></table></div>
         <div className="pagination"><div className="page-summary">共 {visibleRows.length} 条</div><div className="page-size"><select><option>10条/页</option><option>20条/页</option><option>50条/页</option></select></div><div className="page-numbers"><button className="page-arrow" onClick={() => notify('当前已经是第一页')}><LeftOutlined/></button><button className="page-number active">1</button><button className="page-arrow" onClick={() => notify('当前已经是最后一页')}><RightOutlined/></button></div><div className="page-jump"><span>前往</span><input defaultValue="1" inputMode="numeric"/><span>页</span></div></div>
       </section>
