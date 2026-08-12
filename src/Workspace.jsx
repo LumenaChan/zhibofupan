@@ -143,8 +143,9 @@ export function Workspace({ video, onBack }) {
   const [leftCollapsed, setLeftCollapsed] = useState(false);
   const [centerCollapsed, setCenterCollapsed] = useState(false);
   const [rightCollapsed, setRightCollapsed] = useState(false);
-  const [leftWidth, setLeftWidth] = useState(250);
-  const [centerWidth, setCenterWidth] = useState(750);
+  // 默认按 1:3:2 自适应分栏；用户开始拖拽后才固定为当前拖拽宽度。
+  const [leftWidth, setLeftWidth] = useState(null);
+  const [centerWidth, setCenterWidth] = useState(null);
   const [compassOpen, setCompassOpen] = useState(false);
   const [highFreqOpen, setHighFreqOpen] = useState(false);
   const [frequencyCategory, setFrequencyCategory] = useState(categoryOrder[0]);
@@ -189,6 +190,7 @@ export function Workspace({ video, onBack }) {
     { role:'assistant', text:naturalQuestionReport, markdown:true, reasoning:reasoningByQuestion[naturalQuestion].text, duration:reasoningByQuestion[naturalQuestion].duration, question:naturalQuestion }
   ]);
   const dragRef = useRef(null);
+  const workspaceGridRef = useRef(null);
   const chatScrollRef = useRef(null);
   const inputRef = useRef(null);
   const fabDraggedRef = useRef(false);
@@ -309,7 +311,10 @@ export function Workspace({ video, onBack }) {
 
   const startResize = (edge, event) => {
     event.preventDefault();
-    dragRef.current = { edge, startX:event.clientX, left:leftWidth, center:centerWidth };
+    const grid = workspaceGridRef.current;
+    const left = grid?.querySelector('.video-panel')?.getBoundingClientRect().width ?? 250;
+    const center = grid?.querySelector('.transcript-panel')?.getBoundingClientRect().width ?? 750;
+    dragRef.current = { edge, startX:event.clientX, left, center };
     const move = e => {
       const delta = e.clientX - dragRef.current.startX;
       if (edge === 'left') { setLeftWidth(Math.max(250, Math.min(470, dragRef.current.left + delta))); setCenterWidth(Math.max(420, dragRef.current.center - delta)); }
@@ -342,12 +347,16 @@ export function Workspace({ video, onBack }) {
   const handleChatScroll = event => { const node=event.currentTarget; setShowScrollBottom(node.scrollHeight-node.scrollTop-node.clientHeight>32); const top=node.getBoundingClientRect().top; const userMessages=[...node.querySelectorAll('.message.user[data-question]')]; let current=userMessages[0]; userMessages.forEach(item=>{if(item.getBoundingClientRect().top<=top+52) current=item;}); if(current?.dataset.question) setActiveAnchor(current.dataset.question); };
   const beginFabDrag = event => { if(event.button!==0) return; const panel=event.currentTarget.closest('.ai-panel'); const rect=panel.getBoundingClientRect(); const start={x:event.clientX,y:event.clientY,left:event.currentTarget.getBoundingClientRect().left-rect.left,top:event.currentTarget.getBoundingClientRect().top-rect.top}; fabDraggedRef.current=false; const move=e=>{const dx=e.clientX-start.x,dy=e.clientY-start.y;if(Math.abs(dx)+Math.abs(dy)>3)fabDraggedRef.current=true;setFabPosition({left:Math.max(8,Math.min(rect.width-104,start.left+dx)),top:Math.max(66,Math.min(rect.height-42,start.top+dy))});}; const up=()=>{window.removeEventListener('pointermove',move);window.removeEventListener('pointerup',up);}; window.addEventListener('pointermove',move);window.addEventListener('pointerup',up); };
   const saveSessionName = index => { const next=sessionDraft.trim(); if(next) setSessionNames(items=>items.map((item,i)=>i===index?next:item)); setEditingSession(-1); };
-  const gridStyle = { '--left-column':`${leftCollapsed ? 48 : leftWidth}px`, gridTemplateColumns: `${leftCollapsed ? 48 : leftWidth}px 6px ${centerCollapsed ? 48 : rightCollapsed ? 'minmax(420px,1fr)' : `${centerWidth}px`} 6px ${rightCollapsed ? '48px' : 'minmax(430px,1fr)'}` };
+  const useDefaultSplit = leftWidth === null && centerWidth === null;
+  const gridStyle = {
+    '--left-column': leftCollapsed ? '48px' : useDefaultSplit ? '1fr' : `${leftWidth}px`,
+    gridTemplateColumns: `${leftCollapsed ? '48px' : useDefaultSplit ? '1fr' : `${leftWidth}px`} 6px ${centerCollapsed ? '48px' : rightCollapsed ? 'minmax(420px,1fr)' : useDefaultSplit ? '3fr' : `${centerWidth}px`} 6px ${rightCollapsed ? '48px' : centerCollapsed ? 'minmax(430px,1fr)' : useDefaultSplit ? '2fr' : 'minmax(430px,1fr)'}`
+  };
 
   return <div className="workspace-shell">
     <header className="ws-topbar"><Brand/><nav>{['首页','兴趣电商','一类电商','直播','退货','财务','广告','库存','订单','店铺','弹幕'].map(i=><button className={i==='直播'?'active':''} key={i}>{i}{['兴趣电商','一类电商'].includes(i)&&<CaretDownFilled/>}</button>)}</nav><div className="ws-user"><span>陈</span>陈旭光<DownOutlined/></div></header>
     <section className="workspace-header"><button className="back" onClick={onBack}><ArrowLeftOutlined/>返回列表</button><div className="video-switch"><button onClick={()=>setVideoSwitchOpen(v=>!v)}><h1>{selectedVideo.name}</h1><DownOutlined/></button>{videoSwitchOpen&&<div>{reviewVideos.map(item=><button className={item.name===selectedVideo.name?'active':''} key={item.name} onClick={()=>{setSelectedVideo(item);setVideoSwitchOpen(false)}}><strong>{item.name}</strong><span>{item.account}</span></button>)}</div>}</div><div className="title"><span className="ws-status">分析完成</span></div><div className="meta"><span>{selectedVideo.account}</span><i></i><span>李嘉珂</span><i></i><span>创维静享驱蚊空气循环扇</span><i></i><span>{videoDuration.slice(3)}</span><i></i><span>口播 11,806 字</span><span className="speech-speed">口播速度 308 字/分钟 <span className="speed-help"><ExclamationCircleOutlined/><span className="speed-tooltip">口播速度 = 口播总字数 ÷ 实际说话总时长；静默、音乐和无口播区间不计入说话时长。</span></span></span></div><div className="link-config"><button className={linked?'active':''} onClick={()=>{setLinkConfigOpen(v=>!v);setMoreMenuOpen(false)}}><LinkOutlined/>联动配置</button>{linkConfigOpen&&<div><label><input type="checkbox" checked={linked} onChange={e=>setLinked(e.target.checked)}/><span>视频、口播与弹幕时间联动</span></label><small>开启后，拖动视频或点击时间戳将同步定位三类内容。</small></div>}</div><div className="workspace-more"><button className="ws-more" aria-label="更多功能" onClick={()=>{setMoreMenuOpen(v=>!v);setLinkConfigOpen(false)}}><MoreOutlined/></button>{moreMenuOpen&&<div className="workspace-more-menu"><button disabled><strong>导出话术</strong><span>暂未开放</span></button></div>}</div></section>
-    <div className={'workspace-grid '+(centerCollapsed?'center-collapsed':'')} style={gridStyle}>
+    <div ref={workspaceGridRef} className={'workspace-grid '+(centerCollapsed?'center-collapsed':'')} style={gridStyle}>
       <aside className={'video-panel '+(leftCollapsed?'collapsed':'')}>
         <button className="collapse-btn" aria-label={leftCollapsed?'展开视频与弹幕':'收起视频与弹幕'} onClick={()=>setLeftCollapsed(v=>!v)}>{leftCollapsed?<MenuUnfoldOutlined/>:<MenuFoldOutlined/>}</button>
         {leftCollapsed ? <span className="vertical-label">视频与弹幕</span> : <><div className="panel-title"><strong>直播画面</strong><span>原始证据</span></div><div className="portrait-video"><img className="live-frame" src="/untitle.png" alt="直播画面"/><div className="video-controls"><button className="play-main" aria-label={playing?'暂停':'播放'} onClick={()=>setPlaying(v=>!v)}>{playing?<PauseCircleFilled/>:<PlayCircleFilled/>}</button><span>{toTime(videoSeconds)}</span><input aria-label="视频播放进度" type="range" min="0" max={toSeconds(videoDuration)} value={Math.min(videoSeconds,toSeconds(videoDuration))} onInput={handleVideoProgress} onChange={handleVideoProgress}/><span>{videoDuration.slice(3)}</span></div></div><div className="comment-head"><strong>弹幕</strong><span>识别 {comments.length} 条</span><div className="comment-tools"><button className={'danmu-compass-trigger '+(danmuCompassOpen?'active':'')} onClick={()=>setDanmuCompassOpen(open=>!open)}>弹幕分类 <CaretDownFilled/></button><button className="comment-search"><SearchOutlined/></button></div></div>{danmuCompassOpen&&<section className="danmu-compass"><header><div><strong>弹幕分类</strong><span>按关键词命中的弹幕分类</span></div><button aria-label="关闭弹幕分类" onClick={()=>setDanmuCompassOpen(false)}><CloseOutlined/></button></header><div>{danmuCompass.map(item=><button key={item.category} className={activeDanmuCategory===item.category?'active':''} onClick={()=>{setActiveDanmuCategory(category=>category===item.category?'':item.category);setCommentPage(1);setDanmuCompassOpen(false)}}><span>{item.category}</span><em>{item.percent}% · {item.count}</em></button>)}</div></section>}<div className="comment-list">{visibleComments.map((item,index)=><button title={`弹幕时间 ${item.time}`} key={`${item.time}-${item.user}-${index}`} onClick={()=>{setVideoSeconds(toSeconds(item.time));if(linked){const [h,m,s]=item.time.split(':');setCurrentTime(item.time);setLocateHour(h);setLocateMinute(m);setLocateSecond(s)}}} className={nearestCommentTime===item.time?'active':''}><span className="comment-level">Lv.{item.level}</span><strong>{item.user}</strong><em>{renderDanmuText(item)}</em></button>)}</div><div className="evidence-pagination"><button disabled={commentPage===1} onClick={()=>setCommentPage(p=>p-1)}><LeftOutlined/></button><span>{commentPage}/{commentPages}</span><button disabled={commentPage===commentPages} onClick={()=>setCommentPage(p=>p+1)}><DownOutlined/></button></div></>}
