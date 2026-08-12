@@ -1,61 +1,102 @@
-import { useMemo, useRef, useState } from 'react';
+﻿import { useMemo, useRef, useState } from 'react';
 import { ArrowLeftOutlined, CaretDownFilled, CheckOutlined, CloseOutlined, CopyOutlined, DownOutlined, EditOutlined, ExclamationCircleOutlined, LeftOutlined, LinkOutlined, MenuFoldOutlined, MenuUnfoldOutlined, MessageOutlined, MoreOutlined, PauseCircleFilled, PlayCircleFilled, PlusOutlined, SearchOutlined, SendOutlined, SettingOutlined, SwapOutlined, UserOutlined } from '@ant-design/icons';
-
-const transcript = [
-  { time: '00:00:08', minute: '00:00', text: '大家上午好，欢迎来到海尔宛瑾专卖店，今天给大家带来的是云溪洗烘套装。' },
-  { time: '00:00:32', minute: '00:00', text: '刚进入直播间的朋友可以先点一下关注，右上角加入粉丝团，后面会有专属福利。', tags: ['关注力', '粉团话术'] },
-  { time: '00:01:12', minute: '00:01', text: '这套洗衣机是精华洗技术，能够快速激活洗衣液，针对领口袖口这些顽固污渍洗得更干净。', tags: ['塑品', '产品卖点'] },
-  { time: '00:01:58', minute: '00:01', text: '家里有宝宝或者容易过敏的朋友尤其适合，高温除菌以后衣物穿起来会更安心。', tags: ['塑品', '目标人群'] },
-  { time: '00:02:40', minute: '00:02', text: '今天直播间到手价只要六千九百九十九，错过今天就恢复原价，这是全年最低价。', tags: ['促单', '疑似违规'], risk: true },
-  { time: '00:03:16', minute: '00:03', text: '拍下以后客服会联系大家确认送货时间，免费送装一体，不需要另外付安装费。', tags: ['售后', '服务保障'] },
-  { time: '00:04:05', minute: '00:04', text: '还在犹豫的朋友直接点击下方小黄车，前二十名再送一年洗衣液，现在库存只剩最后八套。', tags: ['促单', '下单指令'] },
-  { time: '00:05:24', minute: '00:05', text: '大家最关心的尺寸我再讲一次，预留位置宽六百毫米、高八百五十毫米就可以安装。', tags: ['塑品', '属性功能'] },
-  { time: '00:06:18', minute: '00:06', text: '云溪套装支持洗烘联动，洗衣结束后烘干机会自动匹配程序，不需要大家再次操作。', tags: ['塑品', '产品卖点'] },
-  { time: '00:07:06', minute: '00:07', text: '刚才问噪音的朋友可以放心，夜间模式运行声音更轻，家里有老人孩子也不会影响休息。', tags: ['互动', '目标人群'] },
-  { time: '00:08:22', minute: '00:08', text: '现在拍下还可以享受免费送装一体和整机延保，具体覆盖区域请在下单前咨询客服。', tags: ['售后', '服务保障'] },
-  { time: '00:09:15', minute: '00:09', text: '库存提示已经变黄了，想要白色套装的朋友先拍下锁定库存，不合适也支持七天无理由。', tags: ['促单', '下单指令'] },
-  { time: '00:10:04', minute: '00:10', text: '新进直播间的朋友点一下关注，我马上再完整演示一次精华洗程序的操作步骤。', tags: ['关注力', '迎新话术'] },
-  { time: '00:11:28', minute: '00:11', text: '这款不是容量越大就越费水，它会根据衣物重量自动调整用水量和洗涤时长。', tags: ['塑品', '疑虑化解'] },
-  { time: '00:12:36', minute: '00:12', text: '价格权益以商品详情页实时展示为准，大家点击小黄车就能看到当前可领取的优惠券。', tags: ['促单', '合规表达'] },
-];
+import transcript from './transcript-data';
+import { categoryOrder, speechCategoryKeywords } from './speech-category-keywords';
+import naturalQuestionReport from '../report/natural-question.md?raw';
+import overallDiagnosisReport from '../report/overall-diagnosis.md?raw';
+import danmuDiagnosisReport from '../report/danmu-diagnosis.md?raw';
+import speechOptimizationReport from '../report/speech-optimization.md?raw';
+import violationReport from '../report/violation-report.md?raw';
 
 const comments = [
-  {time:'00:00:46',level:12,user:'海风轻轻',text:'洗衣机尺寸是多少？'},
-  {time:'00:01:18',level:8,user:'小熊软糖',text:'有宝宝可以用吗'},
-  {time:'00:01:37',level:21,user:'星河入梦',text:'烘干会不会缩水'},
-  {time:'00:02:03',level:5,user:'小满同学',text:'今天什么价格'},
-  {time:'00:02:48',level:18,user:'橙子汽水',text:'全年最低价是真的吗'},
-  {time:'00:03:21',level:9,user:'简单生活',text:'安装收费吗'},
-  {time:'00:04:12',level:16,user:'柠檬树下',text:'送什么赠品'},
-  {time:'00:05:30',level:26,user:'北方的风',text:'老小区能送上楼吗'},
-  {time:'00:05:48',level:7,user:'七月微光',text:'白色有现货吗'},
-  {time:'00:06:02',level:14,user:'一颗小豆子',text:'可以以旧换新吗'},
-  {time:'00:06:26',level:11,user:'夏日薄荷',text:'洗烘联动需要联网吗'},
-  {time:'00:06:52',level:19,user:'月亮邮差',text:'夜间洗衣声音大不大'},
-  {time:'00:07:14',level:6,user:'可乐不加冰',text:'安装需要提前预约吗'},
-  {time:'00:07:39',level:23,user:'星星泡饭',text:'旧机器可以帮忙搬走吗'},
-  {time:'00:08:07',level:15,user:'山茶花开',text:'延保是几年呀'},
-  {time:'00:08:43',level:10,user:'橘子海',text:'县城也能送装一体吗'},
-  {time:'00:09:18',level:28,user:'清风徐来',text:'白色还有多少库存'},
-  {time:'00:09:46',level:13,user:'布丁奶茶',text:'优惠券在哪里领取'},
-  {time:'00:10:21',level:17,user:'云朵收藏家',text:'能再演示一下精华洗吗'},
-  {time:'00:11:03',level:9,user:'南风知意',text:'一家四口容量够用吗'},
-  {time:'00:11:44',level:20,user:'小岛来信',text:'耗水量会不会很高'},
-  {time:'00:12:12',level:7,user:'晚风吹过',text:'支持花呗分期吗'}
+  {time:'00:00:00',level:18,user:'明***',text:'刚拍了'}, {time:'00:00:00',level:3,user:'w***',text:'有送驱蚊液是吗？'},
+  {time:'00:00:00',level:3,user:'阳***',text:'台式怎么拍'}, {time:'00:00:00',level:4,user:'徐***',text:'我也下单了'},
+  {time:'00:00:31',level:3,user:'6***',text:'买了'}, {time:'00:00:54',level:3,user:'阳***',text:'不是立式的吗？怎么变台式了？'},
+  {time:'00:01:38',level:0,user:'爱***',text:'已下单，加急，'}, {time:'00:02:08',level:2,user:'快***',text:'下单了'},
+  {time:'00:02:17',level:23,user:'香蕉***',text:'风速大不大'}, {time:'00:03:08',level:7,user:'N***',text:'我怎么拍不了'},
+  {time:'00:03:12',level:23,user:'容***',text:'我也买了'}, {time:'00:03:28',level:24,user:'擦***',text:'279的风是不是要比199大啊'},
+  {time:'00:03:57',level:23,user:'擦***',text:'看一下我是不是买对了的'}, {time:'00:05:22',level:3,user:'花***',text:'家里没蚊子的拍哪一个？'},
+  {time:'00:05:40',level:13,user:'不***',text:'好用吗'}, {time:'00:08:54',level:18,user:'明***',text:'刚拍了199'},
+  {time:'00:09:13',level:1,user:'勇***',text:'已拍'}, {time:'00:09:17',level:12,user:'梅***',text:'发哪家快递？'},
+  {time:'00:10:07',level:1,user:'李***',text:'199不能买啊199高'}, {time:'00:10:50',level:1,user:'李***',text:'哈喽，美女我179高了179了那199要了179买完了'},
+  {time:'00:14:12',level:23,user:'香蕉***',text:'我也买199的'}, {time:'00:14:59',level:2,user:'篮球***',text:'风扇高度多少？'},
+  {time:'00:15:29',level:23,user:'香蕉***',text:'加急'}, {time:'00:15:52',level:23,user:'香蕉***',text:'我买的是199的'},
+  {time:'00:17:06',level:1,user:'福***',text:'风速怎么样'}, {time:'00:17:21',level:1,user:'福***',text:'质保多久'},
+  {time:'00:17:51',level:23,user:'香蕉***',text:'云南多久能到'}, {time:'00:18:02',level:26,user:'风***',text:'钻石风扇刚到家，又看上你这款叫我怎么办'},
+  {time:'00:18:25',level:2,user:'爱***',text:'多重'}, {time:'00:18:51',level:11,user:'墨***',text:'多大啊'},
+  {time:'00:19:08',level:3,user:'X***',text:'下单了'}, {time:'00:21:01',level:11,user:'墨***',text:'买了'},
+  {time:'00:21:25',level:11,user:'墨***',text:'怎么领？'}, {time:'00:24:10',level:6,user:'吃***',text:'哪款有语音控制的'},
+  {time:'00:24:19',level:1,user:'贵***',text:'那好啊，美女我'}, {time:'00:25:20',level:1,user:'闰***',text:'有效距离多远'},
+  {time:'00:25:30',level:1,user:'贵***',text:'真有你说那么好吗？'}, {time:'00:25:43',level:6,user:'木***',text:'可以声控的吗'},
+  {time:'00:27:53',level:24,user:'美***',text:'怎么不回答问题'}, {time:'00:27:55',level:1,user:'贵***',text:'怎么进不去呢'},
+  {time:'00:28:23',level:23,user:'香蕉***',text:'我的没送遥控吗'}, {time:'00:29:19',level:23,user:'香蕉***',text:'送几样东西'},
+  {time:'00:29:55',level:16,user:'昕***',text:'196是台立两用嘛？'}, {time:'00:30:49',level:4,user:'玲***',text:'我买了'},
+  {time:'00:31:22',level:4,user:'玲***',text:'风扇多大直径'}, {time:'00:33:14',level:4,user:'玲***',text:'158元的是310x310x1050是不是'},
+  {time:'00:33:25',level:10,user:'爱心***',text:'158的有遥控器么'}, {time:'00:35:52',level:23,user:'香蕉***',text:'我买了'},
+  {time:'00:37:40',level:23,user:'香蕉***',text:'早时候买的哪个不送遥控'}
 ];
 
-const frequentWords = [
-  {word:'直播间',count:86,category:'互动力'},
-  {word:'大家',count:73,category:'互动力'},
-  {word:'今天',count:48,category:'促单/线索'},
-  {word:'洗衣机',count:42,category:'塑品'},
-  {word:'点击',count:31,category:'促单/线索'},
-  {word:'安心',count:19,category:'售后'}
-];
+const categoryColors = ['#5b8ff9','#61d9a8','#f6bd4a','#7666f2','#6dc8ec','#a78bfa','#f38f5d','#52b7a8'];
+const danmuCategoryKeywords = {
+  '购买成交':['刚拍了','怎么拍','下单了','买了','已下单','怎么拍不了','我也买了','买对了','拍哪一个','刚拍了199','已拍','199不能买','买完了','我也买199的','我买的是199的','怎么进不去','我买了'],
+  '价格优惠':['279','199','179','196','158元','158的'],
+  '功能性能':['风速大不大','风是不是要比199大','风速怎么样','语音控制','声控'],
+  '规格参数':['高度多少','多重','多大啊','有效距离多远','多大直径','310x310x1050'],
+  '款式选购':['台式','立式','怎么变台式','买对了','拍哪一个','279的风是不是要比199大','钻石风扇','这款','哪款','台立两用','哪个不送遥控'],
+  '赠品权益':['送驱蚊液','怎么领','没送遥控','送几样东西','有遥控器','不送遥控'],
+  '物流售后':['加急','发哪家快递','质保多久','云南多久能到','刚到家','没送遥控'],
+  '体验反馈':['好用吗','真有你说那么好吗','怎么不回答问题']
+};
+const danmuCategoryOrder = Object.keys(danmuCategoryKeywords);
+const sensitiveRiskKeywords = {
+  '价格优惠风险':['清仓','国补','国库','国股','国五','果补','双重叠加','原价599','原价5599','省四百多块','不会再有这个价','之后不会再上了','清完不再补'],
+  '稀缺促单风险':['就这三个名额','就这四个名额','就这五个名额','只有这四个了','还能送这五位','再送两位','只能加两单','30秒时间','20秒时间','一分钟时间','过点不再等','现货确实不多','没货了','正在支付的全部清空','不买的话咱就让给新人'],
+  '排名绝对化风险':['五大榜单的榜首','五大榜单都在top 1的位置','榜首','top 1','全平台全类目','全平台全联盟','全平台全链路','只有它这一款'],
+  '性能功效风险':['比普通风扇凉快2到3倍','凉快2到3倍','连开七天七夜不带发热发烫','连开七天7夜不带发热发烫','隔6米','抑菌器','新风机','防霉抗菌的扇叶','防霉','防潮','防短路','吹的风舒服干净'],
+  '数据背书风险':['粉丝量三百多万','累计销量一百多万台','卖一百多万台','26年新款','检测报告','经过检测'],
+  '商品承诺风险':['199直接就发二号5599的顶配机器','买到199直接就发2号599的顶配','直接升级发2号599的顶配版本','所有功能都有','所有功能全部都有','送驱蚊液','送遥控器','送驱蚊','送遥控','不送驱蚊','不送遥控','不带语音'],
+  '售后履约风险':['七天无理由','两年的整机质保','升级了两年的整机质保','质保两年','两年之内有啥问题','联系我们创维客服','全部安排现货','安排现货','现在就发','四通一达的现在就发走']
+};
+const orderedKeywords = Object.fromEntries(categoryOrder.map(category=>[category,[...speechCategoryKeywords[category]].sort((a,b)=>b.length-a.length)]));
+const keywordCandidates = categoryOrder.flatMap(category => orderedKeywords[category].map(keyword=>({category,keyword}))).sort((a,b)=>b.keyword.length-a.keyword.length || a.keyword.localeCompare(b.keyword));
+const findKeywordMatches = text => {
+  const candidates = keywordCandidates.flatMap(({category,keyword}) => {
+    const hits=[]; let start=text.indexOf(keyword);
+    while(start!==-1){ hits.push({category,keyword,start,end:start+keyword.length}); start=text.indexOf(keyword,start+keyword.length); }
+    return hits;
+  }).sort((a,b)=>b.keyword.length-a.keyword.length || a.start-b.start);
+  const accepted=[];
+  candidates.forEach(hit=>{ if(!accepted.some(item=>hit.start<item.end&&item.start<hit.end)) accepted.push(hit); });
+  return accepted.sort((a,b)=>a.start-b.start);
+};
+const riskCandidates = Object.entries(sensitiveRiskKeywords).flatMap(([riskType,keywords])=>keywords.map(keyword=>({riskType,keyword}))).sort((a,b)=>b.keyword.length-a.keyword.length || a.keyword.localeCompare(b.keyword));
+const findRiskMatches = text => {
+  const candidates = riskCandidates.flatMap(({riskType,keyword}) => {
+    const hits=[]; let start=text.indexOf(keyword);
+    while(start!==-1){ hits.push({riskType,keyword,start,end:start+keyword.length}); start=text.indexOf(keyword,start+keyword.length); }
+    return hits;
+  }).sort((a,b)=>b.keyword.length-a.keyword.length || a.start-b.start);
+  const accepted=[];
+  candidates.forEach(hit=>{ if(!accepted.some(item=>hit.start<item.end&&item.start<hit.end)) accepted.push(hit); });
+  return accepted.sort((a,b)=>a.start-b.start);
+};
+const danmuCandidates = danmuCategoryOrder.flatMap(category=>danmuCategoryKeywords[category].map(keyword=>({category,keyword}))).sort((a,b)=>b.keyword.length-a.keyword.length || a.keyword.localeCompare(b.keyword));
+const findDanmuMatches = text => {
+  const candidates=danmuCandidates.flatMap(({category,keyword})=>{const hits=[];let start=text.indexOf(keyword);while(start!==-1){hits.push({category,keyword,start,end:start+keyword.length});start=text.indexOf(keyword,start+keyword.length);}return hits;}).sort((a,b)=>b.keyword.length-a.keyword.length || a.start-b.start);
+  const accepted=[]; candidates.forEach(hit=>{if(!accepted.some(item=>hit.start<item.end&&item.start<hit.end))accepted.push(hit);});
+  return accepted.sort((a,b)=>a.start-b.start);
+};
+const categorizedComments = comments.map(item=>{const danmuMatches=findDanmuMatches(item.text);return {...item,danmuMatches,danmuCategories:[...new Set(danmuMatches.map(match=>match.category))]};});
+const categorizedTranscript = transcript.map(item => {
+  const keywordMatches = findKeywordMatches(item.text);
+  const riskMatches = findRiskMatches(item.text);
+  const categoryMatches = categoryOrder.reduce((result,category)=>{ const words=[...new Set(keywordMatches.filter(hit=>hit.category===category).map(hit=>hit.keyword))]; if(words.length) result[category]=words; return result; },{});
+  return { ...item, tags: Object.keys(categoryMatches), categoryMatches, keywordMatches, riskMatches, hasRisk:riskMatches.length>0 };
+});
 
 const reviewVideos = [
+  {name:'创维静享驱蚊空气循环扇专场复盘',mode:'自有直播',account:'创维生活电器旗舰店'},
   {name:'海尔洗衣机专场复盘',mode:'自有直播',account:'海尔宛瑾专卖店'},
-  {name:'康佳吸尘器竞品话术复盘',mode:'竞品直播',account:'康佳宇盈专卖店'},
   {name:'苏泊尔洗地机早场复盘',mode:'自有直播',account:'苏泊尔全能机皇洗地机'},
   {name:'海尔冰箱主播训练复盘',mode:'自有直播',account:'海尔优选旗舰店'}
 ];
@@ -70,16 +111,28 @@ const quickGroups = [
   { name:'AI提取话术', questions:['提取营销塑品话术','提取粉团话术','提取迎新话术','提取逼单话术','提取互动话术','提炼直播钩子话术','提取直播人设话术','提取行业金句'] },
 ];
 
-const compass = [
-  ['互动力',18,'#5b8ff9'],['关注力',12,'#61d9a8'],['促单/线索',24,'#f6bd4a'],['塑品',31,'#7666f2'],['售后',9,'#6dc8ec'],['其他',6,'#a78bfa']
-];
-
 function Brand() {
   return <div className="ws-brand"><div className="ws-logo-crop"><img src="/source-ui.png" alt=""/></div><strong>数智罗盘</strong></div>;
 }
 
 const toSeconds = value => value.split(':').reduce((total,part)=>total*60+Number(part),0);
 const toTime = total => { const h=Math.floor(total/3600); const m=Math.floor(total%3600/60); const s=Math.floor(total%60); return [h,m,s].map(v=>String(v).padStart(2,'0')).join(':'); };
+const videoDuration = '00:38:53';
+const naturalQuestion = '请帮我总结这场直播目前最需要优先改进的问题。';
+const reportByQuestion = {
+  [naturalQuestion]: naturalQuestionReport,
+  'AI整体诊断报告': overallDiagnosisReport,
+  'AI弹幕诊断报告': danmuDiagnosisReport,
+  'AI话术优化报告': speechOptimizationReport,
+  'AI违规报告': violationReport
+};
+const reasoningByQuestion = {
+  [naturalQuestion]: { duration:'12 秒', text:'我先综合检查了本场直播的主播口播、用户弹幕和违规风险，没有单独依据某一个指标下结论。口播侧最明显的问题是SKU、价格、功能和赠品信息反复交叉出现；弹幕侧则持续出现“买哪个、买对了吗、哪个有语音、有没有遥控”等选款确认问题，说明用户已经有较强购买意向，但决策路径仍不够清晰。\n\n同时，我进一步检查了这些高频销售表达是否只是话术质量问题，发现“TOP1”“凉快2到3倍”“连开七天七夜不发热”“不会再有这个价”等表达还存在重复性的合规风险。因此在多个问题之间进行优先级比较后，我认为当前最值得优先处理的是：先降低用户的选款和决策成本，同时替换已经形成固定循环的高风险销售话术。' },
+  'AI整体诊断报告': { duration:'15 秒', text:'我先从整场直播视角检查主播在产品介绍、价值表达、成交促进、互动答疑、信任建立和售后保障等环节的表现，再结合弹幕判断这些内容是否真正解决了用户需求。本场主播的产品信息输出和成交引导都比较充分，并不存在明显的“无话可说”或产品介绍不足问题。\n\n进一步交叉分析后发现，真正的问题集中在信息组织方式：价格、版本、功能、赠品和促单信息高频重复，但缺少足够稳定的结构，导致用户进入购买阶段后仍需要反复确认SKU和权益。同时部分核心销售话术存在重复性风险。因此整体诊断不应简单归结为“促单不足”，而应重点关注信息结构、用户决策效率、问题承接质量和合规表达四个方向。' },
+  'AI弹幕诊断报告': { duration:'11 秒', text:'我先对49条有效弹幕进行语义归类，没有直接把关键词命中次数当作用户真实需求。例如“刚拍了199”虽然包含价格数字，但核心意图是购买确认；“158的有遥控器么”核心也不是价格，而是在确认对应SKU的功能配置。\n\n继续结合弹幕时间与主播后续口播后可以看到，本场用户已经明显进入购买和选款阶段，关注点主要集中在版本选择、功能参数、赠品权益、物流售后和实际使用效果。主播对高度、语音、质保等标准问题回应较好，但对SKU比较、历史订单权益、地区物流和部分复杂问题容易只回答一部分。因此本场弹幕反映出的核心问题不是用户兴趣不足，而是用户已经想买，但仍存在较高的决策确认成本。' },
+  'AI话术优化报告': { duration:'13 秒', text:'我没有尝试重写整场直播话术，而是先筛选对用户决策影响最大的原始表达，重点检查产品卖点、用户疑问回应、成交引导和高频重复话术。判断时主要关注四件事：用户能不能快速听懂、有没有明确用户价值、能不能形成购买理由，以及是否能够自然引导下一步行动。\n\n本场比较突出的问题并不是主播表达能力弱，而是部分话术信息密度过高、结论先于证据，并且复杂问题的回答不够直接。例如SKU区别经常分散在多轮介绍中，“凉快2到3倍”等表达又过度依赖强结论。因此优化重点应该是把话术调整为先给结论、再讲差异、用场景解释价值、用演示和事实增强可信度，而不是单纯增加更多销售词。' },
+  'AI违规报告': { duration:'14 秒', text:'我先根据风险词库召回疑似问题，但没有把敏感词命中直接判断为违规。例如“七天无理由”“两年质保”“送遥控器”等表达本身可能属于正常商品权益，只有在缺少真实依据或与实际规则不一致时才可能产生风险，因此不能仅凭关键词生成违规结论。\n\n随后结合前后口播语境重新审核高风险片段，最终重点确认了价格承诺、排名宣传、效果夸大和效果保证等问题。其中“TOP1”“凉快2到3倍”“连开七天七夜不发热”等表达在本场多次重复，说明它们已经进入主播固定销售话术，而非偶发口误。因此本场违规优化的重点不是简单屏蔽几个敏感词，而是替换这些反复使用的高风险表达模板，从源头降低下一场直播的重复风险。' }
+};
 
 export function Workspace({ video, onBack }) {
   const transcriptAnchorEnabled = false;
@@ -90,12 +143,14 @@ export function Workspace({ video, onBack }) {
   const [leftCollapsed, setLeftCollapsed] = useState(false);
   const [centerCollapsed, setCenterCollapsed] = useState(false);
   const [rightCollapsed, setRightCollapsed] = useState(false);
-  const [leftWidth, setLeftWidth] = useState(330);
-  const [centerWidth, setCenterWidth] = useState(560);
+  const [leftWidth, setLeftWidth] = useState(250);
+  const [centerWidth, setCenterWidth] = useState(750);
   const [compassOpen, setCompassOpen] = useState(false);
   const [highFreqOpen, setHighFreqOpen] = useState(false);
+  const [frequencyCategory, setFrequencyCategory] = useState(categoryOrder[0]);
   const [sensitiveOn, setSensitiveOn] = useState(false);
   const [selectedWord, setSelectedWord] = useState('');
+  const [inlineHighlight, setInlineHighlight] = useState(null);
   const [linked, setLinked] = useState(true);
   const [linkConfigOpen, setLinkConfigOpen] = useState(false);
   const [moreMenuOpen, setMoreMenuOpen] = useState(false);
@@ -104,6 +159,8 @@ export function Workspace({ video, onBack }) {
   const [locateSecond, setLocateSecond] = useState('40');
   const [transcriptAnchorMinute, setTranscriptAnchorMinute] = useState('');
   const [commentPage, setCommentPage] = useState(1);
+  const [danmuCompassOpen, setDanmuCompassOpen] = useState(false);
+  const [activeDanmuCategory, setActiveDanmuCategory] = useState('');
   const [transcriptPage, setTranscriptPage] = useState(1);
   const [sessionOpen, setSessionOpen] = useState(false);
   const [sessionNames, setSessionNames] = useState(['直播问题诊断与优化','合规风险专项检查','优秀话术提取']);
@@ -128,35 +185,72 @@ export function Workspace({ video, onBack }) {
   const [followupReference, setFollowupReference] = useState(null);
   const [sentQuickPrompts, setSentQuickPrompts] = useState({});
   const [messages, setMessages] = useState([
-    { role:'user', text:'请帮我总结这场直播目前最需要优先改进的问题。', question:'请帮我总结这场直播目前最需要优先改进的问题。' },
-    { role:'assistant', text:'这场直播最需要优先改进的是促单表达的可信度与节奏。主播在 00:02:40 使用了“全年最低价”等高风险绝对化表达，同时在商品卖点讲解后缺少自然的权益承接。建议先修正合规表达，再建立“卖点—人群—权益—下单路径”的完整闭环。', reasoning:'已综合促单节点、风险话术和观众追问：先识别高风险绝对化表述，再检查卖点到权益的承接是否完整，并结合弹幕中的价格疑问判断优先级。', duration:'12 秒', question:'请帮我总结这场直播目前最需要优先改进的问题。' }
+    { role:'user', text:naturalQuestion, question:naturalQuestion },
+    { role:'assistant', text:naturalQuestionReport, markdown:true, reasoning:reasoningByQuestion[naturalQuestion].text, duration:reasoningByQuestion[naturalQuestion].duration, question:naturalQuestion }
   ]);
   const dragRef = useRef(null);
   const chatScrollRef = useRef(null);
   const inputRef = useRef(null);
   const fabDraggedRef = useRef(false);
 
-  const filteredTranscript = useMemo(() => transcript.filter(item => {
+  const compass = useMemo(() => {
+    const counts = Object.fromEntries(categoryOrder.map(category=>[category,0]));
+    categorizedTranscript.forEach(item=>item.tags.forEach(tag=>{ counts[tag] += 1; }));
+    const total = Object.values(counts).reduce((sum,count)=>sum+count,0);
+    return categoryOrder.map((name,index)=>[name,total?Math.round(counts[name]/total*100):0,categoryColors[index],counts[name]]).sort((a,b)=>b[1]-a[1] || b[3]-a[3]);
+  }, []);
+  const topCompassCategories = compass.slice(0,5).map(([name])=>name);
+
+  const categorySegmentCounts = useMemo(() => Object.fromEntries(categoryOrder.map(category=>[category,categorizedTranscript.filter(item=>item.tags.includes(category)).length])), []);
+  const danmuCompass = useMemo(() => {
+    const counts=Object.fromEntries(danmuCategoryOrder.map(category=>[category,categorizedComments.filter(item=>item.danmuCategories.includes(category)).length]));
+    const total=Object.values(counts).reduce((sum,count)=>sum+count,0);
+    return danmuCategoryOrder.map(category=>({category,count:counts[category],percent:total?Math.round(counts[category]/total*100):0}));
+  }, []);
+  const sensitiveSegmentCount = useMemo(() => categorizedTranscript.filter(item=>item.hasRisk).length, []);
+  const keywordStats = useMemo(() => {
+    const stats = new Map();
+    categorizedTranscript.forEach(item=>item.keywordMatches.forEach(hit=>{
+      const key=`${hit.category}::${hit.keyword}`;
+      const current=stats.get(key)||{keyword:hit.keyword,category:hit.category,occurrenceCount:0,segmentTimes:new Set()};
+      current.occurrenceCount += 1;
+      current.segmentTimes.add(item.time);
+      stats.set(key,current);
+    }));
+    return [...stats.values()].map(item=>({...item,segmentCount:item.segmentTimes.size})).sort((a,b)=>b.occurrenceCount-a.occurrenceCount || b.segmentCount-a.segmentCount || a.keyword.localeCompare(b.keyword));
+  }, []);
+  const visibleKeywordStats = keywordStats.filter(item=>item.category===frequencyCategory);
+  const frequencyCategoryOptions = categoryOrder;
+
+  const applyFrequencyCategory = category => { setFrequencyCategory(category); setSelectedWord(''); setActiveTag(category); setTranscriptPage(1); };
+  const clearFrequencyFilter = () => {
+    setSelectedWord('');
+    setActiveTag('全部口播');
+    setTranscriptPage(1);
+  };
+
+  const filteredTranscript = useMemo(() => categorizedTranscript.filter(item => {
     const searchOk = !search || item.text.includes(search);
+    if (sensitiveOn) return searchOk && item.hasRisk;
     const tagOk = activeTag === '全部口播' || item.tags?.includes(activeTag);
     const highlightFilters = [];
     if (selectedWord) highlightFilters.push(item.text.includes(selectedWord));
-    if (sensitiveOn) highlightFilters.push(Boolean(item.risk));
     const highlightOk = highlightFilters.length === 0 || highlightFilters.some(Boolean);
     return searchOk && tagOk && highlightOk;
   }), [search, activeTag, selectedWord, sensitiveOn]);
 
   const commentPageSize = 50;
   const transcriptPageSize = 30;
-  const visibleComments = comments.slice((commentPage-1)*commentPageSize,commentPage*commentPageSize);
+  const filteredComments = activeDanmuCategory ? categorizedComments.filter(item=>item.danmuCategories.includes(activeDanmuCategory)) : categorizedComments;
+  const visibleComments = filteredComments.slice((commentPage-1)*commentPageSize,commentPage*commentPageSize);
   const visibleTranscript = filteredTranscript.slice((transcriptPage-1)*transcriptPageSize,transcriptPage*transcriptPageSize);
-  const commentPages = Math.ceil(comments.length/commentPageSize);
+  const commentPages = Math.max(1,Math.ceil(filteredComments.length/commentPageSize));
   const transcriptPages = Math.max(1,Math.ceil(filteredTranscript.length/transcriptPageSize));
-  const transcriptAnchorTimes = useMemo(() => Array.from({length:Math.floor(toSeconds('02:46:38')/300)+1},(_,index)=>toTime(index*300)),[]);
+  const transcriptAnchorTimes = useMemo(() => Array.from({length:Math.floor(toSeconds(videoDuration)/300)+1},(_,index)=>toTime(index*300)),[]);
 
   const jumpToTime = value => {
     const safe = /^\d{2}:\d{2}:\d{2}$/.test(value) ? value : '00:00:00';
-    const seconds = Math.min(toSeconds('02:46:38'),toSeconds(safe));
+    const seconds = Math.min(toSeconds(videoDuration),toSeconds(safe));
     const target = toTime(seconds); const [h,m,s] = target.split(':');
     setVideoSeconds(seconds); setCurrentTime(target); setLocateHour(h); setLocateMinute(m); setLocateSecond(s);
   };
@@ -167,14 +261,50 @@ export function Workspace({ video, onBack }) {
     if (linked) { const target=toTime(value); const [h,m,s]=target.split(':'); setCurrentTime(target); setLocateHour(h); setLocateMinute(m); setLocateSecond(s); }
   };
 
-  const nearestTranscriptTime = transcript.reduce((best,item)=>Math.abs(toSeconds(item.time)-toSeconds(currentTime))<Math.abs(toSeconds(best)-toSeconds(currentTime))?item.time:best,transcript[0].time);
+  const nearestTranscriptTime = categorizedTranscript.reduce((best,item)=>Math.abs(toSeconds(item.time)-toSeconds(currentTime))<Math.abs(toSeconds(best)-toSeconds(currentTime))?item.time:best,categorizedTranscript[0].time);
   const nearestCommentTime = comments.reduce((best,item)=>Math.abs(toSeconds(item.time)-toSeconds(currentTime))<Math.abs(toSeconds(best)-toSeconds(currentTime))?item.time:best,comments[0].time);
 
-  const renderText = text => {
-    const terms = [sensitiveOn ? '全年最低价' : '', selectedWord, search].filter(Boolean);
-    if (!terms.length) return text;
-    const regex = new RegExp(`(${terms.map(term=>term.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).join('|')})`,'g');
-    return text.split(regex).map((part,index)=>terms.includes(part)?<mark className={part==='全年最低价'?'sensitive-mark':'freq-mark'} key={index}>{part}</mark>:part);
+  const renderText = (text, item) => {
+    const shouldHighlight = hit => selectedWord ? hit.keyword===selectedWord : activeTag!=='全部口播' && hit.category===activeTag;
+    const categoryMatches=item.keywordMatches.filter(shouldHighlight).map(hit=>({...hit,kind:'category'}));
+    const riskMatches=sensitiveOn ? item.riskMatches.map(hit=>({...hit,kind:'risk'})) : [];
+    const inlineMatches=inlineHighlight?.time===item.time ? (inlineHighlight.type==='risk'?item.riskMatches.map(hit=>({...hit,kind:'risk'})):item.keywordMatches.filter(hit=>hit.category===inlineHighlight.value).map(hit=>({...hit,kind:'category'}))) : [];
+    const matches=[...riskMatches,...categoryMatches,...inlineMatches].sort((a,b)=>(a.kind==='risk'?0:1)-(b.kind==='risk'?0:1) || (b.end-b.start)-(a.end-a.start) || a.start-b.start).reduce((accepted,hit)=>accepted.some(item=>hit.start<item.end&&item.start<hit.end)?accepted:[...accepted,hit],[]).sort((a,b)=>a.start-b.start);
+    if(!matches.length && !search) return text;
+    const parts=[]; let cursor=0;
+    matches.forEach((hit,index)=>{ if(hit.start>cursor) parts.push(text.slice(cursor,hit.start)); parts.push(<mark className={hit.kind==='risk'?'sensitive-mark':'category-mark'} key={`${hit.start}-${index}`}>{text.slice(hit.start,hit.end)}</mark>); cursor=hit.end; });
+    if(cursor<text.length) parts.push(text.slice(cursor));
+    return parts;
+  };
+
+  const renderDanmuText = item => {
+    const matches = activeDanmuCategory ? item.danmuMatches.filter(match=>match.category===activeDanmuCategory) : [];
+    if(!matches.length) return item.text;
+    const parts=[]; let cursor=0;
+    matches.forEach((match,index)=>{if(match.start>cursor)parts.push(item.text.slice(cursor,match.start));parts.push(<mark className="danmu-mark" key={`${match.start}-${index}`}>{item.text.slice(match.start,match.end)}</mark>);cursor=match.end;});
+    if(cursor<item.text.length)parts.push(item.text.slice(cursor));
+    return parts;
+  };
+
+  const renderMarkdown = source => {
+    const lines=source.replace(/\\([#*_\-|])/g,'$1').replace(/\r/g,'').split('\n');
+    const blocks=[]; let index=0;
+    const inline = (value,key) => {
+      const segments=value.split(/(\*\*[^*]+\*\*)/g);
+      return segments.map((segment,i)=>segment.startsWith('**')&&segment.endsWith('**')?<strong key={`${key}-${i}`}>{segment.slice(2,-2)}</strong>:segment);
+    };
+    while(index<lines.length){
+      const line=lines[index].trim();
+      if(!line){index+=1;continue;}
+      if(/^#{1,3}\s/.test(line)){const level=line.match(/^#+/)[0].length;const Tag=`h${level}`;blocks.push(<Tag key={index}>{inline(line.replace(/^#{1,3}\s/,''),index)}</Tag>);index+=1;continue;}
+      if(/^[-*]\s+/.test(line)){const items=[];while(index<lines.length&&/^[-*]\s+/.test(lines[index].trim())){items.push(<li key={index}>{inline(lines[index].trim().replace(/^[-*]\s+/,''),index)}</li>);index+=1;}blocks.push(<ul key={`list-${index}`}>{items}</ul>);continue;}
+      if(/^\d+\.\s+/.test(line)){const items=[];while(index<lines.length&&/^\d+\.\s+/.test(lines[index].trim())){items.push(<li key={index}>{inline(lines[index].trim().replace(/^\d+\.\s+/,''),index)}</li>);index+=1;}blocks.push(<ol key={`list-${index}`}>{items}</ol>);continue;}
+      if(/^>\s?/.test(line)){blocks.push(<blockquote key={index}>{inline(line.replace(/^>\s?/,''),index)}</blockquote>);index+=1;continue;}
+      if(/^---+$/.test(line)){blocks.push(<hr key={index}/>);index+=1;continue;}
+      if(line.includes('|')){let divider=index+1;while(divider<lines.length&&!lines[divider].trim())divider+=1;if(divider<lines.length&&/^\s*\|?\s*:?-{2,}/.test(lines[divider].trim())){const cells=line.split('|').filter(Boolean).map(value=>value.trim());const columnCount=cells.length;const gridColumns=columnCount===2?'minmax(0,28fr) minmax(0,72fr)':`minmax(0,${columnCount===3?24:columnCount===4?20:18}fr) ${Array.from({length:columnCount-1},()=>`minmax(0,${(100-(columnCount===3?24:columnCount===4?20:18))/(columnCount-1)}fr)`).join(' ')}`;index=divider+1;const rows=[];while(index<lines.length){if(!lines[index].trim()){index+=1;continue;}if(!lines[index].includes('|'))break;rows.push(lines[index].split('|').filter(Boolean).map(value=>value.trim()));index+=1;}blocks.push(<div className={`report-table-wrap columns-${columnCount}`} key={`table-${index}`}><div className="report-grid" style={{gridTemplateColumns:gridColumns}}>{cells.map((cell,i)=><div className="report-grid-cell head" key={`head-${i}`}>{cell}</div>)}{rows.flatMap((row,rowIndex)=>cells.map((_,columnIndex)=><div className="report-grid-cell" key={`${rowIndex}-${columnIndex}`}>{inline(row[columnIndex]||'',`${rowIndex}-${columnIndex}`)}</div>))}</div></div>);continue;}}
+      const paragraph=[];while(index<lines.length&&lines[index].trim()&&!/^#{1,3}\s|^[-*]\s+|^\d+\.\s+|^>\s?|^---+$/.test(lines[index].trim())){paragraph.push(lines[index].trim());index+=1;}blocks.push(<p key={`p-${index}`}>{inline(paragraph.join(' '),index)}</p>);
+    }
+    return blocks;
   };
 
   const startResize = (edge, event) => {
@@ -199,7 +329,9 @@ export function Workspace({ video, onBack }) {
 
   const sendQuestion = (question, fromQuickAnalysis=false) => {
     if (fromQuickAnalysis && usedQuestions[question]) { jumpToQuestion(question); return; }
-    setMessages(list => [...list,{role:'user',text:question,question},{role:'assistant',text:'已基于整场口播、弹幕和内容罗盘完成分析。建议先处理高风险表达，再围绕“卖点—权益—行动指令”重组当前话术节奏。',reasoning:'已提取与该问题相关的口播片段、观众反馈和内容分类，按风险、转化影响与可执行性排序后形成建议。',duration:'12 秒',question}]);
+    const report=reportByQuestion[question];
+    const reasoning=reasoningByQuestion[question]||{duration:'12 秒',text:'已提取与该问题相关的口播片段、观众反馈和内容分类，按风险、转化影响与可执行性排序后形成建议。'};
+    setMessages(list => [...list,{role:'user',text:question,question},{role:'assistant',text:report||'已基于整场口播、弹幕和内容分类完成分析。建议先处理高风险表达，再围绕“卖点—权益—行动指令”重组当前话术节奏。',markdown:Boolean(report),reasoning:reasoning.text,duration:reasoning.duration,question}]);
     if (fromQuickAnalysis) setUsedQuestions(items=>({...items,[question]:true}));
     setInput(''); setFollowupReference(null); setAnalysisOpen(false);
   };
@@ -214,22 +346,22 @@ export function Workspace({ video, onBack }) {
 
   return <div className="workspace-shell">
     <header className="ws-topbar"><Brand/><nav>{['首页','兴趣电商','一类电商','直播','退货','财务','广告','库存','订单','店铺','弹幕'].map(i=><button className={i==='直播'?'active':''} key={i}>{i}{['兴趣电商','一类电商'].includes(i)&&<CaretDownFilled/>}</button>)}</nav><div className="ws-user"><span>陈</span>陈旭光<DownOutlined/></div></header>
-    <section className="workspace-header"><button className="back" onClick={onBack}><ArrowLeftOutlined/>返回列表</button><div className="video-switch"><button onClick={()=>setVideoSwitchOpen(v=>!v)}><h1>{selectedVideo.name}</h1><DownOutlined/></button>{videoSwitchOpen&&<div>{reviewVideos.map(item=><button className={item.name===selectedVideo.name?'active':''} key={item.name} onClick={()=>{setSelectedVideo(item);setVideoSwitchOpen(false)}}><strong>{item.name}</strong><span>{item.account}</span></button>)}</div>}</div><div className="title"><span className="ws-status">分析完成</span></div><div className="meta"><span>{selectedVideo.account}</span><i></i><span>董佳楠、石嘉慧</span><i></i><span>海尔云溪洗烘套装</span><i></i><span>02:46:38</span><i></i><span>口播 28,647 字</span><span className="speech-speed">口播速度 238 字/分钟 <span className="speed-help"><ExclamationCircleOutlined/><span className="speed-tooltip">口播速度 = 口播总字数 ÷ 实际说话总时长；静默、音乐和无口播区间不计入说话时长。</span></span></span></div><div className="link-config"><button className={linked?'active':''} onClick={()=>{setLinkConfigOpen(v=>!v);setMoreMenuOpen(false)}}><LinkOutlined/>联动配置</button>{linkConfigOpen&&<div><label><input type="checkbox" checked={linked} onChange={e=>setLinked(e.target.checked)}/><span>视频、口播与弹幕时间联动</span></label><small>开启后，拖动视频或点击时间戳将同步定位三类内容。</small></div>}</div><div className="workspace-more"><button className="ws-more" aria-label="更多功能" onClick={()=>{setMoreMenuOpen(v=>!v);setLinkConfigOpen(false)}}><MoreOutlined/></button>{moreMenuOpen&&<div className="workspace-more-menu"><button disabled><strong>导出话术</strong><span>暂未开放</span></button></div>}</div></section>
+    <section className="workspace-header"><button className="back" onClick={onBack}><ArrowLeftOutlined/>返回列表</button><div className="video-switch"><button onClick={()=>setVideoSwitchOpen(v=>!v)}><h1>{selectedVideo.name}</h1><DownOutlined/></button>{videoSwitchOpen&&<div>{reviewVideos.map(item=><button className={item.name===selectedVideo.name?'active':''} key={item.name} onClick={()=>{setSelectedVideo(item);setVideoSwitchOpen(false)}}><strong>{item.name}</strong><span>{item.account}</span></button>)}</div>}</div><div className="title"><span className="ws-status">分析完成</span></div><div className="meta"><span>{selectedVideo.account}</span><i></i><span>李嘉珂</span><i></i><span>创维静享驱蚊空气循环扇</span><i></i><span>{videoDuration.slice(3)}</span><i></i><span>口播 11,806 字</span><span className="speech-speed">口播速度 308 字/分钟 <span className="speed-help"><ExclamationCircleOutlined/><span className="speed-tooltip">口播速度 = 口播总字数 ÷ 实际说话总时长；静默、音乐和无口播区间不计入说话时长。</span></span></span></div><div className="link-config"><button className={linked?'active':''} onClick={()=>{setLinkConfigOpen(v=>!v);setMoreMenuOpen(false)}}><LinkOutlined/>联动配置</button>{linkConfigOpen&&<div><label><input type="checkbox" checked={linked} onChange={e=>setLinked(e.target.checked)}/><span>视频、口播与弹幕时间联动</span></label><small>开启后，拖动视频或点击时间戳将同步定位三类内容。</small></div>}</div><div className="workspace-more"><button className="ws-more" aria-label="更多功能" onClick={()=>{setMoreMenuOpen(v=>!v);setLinkConfigOpen(false)}}><MoreOutlined/></button>{moreMenuOpen&&<div className="workspace-more-menu"><button disabled><strong>导出话术</strong><span>暂未开放</span></button></div>}</div></section>
     <div className={'workspace-grid '+(centerCollapsed?'center-collapsed':'')} style={gridStyle}>
       <aside className={'video-panel '+(leftCollapsed?'collapsed':'')}>
         <button className="collapse-btn" aria-label={leftCollapsed?'展开视频与弹幕':'收起视频与弹幕'} onClick={()=>setLeftCollapsed(v=>!v)}>{leftCollapsed?<MenuUnfoldOutlined/>:<MenuFoldOutlined/>}</button>
-        {leftCollapsed ? <span className="vertical-label">视频与弹幕</span> : <><div className="panel-title"><strong>直播画面</strong><span>原始证据</span></div><div className="portrait-video"><div className="live-frame"><span>海尔云溪<br/>洗烘套装</span><small>AI 直播复盘示例画面</small></div><button className="play-main" onClick={()=>setPlaying(v=>!v)}>{playing?<PauseCircleFilled/>:<PlayCircleFilled/>}</button><div className="video-controls"><span>{toTime(videoSeconds)}</span><input aria-label="视频播放进度" type="range" min="0" max={toSeconds('02:46:38')} value={videoSeconds} onInput={handleVideoProgress} onChange={handleVideoProgress}/><span>02:46:38</span></div></div><div className="comment-head"><strong>弹幕</strong><span>识别 1,286 条</span><button><SearchOutlined/></button></div><div className="comment-list">{visibleComments.map(item=><button title={`弹幕时间 ${item.time}`} key={item.time+item.user} onClick={()=>{setVideoSeconds(toSeconds(item.time));if(linked){const [h,m,s]=item.time.split(':');setCurrentTime(item.time);setLocateHour(h);setLocateMinute(m);setLocateSecond(s)}}} className={nearestCommentTime===item.time?'active':''}><span className="comment-level">Lv.{item.level}</span><strong>{item.user}</strong><em>{item.text}</em></button>)}</div><div className="evidence-pagination"><button disabled={commentPage===1} onClick={()=>setCommentPage(p=>p-1)}><LeftOutlined/></button><span>{commentPage}/{commentPages}</span><button disabled={commentPage===commentPages} onClick={()=>setCommentPage(p=>p+1)}><DownOutlined/></button></div></>}
+        {leftCollapsed ? <span className="vertical-label">视频与弹幕</span> : <><div className="panel-title"><strong>直播画面</strong><span>原始证据</span></div><div className="portrait-video"><img className="live-frame" src="/untitle.png" alt="直播画面"/><div className="video-controls"><button className="play-main" aria-label={playing?'暂停':'播放'} onClick={()=>setPlaying(v=>!v)}>{playing?<PauseCircleFilled/>:<PlayCircleFilled/>}</button><span>{toTime(videoSeconds)}</span><input aria-label="视频播放进度" type="range" min="0" max={toSeconds(videoDuration)} value={Math.min(videoSeconds,toSeconds(videoDuration))} onInput={handleVideoProgress} onChange={handleVideoProgress}/><span>{videoDuration.slice(3)}</span></div></div><div className="comment-head"><strong>弹幕</strong><span>识别 {comments.length} 条</span><div className="comment-tools"><button className={'danmu-compass-trigger '+(danmuCompassOpen?'active':'')} onClick={()=>setDanmuCompassOpen(open=>!open)}>弹幕分类 <CaretDownFilled/></button><button className="comment-search"><SearchOutlined/></button></div></div>{danmuCompassOpen&&<section className="danmu-compass"><header><div><strong>弹幕分类</strong><span>按关键词命中的弹幕分类</span></div><button aria-label="关闭弹幕分类" onClick={()=>setDanmuCompassOpen(false)}><CloseOutlined/></button></header><div>{danmuCompass.map(item=><button key={item.category} className={activeDanmuCategory===item.category?'active':''} onClick={()=>{setActiveDanmuCategory(category=>category===item.category?'':item.category);setCommentPage(1);setDanmuCompassOpen(false)}}><span>{item.category}</span><em>{item.percent}% · {item.count}</em></button>)}</div></section>}<div className="comment-list">{visibleComments.map((item,index)=><button title={`弹幕时间 ${item.time}`} key={`${item.time}-${item.user}-${index}`} onClick={()=>{setVideoSeconds(toSeconds(item.time));if(linked){const [h,m,s]=item.time.split(':');setCurrentTime(item.time);setLocateHour(h);setLocateMinute(m);setLocateSecond(s)}}} className={nearestCommentTime===item.time?'active':''}><span className="comment-level">Lv.{item.level}</span><strong>{item.user}</strong><em>{renderDanmuText(item)}</em></button>)}</div><div className="evidence-pagination"><button disabled={commentPage===1} onClick={()=>setCommentPage(p=>p-1)}><LeftOutlined/></button><span>{commentPage}/{commentPages}</span><button disabled={commentPage===commentPages} onClick={()=>setCommentPage(p=>p+1)}><DownOutlined/></button></div></>}
       </aside>
       <div className="resizer" role="separator" aria-label="调整视频栏宽度" aria-orientation="vertical" onMouseDown={e=>startResize('left',e)}></div>
       <main className={'transcript-panel '+(centerCollapsed?'collapsed':'')}>
         <button className="collapse-btn" aria-label={centerCollapsed?'展开口播与内容分析':'收起口播与内容分析'} onClick={()=>setCenterCollapsed(v=>{const next=!v;if(next)setRightCollapsed(false);return next;})}>{centerCollapsed?<MenuUnfoldOutlined/>:<MenuFoldOutlined/>}</button>
-        {centerCollapsed ? <span className="vertical-label">口播与内容分析</span> : <><div className="transcript-toolbar"><div className="toolbar-locate"><strong>口播稿</strong><span className="locator-label"><SwapOutlined/>快速定位</span><input aria-label="小时" type="number" min="0" max="99" value={locateHour} onFocus={e=>e.currentTarget.select()} onChange={e=>setLocateHour(e.target.value)}/><b>:</b><input aria-label="分钟" type="number" min="0" max="59" value={locateMinute} onFocus={e=>e.currentTarget.select()} onChange={e=>setLocateMinute(e.target.value)}/><b>:</b><input aria-label="秒" type="number" min="0" max="59" value={locateSecond} onFocus={e=>e.currentTarget.select()} onChange={e=>setLocateSecond(e.target.value)}/><button onClick={()=>jumpToTime(`${String(locateHour).padStart(2,'0')}:${String(locateMinute).padStart(2,'0')}:${String(locateSecond).padStart(2,'0')}`)}>跳转</button></div><div className="analysis-actions"><div className="transcript-search"><button aria-label="搜索口播稿" className={searchOpen||search?'active':''} onClick={()=>setSearchOpen(v=>!v)}><SearchOutlined/></button>{searchOpen&&<div className="transcript-search-popover"><SearchOutlined/><input autoFocus placeholder="搜索全部口播" value={search} onChange={event=>{setSearch(event.target.value);setTranscriptPage(1)}}/><button onClick={()=>{setSearch('');setSearchOpen(false);setTranscriptPage(1)}}>清空</button></div>}</div><button className={'compass-toggle '+(compassOpen?'active':'')} onClick={()=>{setCompassOpen(v=>!v);setHighFreqOpen(false)}}>内容罗盘 <CaretDownFilled/></button><button className={highFreqOpen||selectedWord?'active':''} onClick={()=>{setHighFreqOpen(v=>!v);setCompassOpen(false)}}>高频词{selectedWord&&<em>1</em>}</button><button className={sensitiveOn?'active':''} onClick={()=>{setSensitiveOn(v=>!v);setTranscriptPage(1)}}>敏感词 <em>3</em></button></div></div>
-        {compassOpen && <section className="compass-panel"><header><div><strong>内容罗盘</strong><span>内容构成占比，非能力评分</span></div><button onClick={()=>setCompassOpen(false)}>收起 <CaretDownFilled/></button></header><div className="compass-body"><div className="donut"><strong>100%</strong><span>已分类内容</span></div><div className="compass-bars">{compass.map(([name,val,color])=><button key={name} onClick={()=>{setActiveTag(name);setCompassOpen(false)}}><span>{name}</span><i><b style={{width:val*2.5+'px',background:color}}></b></i><em>{val}%</em></button>)}</div></div><footer>分类覆盖率 87.6% · 多标签语句已按标签数量平均分摊</footer></section>}
-        <div className="transcript-quick-locate"><strong>快速定位</strong><div><input aria-label="口播稿快速定位" type="range" min="0" max="9000" step="300" value={Math.min(videoSeconds,9000)} onChange={event=>jumpToTime(toTime(Number(event.target.value)))}/><span className="current-locate">{toTime(Math.min(videoSeconds,9000)).slice(0,5)}</span><div className="locate-ticks">{['00:00','30min','60min','90min','120min','150min'].map(label=><span key={label}>{label}</span>)}</div></div>
+        {centerCollapsed ? <span className="vertical-label">口播与内容分析</span> : <><div className="transcript-toolbar"><div className="toolbar-locate"><strong>口播稿</strong><span className="locator-label"><SwapOutlined/>快速定位</span><input aria-label="小时" type="number" min="0" max="99" value={locateHour} onFocus={e=>e.currentTarget.select()} onChange={e=>setLocateHour(e.target.value)}/><b>:</b><input aria-label="分钟" type="number" min="0" max="59" value={locateMinute} onFocus={e=>e.currentTarget.select()} onChange={e=>setLocateMinute(e.target.value)}/><b>:</b><input aria-label="秒" type="number" min="0" max="59" value={locateSecond} onFocus={e=>e.currentTarget.select()} onChange={e=>setLocateSecond(e.target.value)}/><button onClick={()=>jumpToTime(`${String(locateHour).padStart(2,'0')}:${String(locateMinute).padStart(2,'0')}:${String(locateSecond).padStart(2,'0')}`)}>跳转</button></div><div className="analysis-actions"><div className="transcript-search"><button aria-label="搜索口播稿" className={searchOpen||search?'active':''} onClick={()=>setSearchOpen(v=>!v)}><SearchOutlined/></button>{searchOpen&&<div className="transcript-search-popover"><SearchOutlined/><input autoFocus placeholder="搜索全部口播" value={search} onChange={event=>{setSearch(event.target.value);setTranscriptPage(1)}}/><button onClick={()=>{setSearch('');setSearchOpen(false);setTranscriptPage(1)}}>清空</button></div>}</div><button className={'compass-toggle '+(compassOpen?'active':'')} onClick={()=>{setCompassOpen(v=>!v);setHighFreqOpen(false)}}>内容分类 <CaretDownFilled/></button><button className={highFreqOpen||selectedWord?'active':''} onClick={()=>{setHighFreqOpen(v=>!v);setCompassOpen(false)}}>高频词{selectedWord&&<em>1</em>}</button><button className={sensitiveOn?'active':''} onClick={()=>{setSensitiveOn(v=>!v);setTranscriptPage(1)}}>敏感词 <em>{sensitiveSegmentCount}</em></button></div></div>
+        {compassOpen && <section className="compass-panel"><header><div><strong>内容分类</strong><span>基于关键词命中的内容构成</span></div><button onClick={()=>setCompassOpen(false)}>收起 <CaretDownFilled/></button></header><div className="compass-body"><div className="donut"><strong>100%</strong><span>已分类内容</span></div><div className="compass-bars">{compass.map(([name,val,color,count])=><button key={name} onClick={()=>{setActiveTag(name);setTranscriptPage(1);setCompassOpen(false)}}><span>{name}</span><i><b style={{width:val*2.5+'px',background:color}}></b></i><em>{val}% · {count}</em></button>)}</div></div><footer>多标签口播按命中分类分别计入占比。</footer></section>}
+        <div className="transcript-quick-locate"><strong>快速定位</strong><div><input aria-label="口播稿快速定位" type="range" min="0" max={toSeconds(videoDuration)} step="60" value={Math.min(videoSeconds,toSeconds(videoDuration))} onChange={event=>jumpToTime(toTime(Number(event.target.value)))}/><span className="current-locate">{toTime(Math.min(videoSeconds,toSeconds(videoDuration))).slice(0,5)}</span><div className="locate-ticks">{['00:00','5min','10min','15min','20min','25min','30min','35min','40min'].map(label=><span key={label}>{label}</span>)}</div></div>
         </div>
-        {highFreqOpen&&<section className="frequency-panel"><header><div><strong>高频词</strong><span>点击词语筛选并高亮全部命中位置</span></div><button onClick={()=>{setSelectedWord('');setTranscriptPage(1);setHighFreqOpen(false)}}>清除选择</button></header><div>{frequentWords.map(item=><button className={selectedWord===item.word?'active':''} key={item.word} onClick={()=>{setSelectedWord(selectedWord===item.word?'':item.word);setTranscriptPage(1);setHighFreqOpen(false)}}><strong>{item.word}</strong><span>{item.count} 次</span><em>{item.category}</em></button>)}</div></section>}
-        <div className="locate-strip"><button className={activeTag==='全部口播'?'active':''} onClick={()=>{setActiveTag('全部口播');setTranscriptPage(1)}}>全部口播</button>{['促单','塑品','关注力','疑似违规'].map(tag=><button key={tag} className={activeTag===tag?'active':''} onClick={()=>{setActiveTag(tag);setTranscriptPage(1)}}>{tag}</button>)}<span>定位结果 {filteredTranscript.length} 条</span></div>
-        <div className="transcript-list">{visibleTranscript.map((item,index)=>{const isMinuteMarker=index===0||visibleTranscript[index-1]?.minute!==item.minute;return <article key={item.time} className={(nearestTranscriptTime===item.time?'current ':'')+(item.risk?'risk':'')} onClick={()=>{setVideoSeconds(toSeconds(item.time));if(linked){const [h,m,s]=item.time.split(':');setCurrentTime(item.time);setLocateHour(h);setLocateMinute(m);setLocateSecond(s)}}}><div className="minute minute-anchor" onMouseEnter={()=>transcriptAnchorEnabled&&isMinuteMarker&&setTranscriptAnchorMinute(item.minute)} onMouseLeave={()=>transcriptAnchorEnabled&&setTranscriptAnchorMinute('')}>{isMinuteMarker?item.minute:''}{transcriptAnchorEnabled&&isMinuteMarker&&transcriptAnchorMinute===item.minute&&<section className="transcript-anchor-popover" onClick={event=>event.stopPropagation()}><strong>点击时间点快速跳转</strong><div className="transcript-anchor-times">{transcriptAnchorTimes.map(time=><button key={time} onClick={()=>{jumpToTime(time);setTranscriptAnchorMinute('')}}>{time.slice(0,5)}</button>)}</div><div className="anchor-quick-locate"><span>快速定位</span><input aria-label="小时" type="number" min="0" max="99" value={locateHour} onFocus={event=>event.currentTarget.select()} onChange={event=>setLocateHour(event.target.value)}/><b>:</b><input aria-label="分钟" type="number" min="0" max="59" value={locateMinute} onFocus={event=>event.currentTarget.select()} onChange={event=>setLocateMinute(event.target.value)}/><b>:</b><input aria-label="秒" type="number" min="0" max="59" value={locateSecond} onFocus={event=>event.currentTarget.select()} onChange={event=>setLocateSecond(event.target.value)}/><button onClick={()=>{jumpToTime(`${String(locateHour).padStart(2,'0')}:${String(locateMinute).padStart(2,'0')}:${String(locateSecond).padStart(2,'0')}`);setTranscriptAnchorMinute('')}}>跳转</button></div></section>}</div><div className="utterance"><div className="utterance-meta"><button>{item.time}</button>{item.tags&&<span>{item.tags.map(t=><em key={t}>{t}</em>)}</span>}</div><p>{renderText(item.text)}</p></div></article>})}</div><div className="evidence-pagination transcript-pagination"><button disabled={transcriptPage===1} onClick={()=>setTranscriptPage(p=>p-1)}><LeftOutlined/></button><span>{transcriptPage}/{transcriptPages}</span><button disabled={transcriptPage===transcriptPages} onClick={()=>setTranscriptPage(p=>p+1)}><DownOutlined/></button></div></>}
+{highFreqOpen&&<section className="frequency-panel"><header><div><strong>高频词</strong><span>{frequencyCategory} · {categorySegmentCounts[frequencyCategory]} 条口播命中</span></div><button onClick={clearFrequencyFilter}>清除关键词筛选</button></header><div className="frequency-category-tabs" role="tablist" aria-label="高频词分类">{frequencyCategoryOptions.map(category=>{const count=categorySegmentCounts[category];return <button key={category} role="tab" aria-selected={frequencyCategory===category} className={frequencyCategory===category?'active':''} onClick={()=>applyFrequencyCategory(category)}>{category}<b>{count}</b></button>})}</div><div className="frequency-list-head"><strong>高频关键词</strong></div><div className="frequency-keyword-grid">{visibleKeywordStats.length?visibleKeywordStats.map(item=><button title={`出现${item.occurrenceCount}次，涉及${item.segmentCount}条口播`} className={selectedWord===item.keyword?'active':''} key={`${item.category}-${item.keyword}`} onClick={()=>{setActiveTag(item.category);setSelectedWord(item.keyword);setTranscriptPage(1)}}><strong>{item.keyword}</strong><span>{item.occurrenceCount}次</span></button>):<div className="frequency-empty">该分类暂无命中关键词</div>}</div></section>}
+        <div className="locate-strip"><button className={activeTag==='全部口播'?'active':''} onClick={()=>{setActiveTag('全部口播');setSelectedWord('');setFrequencyCategory(categoryOrder[0]);setTranscriptPage(1)}}>全部口播</button>{topCompassCategories.map(tag=><button key={tag} className={activeTag===tag?'active':''} onClick={()=>{setActiveTag(tag);setSelectedWord('');setFrequencyCategory(tag);setTranscriptPage(1)}}>{tag}</button>)}<span>{selectedWord?<><b>{frequencyCategory} &gt; {selectedWord}</b> · 共命中 {filteredTranscript.length} 条口播 / 出现 {keywordStats.find(item=>item.keyword===selectedWord&&item.category===frequencyCategory)?.occurrenceCount||0} 次 <button onClick={clearFrequencyFilter}>清除筛选</button></>:<>定位结果 {filteredTranscript.length} 条</>}</span></div>
+        <div className="transcript-list">{visibleTranscript.map((item,index)=>{const isMinuteMarker=index===0||visibleTranscript[index-1]?.minute!==item.minute;const toggleInline=(type,value)=>setInlineHighlight(current=>current?.time===item.time&&current.type===type&&current.value===value?null:{time:item.time,type,value});return <article key={item.time} className={nearestTranscriptTime===item.time?'current ':''} onClick={()=>{setVideoSeconds(toSeconds(item.time));if(linked){const [h,m,s]=item.time.split(':');setCurrentTime(item.time);setLocateHour(h);setLocateMinute(m);setLocateSecond(s)}}}><div className="minute minute-anchor" onMouseEnter={()=>transcriptAnchorEnabled&&isMinuteMarker&&setTranscriptAnchorMinute(item.minute)} onMouseLeave={()=>transcriptAnchorEnabled&&setTranscriptAnchorMinute('')}>{isMinuteMarker?item.minute:''}{transcriptAnchorEnabled&&isMinuteMarker&&transcriptAnchorMinute===item.minute&&<section className="transcript-anchor-popover" onClick={event=>event.stopPropagation()}><strong>点击时间点快速跳转</strong><div className="transcript-anchor-times">{transcriptAnchorTimes.map(time=><button key={time} onClick={()=>{jumpToTime(time);setTranscriptAnchorMinute('')}}>{time.slice(0,5)}</button>)}</div><div className="anchor-quick-locate"><span>快速定位</span><input aria-label="小时" type="number" min="0" max="99" value={locateHour} onFocus={event=>event.currentTarget.select()} onChange={event=>setLocateHour(event.target.value)}/><b>:</b><input aria-label="分钟" type="number" min="0" max="59" value={locateMinute} onFocus={event=>event.currentTarget.select()} onChange={event=>setLocateMinute(event.target.value)}/><b>:</b><input aria-label="秒" type="number" min="0" max="59" value={locateSecond} onFocus={event=>event.currentTarget.select()} onChange={event=>setLocateSecond(event.target.value)}/><button onClick={()=>{jumpToTime(`${String(locateHour).padStart(2,'0')}:${String(locateMinute).padStart(2,'0')}:${String(locateSecond).padStart(2,'0')}`);setTranscriptAnchorMinute('')}}>跳转</button></div></section>}</div><div className="utterance"><div className="utterance-meta"><button>{item.time}</button>{(item.tags.length>0||item.hasRisk)&&<span>{item.tags.map(t=><em className={inlineHighlight?.time===item.time&&inlineHighlight.type==='category'&&inlineHighlight.value===t?'active':''} key={t} onClick={event=>{event.stopPropagation();toggleInline('category',t)}}>{t}</em>)}{item.hasRisk&&<em className={'sensitive-tag '+(inlineHighlight?.time===item.time&&inlineHighlight.type==='risk'?'active':'')} onClick={event=>{event.stopPropagation();toggleInline('risk','敏感')}}>敏感</em>}</span>}</div><p>{renderText(item.text,item)}</p></div></article>})}</div><div className="evidence-pagination transcript-pagination"><button disabled={transcriptPage===1} onClick={()=>setTranscriptPage(p=>p-1)}><LeftOutlined/></button><span>{transcriptPage}/{transcriptPages}</span><button disabled={transcriptPage===transcriptPages} onClick={()=>setTranscriptPage(p=>p+1)}><DownOutlined/></button></div></>}
       </main>
       <div className="resizer" role="separator" aria-label="调整AI助手栏宽度" aria-orientation="vertical" onMouseDown={e=>startResize('right',e)}></div>
       <aside className={'ai-panel '+(rightCollapsed?'collapsed':'')}>
@@ -238,7 +370,7 @@ export function Workspace({ video, onBack }) {
         {quickAnalysisEntryEnabled&&<button className="analysis-fab" style={fabPosition.left===null?undefined:{left:fabPosition.left,right:'auto',top:fabPosition.top}} onPointerDown={beginFabDrag} onClick={()=>{if(fabDraggedRef.current){fabDraggedRef.current=false;return;}setAnalysisOpen(true)}}><MessageOutlined/><span>快捷分析</span></button>}
         {analysisOpen&&<section className="analysis-drawer"><header><div><strong>快捷分析</strong><span>已生成报告的问题不可重复发送</span></div><button aria-label="关闭快捷分析" onClick={()=>setAnalysisOpen(false)}><CloseOutlined/></button></header><div className="quick-groups">{quickGroups.map(group=><button key={group.name} className={activeGroup===group.name?'active':''} onClick={()=>setActiveGroup(activeGroup===group.name?'':group.name)}>{group.name}</button>)}</div>{activeGroup&&<div className="quick-questions">{quickGroups.find(g=>g.name===activeGroup)?.questions.map(q=>usedQuestions[q]?<button className="used" key={q} onClick={()=>jumpToQuestion(q)}><span>{q}</span><em>已生成 · 查看报告</em></button>:<button key={q} onClick={()=>sendQuestion(q,true)}>{q}<SendOutlined/></button>)}{quickGroups.find(g=>g.name===activeGroup)?.disabled?.map(q=><button className="disabled" key={q} title="需关联直播经营数据，后续开放" disabled>{q}<small>后续开放</small></button>)}</div>}</section>}
         <nav className="conversation-anchors" aria-label="会话锚点" onPointerEnter={()=>setAnchorPopoverOpen(true)} onPointerLeave={()=>setAnchorPopoverOpen(false)}>{messages.filter(msg=>msg.role==='user').map((msg,index)=><button key={msg.question||index} aria-label={`跳转到问题：${msg.text}`} className={activeAnchor===msg.question?'active':''} onClick={()=>jumpToQuestion(msg.question)}><i></i></button>)}<div className={'anchor-popover '+(anchorPopoverOpen?'open':'')}>{messages.filter(msg=>msg.role==='user').map((msg,index)=><button key={msg.question||index} className={activeAnchor===msg.question?'active':''} onClick={()=>jumpToQuestion(msg.question)}><b>Q{index+1}.</b><span>{msg.text}</span></button>)}</div></nav>
-        <div className="chat-scroll" ref={chatScrollRef} onScroll={handleChatScroll}>{messages.map((msg,index)=><div data-question={msg.question} className={'message '+msg.role+(focusedQuestion===msg.question?' focused':'')} key={index}>{msg.role==='assistant'&&<div className="bot">AI</div>}<div className="bubble">{msg.role==='assistant'&&<div className="reasoning"><button onClick={()=>setExpandedReasoning(items=>({...items,[index]:!items[index]}))}><strong>已深度思考（用时 {msg.duration}）</strong><CaretDownFilled className={expandedReasoning[index]?'open':''}/></button>{expandedReasoning[index]&&<p>{msg.reasoning}</p>}</div>}<div className="answer-text">{msg.text}</div>{msg.role==='assistant'&&<div className="feedback"><div><button onClick={()=>copyAnswer(msg.text,index)}><CopyOutlined/>{copiedIndex===index?'已复制':'复制'}</button><button>有帮助</button><button>没帮助</button><button onClick={()=>{setFollowupReference({text:msg.text,question:msg.question});setInput('');inputRef.current?.focus()}}>进一步提问</button></div><button className="export-answer">导出</button></div>}</div></div>)}</div>
+        <div className="chat-scroll" ref={chatScrollRef} onScroll={handleChatScroll}>{messages.map((msg,index)=>{const reasoningOpen=msg.role==='assistant'?(expandedReasoning[index]??true):false;return <div data-question={msg.question} className={'message '+msg.role+(focusedQuestion===msg.question?' focused':'')} key={index}>{msg.role==='assistant'&&<div className="bot">AI</div>}<div className="bubble">{msg.role==='assistant'&&<div className="reasoning"><button onClick={()=>setExpandedReasoning(items=>({...items,[index]:!reasoningOpen}))}><strong>已深度思考（用时 {msg.duration}）</strong><CaretDownFilled className={reasoningOpen?'open':''}/></button>{reasoningOpen&&<p>{msg.reasoning}</p>}</div>}<div className={'answer-text '+(msg.markdown?'markdown-answer':'')}>{msg.markdown?renderMarkdown(msg.text):msg.text}</div>{msg.role==='assistant'&&<div className="feedback"><div><button onClick={()=>copyAnswer(msg.text,index)}><CopyOutlined/>{copiedIndex===index?'已复制':'复制'}</button><button>有帮助</button><button>没帮助</button><button onClick={()=>{setFollowupReference({text:msg.text,question:msg.question});setInput('');inputRef.current?.focus()}}>进一步提问</button></div><button className="export-answer">导出</button></div>}</div></div>})}</div>
         {showScrollBottom&&<button className="scroll-latest" aria-label="回到最新对话" onClick={scrollToLatest}><DownOutlined/></button>}
         {followupReference&&<div className="followup-reference"><button title="定位到被引用的回答" onClick={()=>jumpToQuestion(followupReference.question)}><span>追问引用：{followupReference.text}</span></button><button aria-label="取消引用回答" onClick={()=>{setFollowupReference(null);setInput('')}}><CloseOutlined/></button><small>围绕当前引用的回答继续提问...</small></div>}
         <footer className="chat-input"><div className="identity"><button><UserOutlined/>运营复盘专家<DownOutlined/></button><span>当前会话身份</span></div><div className="assistant-quick-prompts">{['AI整体诊断报告','AI话术优化报告','AI弹幕诊断报告','AI违规报告'].map(question=>sentQuickPrompts[question]?<div className="used" key={question}><span>{question}</span><i>·</i><button onClick={()=>jumpToQuestion(question)}>查看</button></div>:<button key={question} onClick={()=>{setSentQuickPrompts(items=>({...items,[question]:true}));sendQuestion(question)}}>{question}</button>)}</div><div className="input-box"><textarea ref={inputRef} value={input} onChange={e=>setInput(e.target.value)} placeholder="围绕当前直播自由提问，支持询问指定时间…" onKeyDown={e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();submitInput()}}}></textarea><div><button><SettingOutlined/>引用整场</button><span>{input.length}/2000</span><button className="send" disabled={!input.trim()} onClick={submitInput}><SendOutlined/></button></div></div><small>AI生成内容可能存在误差，请结合原始视频人工核对</small></footer>
@@ -246,3 +378,4 @@ export function Workspace({ video, onBack }) {
     </div>
   </div>;
 }
+
