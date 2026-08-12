@@ -143,9 +143,9 @@ export function Workspace({ video, onBack }) {
   const [leftCollapsed, setLeftCollapsed] = useState(false);
   const [centerCollapsed, setCenterCollapsed] = useState(false);
   const [rightCollapsed, setRightCollapsed] = useState(false);
-  // 默认按 1:3:2 自适应分栏；用户开始拖拽后才固定为当前拖拽宽度。
-  const [leftWidth, setLeftWidth] = useState(null);
-  const [centerWidth, setCenterWidth] = useState(null);
+  // 左右栏按容器比例控制，中栏始终占用剩余空间。
+  const [leftWidth, setLeftWidth] = useState(15);
+  const [rightWidth, setRightWidth] = useState(30);
   const [compassOpen, setCompassOpen] = useState(false);
   const [highFreqOpen, setHighFreqOpen] = useState(false);
   const [frequencyCategory, setFrequencyCategory] = useState(categoryOrder[0]);
@@ -312,13 +312,13 @@ export function Workspace({ video, onBack }) {
   const startResize = (edge, event) => {
     event.preventDefault();
     const grid = workspaceGridRef.current;
-    const left = grid?.querySelector('.video-panel')?.getBoundingClientRect().width ?? 250;
-    const center = grid?.querySelector('.transcript-panel')?.getBoundingClientRect().width ?? 750;
-    dragRef.current = { edge, startX:event.clientX, left, center };
+    const availableWidth = Math.max(1, (grid?.getBoundingClientRect().width ?? window.innerWidth) - 12);
+    dragRef.current = { edge, startX:event.clientX, availableWidth, left:leftWidth, right:rightWidth };
     const move = e => {
       const delta = e.clientX - dragRef.current.startX;
-      if (edge === 'left') { setLeftWidth(Math.max(250, Math.min(470, dragRef.current.left + delta))); setCenterWidth(Math.max(420, dragRef.current.center - delta)); }
-      else setCenterWidth(Math.max(420, Math.min(720, dragRef.current.center + delta)));
+      const deltaPercent = delta / dragRef.current.availableWidth * 100;
+      if (edge === 'left') setLeftWidth(Math.max(10, Math.min(80 - dragRef.current.right, dragRef.current.left + deltaPercent)));
+      else setRightWidth(Math.max(20, Math.min(80 - dragRef.current.left, dragRef.current.right - deltaPercent)));
     };
     const up = () => { document.removeEventListener('mousemove',move); document.removeEventListener('mouseup',up); };
     document.addEventListener('mousemove',move); document.addEventListener('mouseup',up);
@@ -347,10 +347,9 @@ export function Workspace({ video, onBack }) {
   const handleChatScroll = event => { const node=event.currentTarget; setShowScrollBottom(node.scrollHeight-node.scrollTop-node.clientHeight>32); const top=node.getBoundingClientRect().top; const userMessages=[...node.querySelectorAll('.message.user[data-question]')]; let current=userMessages[0]; userMessages.forEach(item=>{if(item.getBoundingClientRect().top<=top+52) current=item;}); if(current?.dataset.question) setActiveAnchor(current.dataset.question); };
   const beginFabDrag = event => { if(event.button!==0) return; const panel=event.currentTarget.closest('.ai-panel'); const rect=panel.getBoundingClientRect(); const start={x:event.clientX,y:event.clientY,left:event.currentTarget.getBoundingClientRect().left-rect.left,top:event.currentTarget.getBoundingClientRect().top-rect.top}; fabDraggedRef.current=false; const move=e=>{const dx=e.clientX-start.x,dy=e.clientY-start.y;if(Math.abs(dx)+Math.abs(dy)>3)fabDraggedRef.current=true;setFabPosition({left:Math.max(8,Math.min(rect.width-104,start.left+dx)),top:Math.max(66,Math.min(rect.height-42,start.top+dy))});}; const up=()=>{window.removeEventListener('pointermove',move);window.removeEventListener('pointerup',up);}; window.addEventListener('pointermove',move);window.addEventListener('pointerup',up); };
   const saveSessionName = index => { const next=sessionDraft.trim(); if(next) setSessionNames(items=>items.map((item,i)=>i===index?next:item)); setEditingSession(-1); };
-  const useDefaultSplit = leftWidth === null && centerWidth === null;
   const gridStyle = {
-    '--left-column': leftCollapsed ? '48px' : useDefaultSplit ? '1fr' : `${leftWidth}px`,
-    gridTemplateColumns: `${leftCollapsed ? '48px' : useDefaultSplit ? '1fr' : `${leftWidth}px`} 6px ${centerCollapsed ? '48px' : rightCollapsed ? 'minmax(420px,1fr)' : useDefaultSplit ? '3fr' : `${centerWidth}px`} 6px ${rightCollapsed ? '48px' : centerCollapsed ? 'minmax(430px,1fr)' : useDefaultSplit ? '2fr' : 'minmax(430px,1fr)'}`
+    '--left-column': leftCollapsed ? '48px' : `${leftWidth}fr`,
+    gridTemplateColumns: `${leftCollapsed ? '48px' : `minmax(0,${leftWidth}fr)`} 6px ${centerCollapsed ? '48px' : rightCollapsed ? 'minmax(0,1fr)' : `minmax(0,${100-leftWidth-rightWidth}fr)`} 6px ${rightCollapsed ? '48px' : centerCollapsed ? 'minmax(430px,1fr)' : `minmax(0,${rightWidth}fr)`}`
   };
 
   return <div className="workspace-shell">
