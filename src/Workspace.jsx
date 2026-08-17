@@ -202,6 +202,13 @@ export function Workspace({ video, onBack }) {
   const [anchorPopoverOpen, setAnchorPopoverOpen] = useState(false);
   const [expandedReasoning, setExpandedReasoning] = useState({});
   const [copiedIndex, setCopiedIndex] = useState(-1);
+  const [exportMenuIndex, setExportMenuIndex] = useState(-1);
+  const [feedbackState, setFeedbackState] = useState({});
+  const [negativeFeedbackIndex, setNegativeFeedbackIndex] = useState(-1);
+  const [negativeFeedbackReason, setNegativeFeedbackReason] = useState('');
+  const [negativeFeedbackNote, setNegativeFeedbackNote] = useState('');
+  const [negativeFeedbackError, setNegativeFeedbackError] = useState('');
+  const [feedbackToast, setFeedbackToast] = useState('');
   const [showScrollBottom, setShowScrollBottom] = useState(false);
   const [fabPosition, setFabPosition] = useState({ left:null, top:70 });
   const [search, setSearch] = useState('');
@@ -339,10 +346,20 @@ export function Workspace({ video, onBack }) {
         : activeTag!=='全部口播' ? item.keywordMatches.filter(hit=>hit.category===activeTag).map(hit=>({...hit,kind:'category'})) : [];
     const riskMatches=sensitiveOn ? item.riskMatches.map(hit=>({...hit,kind:'risk'})) : [];
     const inlineMatches=inlineHighlight?.time===item.time ? (inlineHighlight.type==='risk'?item.riskMatches.map(hit=>({...hit,kind:'risk'})):item.contentMatches.filter(hit=>hit.category===inlineHighlight.value||hit.subcategory===inlineHighlight.value).map(hit=>({...hit,kind:'category'}))) : [];
-    const matches=[...riskMatches,...categoryMatches,...inlineMatches].sort((a,b)=>(a.kind==='risk'?0:1)-(b.kind==='risk'?0:1) || (b.end-b.start)-(a.end-a.start) || a.start-b.start).reduce((accepted,hit)=>accepted.some(item=>hit.start<item.end&&item.start<hit.end)?accepted:[...accepted,hit],[]).sort((a,b)=>a.start-b.start);
+    // 搜索命中独立生成区间；同一关键词在一条口播中出现多次时全部高亮。
+    const searchMatches=[];
+    if (search) {
+      let start=text.indexOf(search);
+      while (start!==-1) {
+        searchMatches.push({start,end:start+search.length,kind:'search'});
+        start=text.indexOf(search,start+search.length);
+      }
+    }
+    const matchPriority={risk:0,search:1,category:2};
+    const matches=[...riskMatches,...searchMatches,...categoryMatches,...inlineMatches].sort((a,b)=>(matchPriority[a.kind]??3)-(matchPriority[b.kind]??3) || (b.end-b.start)-(a.end-a.start) || a.start-b.start).reduce((accepted,hit)=>accepted.some(item=>hit.start<item.end&&item.start<hit.end)?accepted:[...accepted,hit],[]).sort((a,b)=>a.start-b.start);
     if(!matches.length && !search) return text;
     const parts=[]; let cursor=0;
-    matches.forEach((hit,index)=>{ if(hit.start>cursor) parts.push(text.slice(cursor,hit.start)); parts.push(<mark className={hit.kind==='risk'?'sensitive-mark':'category-mark'} key={`${hit.start}-${index}`}>{text.slice(hit.start,hit.end)}</mark>); cursor=hit.end; });
+    matches.forEach((hit,index)=>{ if(hit.start>cursor) parts.push(text.slice(cursor,hit.start)); const className=hit.kind==='risk'?'sensitive-mark':hit.kind==='search'?'search-mark':'category-mark'; parts.push(<mark className={className} key={`${hit.start}-${index}`}>{text.slice(hit.start,hit.end)}</mark>); cursor=hit.end; });
     if(cursor<text.length) parts.push(text.slice(cursor));
     return parts;
   };
@@ -411,6 +428,28 @@ export function Workspace({ video, onBack }) {
 
   const submitInput = () => { if (input.trim()) sendQuestion(input.trim()); };
   const copyAnswer = async (text,index) => { try { await navigator.clipboard?.writeText(text); } finally { setCopiedIndex(index); setTimeout(()=>setCopiedIndex(-1),1600); } };
+  const selectExportFormat = () => setExportMenuIndex(-1);
+  const showFeedbackToast = () => { setFeedbackToast('反馈已提交'); window.setTimeout(()=>setFeedbackToast(''), 1800); };
+  const submitHelpfulFeedback = index => {
+    if (feedbackState[index]) return;
+    setFeedbackState(items=>({...items,[index]:'helpful'}));
+    showFeedbackToast();
+  };
+  const openNegativeFeedback = index => {
+    if (feedbackState[index]) return;
+    setNegativeFeedbackError('');
+    setNegativeFeedbackIndex(index);
+  };
+  const submitNegativeFeedback = () => {
+    if (!negativeFeedbackReason) { setNegativeFeedbackError('请选择反馈原因'); return; }
+    // 原型阶段模拟提交成功；接入接口后如提交失败，不清空原因和补充说明，供用户重试。
+    setFeedbackState(items=>({...items,[negativeFeedbackIndex]:'unhelpful'}));
+    setNegativeFeedbackIndex(-1);
+    setNegativeFeedbackReason('');
+    setNegativeFeedbackNote('');
+    setNegativeFeedbackError('');
+    showFeedbackToast();
+  };
   const scrollToLatest = () => { const node=chatScrollRef.current; if(node){node.scrollTo({top:node.scrollHeight,behavior:'smooth'});setShowScrollBottom(false);} };
   const handleChatScroll = event => { const node=event.currentTarget; setShowScrollBottom(node.scrollHeight-node.scrollTop-node.clientHeight>32); const top=node.getBoundingClientRect().top; const userMessages=[...node.querySelectorAll('.message.user[data-question]')]; let current=userMessages[0]; userMessages.forEach(item=>{if(item.getBoundingClientRect().top<=top+52) current=item;}); if(current?.dataset.question) setActiveAnchor(current.dataset.question); };
   const beginFabDrag = event => { if(event.button!==0) return; const panel=event.currentTarget.closest('.ai-panel'); const rect=panel.getBoundingClientRect(); const start={x:event.clientX,y:event.clientY,left:event.currentTarget.getBoundingClientRect().left-rect.left,top:event.currentTarget.getBoundingClientRect().top-rect.top}; fabDraggedRef.current=false; const move=e=>{const dx=e.clientX-start.x,dy=e.clientY-start.y;if(Math.abs(dx)+Math.abs(dy)>3)fabDraggedRef.current=true;setFabPosition({left:Math.max(8,Math.min(rect.width-104,start.left+dx)),top:Math.max(66,Math.min(rect.height-42,start.top+dy))});}; const up=()=>{window.removeEventListener('pointermove',move);window.removeEventListener('pointerup',up);}; window.addEventListener('pointermove',move);window.addEventListener('pointerup',up); };
@@ -446,7 +485,9 @@ export function Workspace({ video, onBack }) {
         {quickAnalysisEntryEnabled&&<button className="analysis-fab" style={fabPosition.left===null?undefined:{left:fabPosition.left,right:'auto',top:fabPosition.top}} onPointerDown={beginFabDrag} onClick={()=>{if(fabDraggedRef.current){fabDraggedRef.current=false;return;}setAnalysisOpen(true)}}><MessageOutlined/><span>快捷分析</span></button>}
         {analysisOpen&&<section className="analysis-drawer"><header><div><strong>快捷分析</strong><span>已生成报告的问题不可重复发送</span></div><button aria-label="关闭快捷分析" onClick={()=>setAnalysisOpen(false)}><CloseOutlined/></button></header><div className="quick-groups">{quickGroups.map(group=><button key={group.name} className={activeGroup===group.name?'active':''} onClick={()=>setActiveGroup(activeGroup===group.name?'':group.name)}>{group.name}</button>)}</div>{activeGroup&&<div className="quick-questions">{quickGroups.find(g=>g.name===activeGroup)?.questions.map(q=>usedQuestions[q]?<button className="used" key={q} onClick={()=>jumpToQuestion(q)}><span>{q}</span><em>已生成 · 查看报告</em></button>:<button key={q} onClick={()=>sendQuestion(q,true)}>{q}<SendOutlined/></button>)}{quickGroups.find(g=>g.name===activeGroup)?.disabled?.map(q=><button className="disabled" key={q} title="需关联直播经营数据，后续开放" disabled>{q}<small>后续开放</small></button>)}</div>}</section>}
         <nav className="conversation-anchors" aria-label="会话锚点" onPointerEnter={()=>setAnchorPopoverOpen(true)} onPointerLeave={()=>setAnchorPopoverOpen(false)}>{messages.filter(msg=>msg.role==='user').map((msg,index)=><button key={msg.question||index} aria-label={`跳转到问题：${msg.text}`} className={activeAnchor===msg.question?'active':''} onClick={()=>jumpToQuestion(msg.question)}><i></i></button>)}<div className={'anchor-popover '+(anchorPopoverOpen?'open':'')}>{messages.filter(msg=>msg.role==='user').map((msg,index)=><button key={msg.question||index} className={activeAnchor===msg.question?'active':''} onClick={()=>jumpToQuestion(msg.question)}><b>Q{index+1}.</b><span>{msg.text}</span></button>)}</div></nav>
-        <div className="chat-scroll" ref={chatScrollRef} onScroll={handleChatScroll}>{messages.map((msg,index)=>{const reasoningOpen=msg.role==='assistant'?(expandedReasoning[index]??true):false;return <div data-question={msg.question} className={'message '+msg.role+(focusedQuestion===msg.question?' focused':'')} key={index}>{msg.role==='assistant'&&<div className="bot">AI</div>}<div className="bubble">{msg.role==='assistant'&&<div className="reasoning"><button onClick={()=>setExpandedReasoning(items=>({...items,[index]:!reasoningOpen}))}><strong>已深度思考（用时 {msg.duration}）</strong><CaretDownFilled className={reasoningOpen?'open':''}/></button>{reasoningOpen&&<p>{msg.reasoning}</p>}</div>}<div className={'answer-text '+(msg.markdown?'markdown-answer':'')}>{msg.markdown?renderMarkdown(msg.text):msg.text}</div>{msg.role==='assistant'&&<div className="feedback"><div><button onClick={()=>copyAnswer(msg.text,index)}><CopyOutlined/>{copiedIndex===index?'已复制':'复制'}</button><button>有帮助</button><button>没帮助</button><button onClick={()=>{setFollowupReference({text:msg.text,question:msg.question});setInput('');inputRef.current?.focus()}}>进一步提问</button></div><button className="export-answer">导出</button></div>}</div></div>})}</div>
+        <div className="chat-scroll" ref={chatScrollRef} onScroll={handleChatScroll}>{messages.map((msg,index)=>{const reasoningOpen=msg.role==='assistant'?(expandedReasoning[index]??true):false;const currentFeedback=feedbackState[index];return <div data-question={msg.question} className={'message '+msg.role+(focusedQuestion===msg.question?' focused':'')} key={index}>{msg.role==='assistant'&&<div className="bot">AI</div>}<div className="bubble">{msg.role==='assistant'&&<div className="reasoning"><button onClick={()=>setExpandedReasoning(items=>({...items,[index]:!reasoningOpen}))}><strong>已深度思考（用时 {msg.duration}）</strong><CaretDownFilled className={reasoningOpen?'open':''}/></button>{reasoningOpen&&<p>{msg.reasoning}</p>}</div>}<div className={'answer-text '+(msg.markdown?'markdown-answer':'')}>{msg.markdown?renderMarkdown(msg.text):msg.text}</div>{msg.role==='assistant'&&<div className="feedback"><div><button onClick={()=>copyAnswer(msg.text,index)}><CopyOutlined/>{copiedIndex===index?'已复制':'复制'}</button><button className={currentFeedback==='helpful'?'selected-feedback':''} disabled={Boolean(currentFeedback)} onClick={()=>submitHelpfulFeedback(index)}>{currentFeedback==='helpful'&&<CheckOutlined/>}有帮助</button><button className={currentFeedback==='unhelpful'?'selected-feedback':''} disabled={Boolean(currentFeedback)} onClick={()=>openNegativeFeedback(index)}>{currentFeedback==='unhelpful'&&<CheckOutlined/>}没帮助</button><button onClick={()=>{setFollowupReference({text:msg.text,question:msg.question});setInput('');inputRef.current?.focus()}}>进一步提问</button></div><div className="answer-export"><button className="export-answer" onClick={()=>setExportMenuIndex(current=>current===index?-1:index)}>导出 <CaretDownFilled/></button>{exportMenuIndex===index&&<div className="answer-export-menu"><button onClick={selectExportFormat}>MD</button><button onClick={selectExportFormat}>Word</button><button onClick={selectExportFormat}>PDF</button></div>}</div></div>}</div></div>})}</div>
+        {negativeFeedbackIndex!==-1&&<div className="feedback-modal-mask" role="presentation" onMouseDown={()=>setNegativeFeedbackIndex(-1)}><section className="feedback-modal" role="dialog" aria-modal="true" aria-labelledby="negative-feedback-title" onMouseDown={event=>event.stopPropagation()}><header><strong id="negative-feedback-title">反馈原因</strong><button aria-label="关闭反馈弹窗" onClick={()=>setNegativeFeedbackIndex(-1)}><CloseOutlined/></button></header><p>请选择本次回答未满足预期的原因<span>*</span></p><div className="feedback-reasons">{['不准确','缺少证据','建议不可执行','表达不清晰','其他'].map(reason=><label key={reason}><input type="radio" name="negative-feedback-reason" value={reason} checked={negativeFeedbackReason===reason} onChange={event=>{setNegativeFeedbackReason(event.target.value);setNegativeFeedbackError('')}}/>{reason}</label>)}</div>{negativeFeedbackError&&<small className="feedback-error">{negativeFeedbackError}</small>}<label className="feedback-note">补充说明（选填）<textarea maxLength="1000" value={negativeFeedbackNote} onChange={event=>setNegativeFeedbackNote(event.target.value)} placeholder="请补充说明具体问题，帮助我们持续改进"/><span>{negativeFeedbackNote.length}/1000</span></label><footer><button onClick={()=>setNegativeFeedbackIndex(-1)}>取消</button><button className="submit-feedback" onClick={submitNegativeFeedback}>提交</button></footer></section></div>}
+        {feedbackToast&&<div className="feedback-toast" role="status"><CheckOutlined/>{feedbackToast}</div>}
         {showScrollBottom&&<button className="scroll-latest" aria-label="回到最新对话" onClick={scrollToLatest}><DownOutlined/></button>}
         {followupReference&&<div className="followup-reference"><button title="定位到被引用的回答" onClick={()=>jumpToQuestion(followupReference.question)}><span>追问引用：{followupReference.text}</span></button><button aria-label="取消引用回答" onClick={()=>{setFollowupReference(null);setInput('')}}><CloseOutlined/></button><small>围绕当前引用的回答继续提问...</small></div>}
         <footer className="chat-input"><div className="identity"><button><UserOutlined/>运营复盘专家<DownOutlined/></button><span>当前会话身份</span></div><div className="assistant-quick-prompts">{['AI整体诊断报告','AI话术优化报告','AI弹幕诊断报告','AI违规报告'].map(question=>sentQuickPrompts[question]?<div className="used" key={question}><span>{question}</span><i>·</i><button onClick={()=>jumpToQuestion(question)}>查看</button></div>:<button key={question} onClick={()=>{setSentQuickPrompts(items=>({...items,[question]:true}));sendQuestion(question)}}>{question}</button>)}</div><div className="input-box"><textarea ref={inputRef} value={input} onChange={e=>setInput(e.target.value)} placeholder="围绕当前直播自由提问，支持询问指定时间…" onKeyDown={e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();submitInput()}}}></textarea><div><button><SettingOutlined/>引用整场</button><span>{input.length}/2000</span><button className="send" disabled={!input.trim()} onClick={submitInput}><SendOutlined/></button></div></div><small>AI生成内容可能存在误差，请结合原始视频人工核对</small></footer>
