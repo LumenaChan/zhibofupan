@@ -1,0 +1,5299 @@
+{
+  "meta": {
+    "source_file": "zhibofupantest001_原文(1).srt",
+    "source_type": "SRT真实主播口播原稿",
+    "srt_caption_count": 1387,
+    "source_duration_end": "00:38:53,060",
+    "taxonomy_version": "用户确认最新版（2026-08-17）",
+    "extraction_principle": "仅从本次SRT真实口播中提取；不补充原稿未出现的行业通用词。对明显ASR误识别仅作为source_match_terms变体保留，不改写原始证据文本。",
+    "count_definition": "caption_hit_count表示至少命中该关键词任一source_match_terms的SRT字幕条数；同一字幕条内重复出现只计1条。",
+    "recommended_matching_rule": "优先匹配更长、更具体的短语；若同一字幕同时命中跨分类的长短词（如“创维客服”与“创维”），建议采用最长短语优先，避免重复归类。",
+    "category_count": 6,
+    "keyword_mapping_count": 123
+  },
+  "taxonomy": [
+    {
+      "category": "功能价值",
+      "subcategories": [
+        {
+          "subcategory": "产品功能",
+          "keywords": [
+            {
+              "keyword": "独立香薰",
+              "source_match_terms": [
+                "独立香薰"
+              ],
+              "caption_hit_count": 15,
+              "evidence_examples": [
+                {
+                  "srt_index": 2,
+                  "start": "00:00:05,580",
+                  "end": "00:00:06,288",
+                  "text": "独立香薰",
+                  "matched_terms": [
+                    "独立香薰"
+                  ]
+                },
+                {
+                  "srt_index": 109,
+                  "start": "00:02:47,180",
+                  "end": "00:02:47,868",
+                  "text": "独立香薰",
+                  "matched_terms": [
+                    "独立香薰"
+                  ]
+                },
+                {
+                  "srt_index": 196,
+                  "start": "00:05:12,040",
+                  "end": "00:05:12,688",
+                  "text": "独立香薰",
+                  "matched_terms": [
+                    "独立香薰"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "独立灯光",
+              "source_match_terms": [
+                "独立灯光"
+              ],
+              "caption_hit_count": 16,
+              "evidence_examples": [
+                {
+                  "srt_index": 3,
+                  "start": "00:00:06,290",
+                  "end": "00:00:06,870",
+                  "text": "独立灯光",
+                  "matched_terms": [
+                    "独立灯光"
+                  ]
+                },
+                {
+                  "srt_index": 110,
+                  "start": "00:02:47,870",
+                  "end": "00:02:48,458",
+                  "text": "独立灯光",
+                  "matched_terms": [
+                    "独立灯光"
+                  ]
+                },
+                {
+                  "srt_index": 194,
+                  "start": "00:05:10,770",
+                  "end": "00:05:11,430",
+                  "text": "独立灯光",
+                  "matched_terms": [
+                    "独立灯光"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "独立驱蚊",
+              "source_match_terms": [
+                "独立驱蚊"
+              ],
+              "caption_hit_count": 16,
+              "evidence_examples": [
+                {
+                  "srt_index": 4,
+                  "start": "00:00:06,870",
+                  "end": "00:00:07,550",
+                  "text": "独立驱蚊",
+                  "matched_terms": [
+                    "独立驱蚊"
+                  ]
+                },
+                {
+                  "srt_index": 111,
+                  "start": "00:02:48,460",
+                  "end": "00:02:49,080",
+                  "text": "独立驱蚊",
+                  "matched_terms": [
+                    "独立驱蚊"
+                  ]
+                },
+                {
+                  "srt_index": 195,
+                  "start": "00:05:11,430",
+                  "end": "00:05:12,038",
+                  "text": "独立驱蚊",
+                  "matched_terms": [
+                    "独立驱蚊"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "AI智能语音芯片",
+              "source_match_terms": [
+                "AI智能语音芯片",
+                "智能语音芯片"
+              ],
+              "caption_hit_count": 14,
+              "evidence_examples": [
+                {
+                  "srt_index": 5,
+                  "start": "00:00:07,740",
+                  "end": "00:00:09,340",
+                  "text": "加上AI智能语音芯片",
+                  "matched_terms": [
+                    "AI智能语音芯片",
+                    "智能语音芯片"
+                  ]
+                },
+                {
+                  "srt_index": 308,
+                  "start": "00:08:08,740",
+                  "end": "00:08:10,400",
+                  "text": "还带AI智能语音芯片",
+                  "matched_terms": [
+                    "AI智能语音芯片",
+                    "智能语音芯片"
+                  ]
+                },
+                {
+                  "srt_index": 380,
+                  "start": "00:10:05,620",
+                  "end": "00:10:07,290",
+                  "text": "还有AI智能语音芯片",
+                  "matched_terms": [
+                    "AI智能语音芯片",
+                    "智能语音芯片"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "不用联网",
+              "source_match_terms": [
+                "不用联网"
+              ],
+              "caption_hit_count": 2,
+              "evidence_examples": [
+                {
+                  "srt_index": 6,
+                  "start": "00:00:09,340",
+                  "end": "00:00:10,180",
+                  "text": "不用联网",
+                  "matched_terms": [
+                    "不用联网"
+                  ]
+                },
+                {
+                  "srt_index": 470,
+                  "start": "00:12:34,450",
+                  "end": "00:12:35,198",
+                  "text": "不用联网",
+                  "matched_terms": [
+                    "不用联网"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "一机六用",
+              "source_match_terms": [
+                "一机六用"
+              ],
+              "caption_hit_count": 17,
+              "evidence_examples": [
+                {
+                  "srt_index": 107,
+                  "start": "00:02:41,470",
+                  "end": "00:02:45,804",
+                  "text": "我直接给你升级82号599的顶配到手一机六用",
+                  "matched_terms": [
+                    "一机六用"
+                  ]
+                },
+                {
+                  "srt_index": 193,
+                  "start": "00:05:09,130",
+                  "end": "00:05:10,346",
+                  "text": "而且是一机六用的",
+                  "matched_terms": [
+                    "一机六用"
+                  ]
+                },
+                {
+                  "srt_index": 266,
+                  "start": "00:07:01,270",
+                  "end": "00:07:03,050",
+                  "text": "一机六用所有功能都有",
+                  "matched_terms": [
+                    "一机六用"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "360度循环送风",
+              "source_match_terms": [
+                "360度循环送风",
+                "360度的循环送风"
+              ],
+              "caption_hit_count": 7,
+              "evidence_examples": [
+                {
+                  "srt_index": 28,
+                  "start": "00:00:46,540",
+                  "end": "00:00:49,550",
+                  "text": "它升级的是360度的循环送风",
+                  "matched_terms": [
+                    "360度的循环送风"
+                  ]
+                },
+                {
+                  "srt_index": 406,
+                  "start": "00:10:51,847",
+                  "end": "00:10:55,457",
+                  "text": "但是我们循环扇吹的是360度的循环送风",
+                  "matched_terms": [
+                    "360度的循环送风"
+                  ]
+                },
+                {
+                  "srt_index": 566,
+                  "start": "00:15:17,810",
+                  "end": "00:15:20,836",
+                  "text": "我们今天全部升级360度的循环送风",
+                  "matched_terms": [
+                    "360度的循环送风"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "睡眠风",
+              "source_match_terms": [
+                "睡眠风"
+              ],
+              "caption_hit_count": 7,
+              "evidence_examples": [
+                {
+                  "srt_index": 56,
+                  "start": "00:01:25,420",
+                  "end": "00:01:27,080",
+                  "text": "睡觉能直接去开睡眠风",
+                  "matched_terms": [
+                    "睡眠风"
+                  ]
+                },
+                {
+                  "srt_index": 250,
+                  "start": "00:06:36,730",
+                  "end": "00:06:38,545",
+                  "text": "睡觉还能直接去开睡眠风",
+                  "matched_terms": [
+                    "睡眠风"
+                  ]
+                },
+                {
+                  "srt_index": 572,
+                  "start": "00:15:29,190",
+                  "end": "00:15:30,666",
+                  "text": "睡觉直接去开睡眠风",
+                  "matched_terms": [
+                    "睡眠风"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "循环风",
+              "source_match_terms": [
+                "循环风"
+              ],
+              "caption_hit_count": 6,
+              "evidence_examples": [
+                {
+                  "srt_index": 59,
+                  "start": "00:01:29,170",
+                  "end": "00:01:29,890",
+                  "text": "开循环风",
+                  "matched_terms": [
+                    "循环风"
+                  ]
+                },
+                {
+                  "srt_index": 253,
+                  "start": "00:06:40,170",
+                  "end": "00:06:41,765",
+                  "text": "可以开5到6档的循环风",
+                  "matched_terms": [
+                    "循环风"
+                  ]
+                },
+                {
+                  "srt_index": 574,
+                  "start": "00:15:31,970",
+                  "end": "00:15:33,650",
+                  "text": "朝被开5到6档循环风",
+                  "matched_terms": [
+                    "循环风"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "八档暴风",
+              "source_match_terms": [
+                "八档暴风"
+              ],
+              "caption_hit_count": 7,
+              "evidence_examples": [
+                {
+                  "srt_index": 60,
+                  "start": "00:01:30,130",
+                  "end": "00:01:31,276",
+                  "text": "还有八档暴风",
+                  "matched_terms": [
+                    "八档暴风"
+                  ]
+                },
+                {
+                  "srt_index": 254,
+                  "start": "00:06:42,060",
+                  "end": "00:06:44,580",
+                  "text": "特别闷的直接开八档暴风就可以了",
+                  "matched_terms": [
+                    "八档暴风"
+                  ]
+                },
+                {
+                  "srt_index": 576,
+                  "start": "00:15:34,990",
+                  "end": "00:15:36,761",
+                  "text": "直接开八档暴风就可以了",
+                  "matched_terms": [
+                    "八档暴风"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "抑菌器",
+              "source_match_terms": [
+                "抑菌器"
+              ],
+              "caption_hit_count": 13,
+              "evidence_examples": [
+                {
+                  "srt_index": 9,
+                  "start": "00:00:13,390",
+                  "end": "00:00:16,190",
+                  "text": "能当抑菌器和新风机送驱蚊液送",
+                  "matched_terms": [
+                    "抑菌器"
+                  ]
+                },
+                {
+                  "srt_index": 113,
+                  "start": "00:02:50,130",
+                  "end": "00:02:53,105",
+                  "text": "加上防霉抗菌的扇叶裆抑菌器和新风机",
+                  "matched_terms": [
+                    "抑菌器"
+                  ]
+                },
+                {
+                  "srt_index": 313,
+                  "start": "00:08:15,180",
+                  "end": "00:08:17,010",
+                  "text": "还能当抑菌器和进风机",
+                  "matched_terms": [
+                    "抑菌器"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "新风机",
+              "source_match_terms": [
+                "新风机"
+              ],
+              "caption_hit_count": 13,
+              "evidence_examples": [
+                {
+                  "srt_index": 9,
+                  "start": "00:00:13,390",
+                  "end": "00:00:16,190",
+                  "text": "能当抑菌器和新风机送驱蚊液送",
+                  "matched_terms": [
+                    "新风机"
+                  ]
+                },
+                {
+                  "srt_index": 113,
+                  "start": "00:02:50,130",
+                  "end": "00:02:53,105",
+                  "text": "加上防霉抗菌的扇叶裆抑菌器和新风机",
+                  "matched_terms": [
+                    "新风机"
+                  ]
+                },
+                {
+                  "srt_index": 385,
+                  "start": "00:10:11,900",
+                  "end": "00:10:13,770",
+                  "text": "还能当抑菌器和新风机",
+                  "matched_terms": [
+                    "新风机"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "台式",
+              "source_match_terms": [
+                "台式"
+              ],
+              "caption_hit_count": 4,
+              "evidence_examples": [
+                {
+                  "srt_index": 39,
+                  "start": "00:01:03,180",
+                  "end": "00:01:04,170",
+                  "text": "怎么变台式吗",
+                  "matched_terms": [
+                    "台式"
+                  ]
+                },
+                {
+                  "srt_index": 41,
+                  "start": "00:01:05,260",
+                  "end": "00:01:06,296",
+                  "text": "你不是要台式吗",
+                  "matched_terms": [
+                    "台式"
+                  ]
+                },
+                {
+                  "srt_index": 43,
+                  "start": "00:01:07,390",
+                  "end": "00:01:09,209",
+                  "text": "哥你要台式还是要立式",
+                  "matched_terms": [
+                    "台式"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "立式",
+              "source_match_terms": [
+                "立式"
+              ],
+              "caption_hit_count": 2,
+              "evidence_examples": [
+                {
+                  "srt_index": 38,
+                  "start": "00:01:02,480",
+                  "end": "00:01:03,180",
+                  "text": "不是立式吗",
+                  "matched_terms": [
+                    "立式"
+                  ]
+                },
+                {
+                  "srt_index": 43,
+                  "start": "00:01:07,390",
+                  "end": "00:01:09,209",
+                  "text": "哥你要台式还是要立式",
+                  "matched_terms": [
+                    "立式"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "把杆子拧掉",
+              "source_match_terms": [
+                "把杆子拧掉"
+              ],
+              "caption_hit_count": 1,
+              "evidence_examples": [
+                {
+                  "srt_index": 46,
+                  "start": "00:01:12,590",
+                  "end": "00:01:14,366",
+                  "text": "把杆子拧掉就能变成台式了",
+                  "matched_terms": [
+                    "把杆子拧掉"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "subcategory": "硬件参数",
+          "keywords": [
+            {
+              "keyword": "八个档位",
+              "source_match_terms": [
+                "八个档位",
+                "八档风",
+                "八档"
+              ],
+              "caption_hit_count": 28,
+              "evidence_examples": [
+                {
+                  "srt_index": 7,
+                  "start": "00:00:10,420",
+                  "end": "00:00:11,708",
+                  "text": "八个档位风力更大",
+                  "matched_terms": [
+                    "八个档位"
+                  ]
+                },
+                {
+                  "srt_index": 51,
+                  "start": "00:01:19,830",
+                  "end": "00:01:20,460",
+                  "text": "八档风",
+                  "matched_terms": [
+                    "八档风",
+                    "八档"
+                  ]
+                },
+                {
+                  "srt_index": 60,
+                  "start": "00:01:30,130",
+                  "end": "00:01:31,276",
+                  "text": "还有八档暴风",
+                  "matched_terms": [
+                    "八档"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "三种模式",
+              "source_match_terms": [
+                "三种模式"
+              ],
+              "caption_hit_count": 7,
+              "evidence_examples": [
+                {
+                  "srt_index": 52,
+                  "start": "00:01:20,460",
+                  "end": "00:01:21,148",
+                  "text": "三种模式",
+                  "matched_terms": [
+                    "三种模式"
+                  ]
+                },
+                {
+                  "srt_index": 246,
+                  "start": "00:06:30,390",
+                  "end": "00:06:31,734",
+                  "text": "八个档位三种模式",
+                  "matched_terms": [
+                    "三种模式"
+                  ]
+                },
+                {
+                  "srt_index": 407,
+                  "start": "00:10:55,471",
+                  "end": "00:10:58,051",
+                  "text": "而且八个档位三种模式只有40瓦",
+                  "matched_terms": [
+                    "三种模式"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "40瓦",
+              "source_match_terms": [
+                "40瓦"
+              ],
+              "caption_hit_count": 8,
+              "evidence_examples": [
+                {
+                  "srt_index": 53,
+                  "start": "00:01:21,150",
+                  "end": "00:01:21,870",
+                  "text": "只有40瓦",
+                  "matched_terms": [
+                    "40瓦"
+                  ]
+                },
+                {
+                  "srt_index": 248,
+                  "start": "00:06:32,540",
+                  "end": "00:06:33,569",
+                  "text": "而且只有40瓦",
+                  "matched_terms": [
+                    "40瓦"
+                  ]
+                },
+                {
+                  "srt_index": 407,
+                  "start": "00:10:55,471",
+                  "end": "00:10:58,051",
+                  "text": "而且八个档位三种模式只有40瓦",
+                  "matched_terms": [
+                    "40瓦"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "高转速罩极电机",
+              "source_match_terms": [
+                "高转速罩极电机",
+                "罩极电机"
+              ],
+              "caption_hit_count": 5,
+              "evidence_examples": [
+                {
+                  "srt_index": 81,
+                  "start": "00:02:05,570",
+                  "end": "00:02:06,746",
+                  "text": "高转速罩极电机",
+                  "matched_terms": [
+                    "高转速罩极电机",
+                    "罩极电机"
+                  ]
+                },
+                {
+                  "srt_index": 601,
+                  "start": "00:16:20,930",
+                  "end": "00:16:24,950",
+                  "text": "高转速罩极电机连开七天7夜不带发热发烫的",
+                  "matched_terms": [
+                    "高转速罩极电机",
+                    "罩极电机"
+                  ]
+                },
+                {
+                  "srt_index": 776,
+                  "start": "00:21:24,890",
+                  "end": "00:21:28,970",
+                  "text": "高转速罩极电机连开七天7夜不带发热发烫的",
+                  "matched_terms": [
+                    "高转速罩极电机",
+                    "罩极电机"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "防霉抗菌扇叶",
+              "source_match_terms": [
+                "防霉抗菌的扇叶"
+              ],
+              "caption_hit_count": 3,
+              "evidence_examples": [
+                {
+                  "srt_index": 113,
+                  "start": "00:02:50,130",
+                  "end": "00:02:53,105",
+                  "text": "加上防霉抗菌的扇叶裆抑菌器和新风机",
+                  "matched_terms": [
+                    "防霉抗菌的扇叶"
+                  ]
+                },
+                {
+                  "srt_index": 198,
+                  "start": "00:05:13,750",
+                  "end": "00:05:15,379",
+                  "text": "加上防霉抗菌的扇叶",
+                  "matched_terms": [
+                    "防霉抗菌的扇叶"
+                  ]
+                },
+                {
+                  "srt_index": 1370,
+                  "start": "00:38:14,260",
+                  "end": "00:38:15,964",
+                  "text": "有防霉抗菌的扇叶",
+                  "matched_terms": [
+                    "防霉抗菌的扇叶"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "防霉",
+              "source_match_terms": [
+                "防霉"
+              ],
+              "caption_hit_count": 11,
+              "evidence_examples": [
+                {
+                  "srt_index": 79,
+                  "start": "00:02:01,630",
+                  "end": "00:02:04,328",
+                  "text": "回南天我们专门升级防霉",
+                  "matched_terms": [
+                    "防霉"
+                  ]
+                },
+                {
+                  "srt_index": 113,
+                  "start": "00:02:50,130",
+                  "end": "00:02:53,105",
+                  "text": "加上防霉抗菌的扇叶裆抑菌器和新风机",
+                  "matched_terms": [
+                    "防霉"
+                  ]
+                },
+                {
+                  "srt_index": 198,
+                  "start": "00:05:13,750",
+                  "end": "00:05:15,379",
+                  "text": "加上防霉抗菌的扇叶",
+                  "matched_terms": [
+                    "防霉"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "防潮",
+              "source_match_terms": [
+                "防潮"
+              ],
+              "caption_hit_count": 8,
+              "evidence_examples": [
+                {
+                  "srt_index": 80,
+                  "start": "00:02:04,330",
+                  "end": "00:02:05,569",
+                  "text": "防潮防短路",
+                  "matched_terms": [
+                    "防潮"
+                  ]
+                },
+                {
+                  "srt_index": 284,
+                  "start": "00:07:29,190",
+                  "end": "00:07:30,329",
+                  "text": "防潮防短路",
+                  "matched_terms": [
+                    "防潮"
+                  ]
+                },
+                {
+                  "srt_index": 435,
+                  "start": "00:11:39,040",
+                  "end": "00:11:40,238",
+                  "text": "防潮防短路",
+                  "matched_terms": [
+                    "防潮"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "防短路",
+              "source_match_terms": [
+                "防短路"
+              ],
+              "caption_hit_count": 8,
+              "evidence_examples": [
+                {
+                  "srt_index": 80,
+                  "start": "00:02:04,330",
+                  "end": "00:02:05,569",
+                  "text": "防潮防短路",
+                  "matched_terms": [
+                    "防短路"
+                  ]
+                },
+                {
+                  "srt_index": 284,
+                  "start": "00:07:29,190",
+                  "end": "00:07:30,329",
+                  "text": "防潮防短路",
+                  "matched_terms": [
+                    "防短路"
+                  ]
+                },
+                {
+                  "srt_index": 435,
+                  "start": "00:11:39,040",
+                  "end": "00:11:40,238",
+                  "text": "防潮防短路",
+                  "matched_terms": [
+                    "防短路"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "转速高",
+              "source_match_terms": [
+                "转速高"
+              ],
+              "caption_hit_count": 8,
+              "evidence_examples": [
+                {
+                  "srt_index": 83,
+                  "start": "00:02:09,780",
+                  "end": "00:02:10,780",
+                  "text": "而且转速高",
+                  "matched_terms": [
+                    "转速高"
+                  ]
+                },
+                {
+                  "srt_index": 288,
+                  "start": "00:07:35,080",
+                  "end": "00:07:36,050",
+                  "text": "而且转速高",
+                  "matched_terms": [
+                    "转速高"
+                  ]
+                },
+                {
+                  "srt_index": 440,
+                  "start": "00:11:50,780",
+                  "end": "00:11:51,800",
+                  "text": "而且转速高",
+                  "matched_terms": [
+                    "转速高"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "动力强",
+              "source_match_terms": [
+                "动力强"
+              ],
+              "caption_hit_count": 8,
+              "evidence_examples": [
+                {
+                  "srt_index": 84,
+                  "start": "00:02:10,780",
+                  "end": "00:02:11,338",
+                  "text": "动力强",
+                  "matched_terms": [
+                    "动力强"
+                  ]
+                },
+                {
+                  "srt_index": 289,
+                  "start": "00:07:36,050",
+                  "end": "00:07:36,638",
+                  "text": "动力强",
+                  "matched_terms": [
+                    "动力强"
+                  ]
+                },
+                {
+                  "srt_index": 441,
+                  "start": "00:11:51,800",
+                  "end": "00:11:52,379",
+                  "text": "动力强",
+                  "matched_terms": [
+                    "动力强"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "耐磨耐造",
+              "source_match_terms": [
+                "耐磨耐造"
+              ],
+              "caption_hit_count": 8,
+              "evidence_examples": [
+                {
+                  "srt_index": 85,
+                  "start": "00:02:11,340",
+                  "end": "00:02:12,080",
+                  "text": "耐磨耐造",
+                  "matched_terms": [
+                    "耐磨耐造"
+                  ]
+                },
+                {
+                  "srt_index": 290,
+                  "start": "00:07:36,640",
+                  "end": "00:07:37,400",
+                  "text": "耐磨耐造",
+                  "matched_terms": [
+                    "耐磨耐造"
+                  ]
+                },
+                {
+                  "srt_index": 442,
+                  "start": "00:11:52,380",
+                  "end": "00:11:53,120",
+                  "text": "耐磨耐造",
+                  "matched_terms": [
+                    "耐磨耐造"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "耐高温",
+              "source_match_terms": [
+                "耐高温"
+              ],
+              "caption_hit_count": 8,
+              "evidence_examples": [
+                {
+                  "srt_index": 86,
+                  "start": "00:02:12,080",
+                  "end": "00:02:15,018",
+                  "text": "耐高温连开七天七夜不带发热发烫的",
+                  "matched_terms": [
+                    "耐高温"
+                  ]
+                },
+                {
+                  "srt_index": 291,
+                  "start": "00:07:37,400",
+                  "end": "00:07:38,009",
+                  "text": "耐高温",
+                  "matched_terms": [
+                    "耐高温"
+                  ]
+                },
+                {
+                  "srt_index": 443,
+                  "start": "00:11:53,120",
+                  "end": "00:11:53,669",
+                  "text": "耐高温",
+                  "matched_terms": [
+                    "耐高温"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "连开七天七夜",
+              "source_match_terms": [
+                "连开七天七夜"
+              ],
+              "caption_hit_count": 6,
+              "evidence_examples": [
+                {
+                  "srt_index": 86,
+                  "start": "00:02:12,080",
+                  "end": "00:02:15,018",
+                  "text": "耐高温连开七天七夜不带发热发烫的",
+                  "matched_terms": [
+                    "连开七天七夜"
+                  ]
+                },
+                {
+                  "srt_index": 286,
+                  "start": "00:07:32,150",
+                  "end": "00:07:33,572",
+                  "text": "你可以连开七天七夜",
+                  "matched_terms": [
+                    "连开七天七夜"
+                  ]
+                },
+                {
+                  "srt_index": 438,
+                  "start": "00:11:43,030",
+                  "end": "00:11:48,886",
+                  "text": "给他升级好电机还能升级这四个这个电机连开七天七夜",
+                  "matched_terms": [
+                    "连开七天七夜"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "不带发热发烫",
+              "source_match_terms": [
+                "不带发热发烫"
+              ],
+              "caption_hit_count": 8,
+              "evidence_examples": [
+                {
+                  "srt_index": 86,
+                  "start": "00:02:12,080",
+                  "end": "00:02:15,018",
+                  "text": "耐高温连开七天七夜不带发热发烫的",
+                  "matched_terms": [
+                    "不带发热发烫"
+                  ]
+                },
+                {
+                  "srt_index": 287,
+                  "start": "00:07:33,580",
+                  "end": "00:07:34,844",
+                  "text": "它不带发热发烫的",
+                  "matched_terms": [
+                    "不带发热发烫"
+                  ]
+                },
+                {
+                  "srt_index": 439,
+                  "start": "00:11:49,160",
+                  "end": "00:11:50,560",
+                  "text": "它不带发热发烫的",
+                  "matched_terms": [
+                    "不带发热发烫"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "风力更大",
+              "source_match_terms": [
+                "风力更大"
+              ],
+              "caption_hit_count": 14,
+              "evidence_examples": [
+                {
+                  "srt_index": 7,
+                  "start": "00:00:10,420",
+                  "end": "00:00:11,708",
+                  "text": "八个档位风力更大",
+                  "matched_terms": [
+                    "风力更大"
+                  ]
+                },
+                {
+                  "srt_index": 311,
+                  "start": "00:08:12,650",
+                  "end": "00:08:13,290",
+                  "text": "风力更大",
+                  "matched_terms": [
+                    "风力更大"
+                  ]
+                },
+                {
+                  "srt_index": 383,
+                  "start": "00:10:09,340",
+                  "end": "00:10:09,988",
+                  "text": "风力更大",
+                  "matched_terms": [
+                    "风力更大"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "顶配",
+              "source_match_terms": [
+                "顶配"
+              ],
+              "caption_hit_count": 22,
+              "evidence_examples": [
+                {
+                  "srt_index": 1,
+                  "start": "00:00:00,050",
+                  "end": "00:00:05,146",
+                  "text": "199直接就发二号5599的顶配机器回到家所有功能咱都有",
+                  "matched_terms": [
+                    "顶配"
+                  ]
+                },
+                {
+                  "srt_index": 66,
+                  "start": "00:01:39,110",
+                  "end": "00:01:42,815",
+                  "text": "买到199直接就发2号599顶配的机器",
+                  "matched_terms": [
+                    "顶配"
+                  ]
+                },
+                {
+                  "srt_index": 107,
+                  "start": "00:02:41,470",
+                  "end": "00:02:45,804",
+                  "text": "我直接给你升级82号599的顶配到手一机六用",
+                  "matched_terms": [
+                    "顶配"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "机械款",
+              "source_match_terms": [
+                "机械款"
+              ],
+              "caption_hit_count": 7,
+              "evidence_examples": [
+                {
+                  "srt_index": 70,
+                  "start": "00:01:46,190",
+                  "end": "00:01:48,570",
+                  "text": "买159机械款就只有三档风了",
+                  "matched_terms": [
+                    "机械款"
+                  ]
+                },
+                {
+                  "srt_index": 267,
+                  "start": "00:07:03,500",
+                  "end": "00:07:05,918",
+                  "text": "买159机械款就只有三挡风",
+                  "matched_terms": [
+                    "机械款"
+                  ]
+                },
+                {
+                  "srt_index": 427,
+                  "start": "00:11:25,100",
+                  "end": "00:11:26,981",
+                  "text": "如果买的是159机械款",
+                  "matched_terms": [
+                    "机械款"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "资产价值",
+      "subcategories": [
+        {
+          "subcategory": "平台活动",
+          "keywords": [
+            {
+              "keyword": "清仓",
+              "source_match_terms": [
+                "清仓"
+              ],
+              "caption_hit_count": 17,
+              "evidence_examples": [
+                {
+                  "srt_index": 97,
+                  "start": "00:02:25,130",
+                  "end": "00:02:28,398",
+                  "text": "我们是清仓加上国库双重叠加才会有这个价",
+                  "matched_terms": [
+                    "清仓"
+                  ]
+                },
+                {
+                  "srt_index": 172,
+                  "start": "00:04:34,590",
+                  "end": "00:04:35,577",
+                  "text": "咱今天就是清仓",
+                  "matched_terms": [
+                    "清仓"
+                  ]
+                },
+                {
+                  "srt_index": 188,
+                  "start": "00:04:55,760",
+                  "end": "00:04:57,729",
+                  "text": "因为今天是清仓加上国补",
+                  "matched_terms": [
+                    "清仓"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "国补",
+              "source_match_terms": [
+                "国补",
+                "国库",
+                "补补",
+                "国股",
+                "国五",
+                "果补"
+              ],
+              "caption_hit_count": 12,
+              "evidence_examples": [
+                {
+                  "srt_index": 97,
+                  "start": "00:02:25,130",
+                  "end": "00:02:28,398",
+                  "text": "我们是清仓加上国库双重叠加才会有这个价",
+                  "matched_terms": [
+                    "国库"
+                  ]
+                },
+                {
+                  "srt_index": 188,
+                  "start": "00:04:55,760",
+                  "end": "00:04:57,729",
+                  "text": "因为今天是清仓加上国补",
+                  "matched_terms": [
+                    "国补"
+                  ]
+                },
+                {
+                  "srt_index": 302,
+                  "start": "00:07:57,370",
+                  "end": "00:08:01,420",
+                  "text": "我推荐你今天趁着有国补直接去买100 99能省四百多块",
+                  "matched_terms": [
+                    "国补"
+                  ]
+                }
+              ],
+              "note": "SRT存在明显ASR同音/近音误识别，保留原始变体供匹配。"
+            },
+            {
+              "keyword": "活动",
+              "source_match_terms": [
+                "活动"
+              ],
+              "caption_hit_count": 4,
+              "evidence_examples": [
+                {
+                  "srt_index": 298,
+                  "start": "00:07:47,770",
+                  "end": "00:07:48,799",
+                  "text": "我再说一下活动",
+                  "matched_terms": [
+                    "活动"
+                  ]
+                },
+                {
+                  "srt_index": 895,
+                  "start": "00:24:40,370",
+                  "end": "00:24:41,630",
+                  "text": "我给你今天讲一下活动",
+                  "matched_terms": [
+                    "活动"
+                  ]
+                },
+                {
+                  "srt_index": 982,
+                  "start": "00:27:11,920",
+                  "end": "00:27:13,360",
+                  "text": "咱说一下活动怎么下单",
+                  "matched_terms": [
+                    "活动"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "价格",
+              "source_match_terms": [
+                "价格"
+              ],
+              "caption_hit_count": 10,
+              "evidence_examples": [
+                {
+                  "srt_index": 372,
+                  "start": "00:09:49,790",
+                  "end": "00:09:51,666",
+                  "text": "因为这个价格一个人只能买一次",
+                  "matched_terms": [
+                    "价格"
+                  ]
+                },
+                {
+                  "srt_index": 455,
+                  "start": "00:12:10,290",
+                  "end": "00:12:12,432",
+                  "text": "加上国股的价格之后不会再上了",
+                  "matched_terms": [
+                    "价格"
+                  ]
+                },
+                {
+                  "srt_index": 458,
+                  "start": "00:12:16,470",
+                  "end": "00:12:17,630",
+                  "text": "这个价格全部下掉",
+                  "matched_terms": [
+                    "价格"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "199",
+              "source_match_terms": [
+                "199",
+                "100 99"
+              ],
+              "caption_hit_count": 34,
+              "evidence_examples": [
+                {
+                  "srt_index": 1,
+                  "start": "00:00:00,050",
+                  "end": "00:00:05,146",
+                  "text": "199直接就发二号5599的顶配机器回到家所有功能咱都有",
+                  "matched_terms": [
+                    "199"
+                  ]
+                },
+                {
+                  "srt_index": 66,
+                  "start": "00:01:39,110",
+                  "end": "00:01:42,815",
+                  "text": "买到199直接就发2号599顶配的机器",
+                  "matched_terms": [
+                    "199"
+                  ]
+                },
+                {
+                  "srt_index": 106,
+                  "start": "00:02:39,710",
+                  "end": "00:02:41,470",
+                  "text": "第一个199智能驱蚊款",
+                  "matched_terms": [
+                    "199"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "599",
+              "source_match_terms": [
+                "599"
+              ],
+              "caption_hit_count": 40,
+              "evidence_examples": [
+                {
+                  "srt_index": 1,
+                  "start": "00:00:00,050",
+                  "end": "00:00:05,146",
+                  "text": "199直接就发二号5599的顶配机器回到家所有功能咱都有",
+                  "matched_terms": [
+                    "599"
+                  ]
+                },
+                {
+                  "srt_index": 66,
+                  "start": "00:01:39,110",
+                  "end": "00:01:42,815",
+                  "text": "买到199直接就发2号599顶配的机器",
+                  "matched_terms": [
+                    "599"
+                  ]
+                },
+                {
+                  "srt_index": 104,
+                  "start": "00:02:36,890",
+                  "end": "00:02:37,898",
+                  "text": "这款是599的",
+                  "matched_terms": [
+                    "599"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "159",
+              "source_match_terms": [
+                "159"
+              ],
+              "caption_hit_count": 11,
+              "evidence_examples": [
+                {
+                  "srt_index": 70,
+                  "start": "00:01:46,190",
+                  "end": "00:01:48,570",
+                  "text": "买159机械款就只有三档风了",
+                  "matched_terms": [
+                    "159"
+                  ]
+                },
+                {
+                  "srt_index": 224,
+                  "start": "00:05:47,040",
+                  "end": "00:05:49,665",
+                  "text": "因为159的话只有三档风驱蚊液",
+                  "matched_terms": [
+                    "159"
+                  ]
+                },
+                {
+                  "srt_index": 267,
+                  "start": "00:07:03,500",
+                  "end": "00:07:05,918",
+                  "text": "买159机械款就只有三挡风",
+                  "matched_terms": [
+                    "159"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "原价599",
+              "source_match_terms": [
+                "原价是599"
+              ],
+              "caption_hit_count": 4,
+              "evidence_examples": [
+                {
+                  "srt_index": 619,
+                  "start": "00:16:53,310",
+                  "end": "00:16:55,070",
+                  "text": "橱窗里面原价是599的",
+                  "matched_terms": [
+                    "原价是599"
+                  ]
+                },
+                {
+                  "srt_index": 697,
+                  "start": "00:19:13,410",
+                  "end": "00:19:15,020",
+                  "text": "橱窗里面原价是599",
+                  "matched_terms": [
+                    "原价是599"
+                  ]
+                },
+                {
+                  "srt_index": 795,
+                  "start": "00:21:55,700",
+                  "end": "00:21:58,840",
+                  "text": "你可以五点之后你再来橱窗里面原价是599",
+                  "matched_terms": [
+                    "原价是599"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "省四百多块",
+              "source_match_terms": [
+                "省四百多块",
+                "省了四百多块",
+                "能省四百多块"
+              ],
+              "caption_hit_count": 6,
+              "evidence_examples": [
+                {
+                  "srt_index": 302,
+                  "start": "00:07:57,370",
+                  "end": "00:08:01,420",
+                  "text": "我推荐你今天趁着有国补直接去买100 99能省四百多块",
+                  "matched_terms": [
+                    "省四百多块",
+                    "能省四百多块"
+                  ]
+                },
+                {
+                  "srt_index": 370,
+                  "start": "00:09:47,480",
+                  "end": "00:09:48,656",
+                  "text": "到手能省四百多块",
+                  "matched_terms": [
+                    "省四百多块",
+                    "能省四百多块"
+                  ]
+                },
+                {
+                  "srt_index": 532,
+                  "start": "00:14:30,100",
+                  "end": "00:14:31,276",
+                  "text": "到手省四百多块",
+                  "matched_terms": [
+                    "省四百多块"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "升级",
+              "source_match_terms": [
+                "升级",
+                "升级发",
+                "直接升级"
+              ],
+              "caption_hit_count": 32,
+              "evidence_examples": [
+                {
+                  "srt_index": 28,
+                  "start": "00:00:46,540",
+                  "end": "00:00:49,550",
+                  "text": "它升级的是360度的循环送风",
+                  "matched_terms": [
+                    "升级"
+                  ]
+                },
+                {
+                  "srt_index": 65,
+                  "start": "00:01:36,500",
+                  "end": "00:01:38,648",
+                  "text": "而且升级了两年的整机质保",
+                  "matched_terms": [
+                    "升级"
+                  ]
+                },
+                {
+                  "srt_index": 79,
+                  "start": "00:02:01,630",
+                  "end": "00:02:04,328",
+                  "text": "回南天我们专门升级防霉",
+                  "matched_terms": [
+                    "升级"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "送驱蚊",
+              "source_match_terms": [
+                "送驱蚊",
+                "给他送驱蚊",
+                "给你送驱蚊"
+              ],
+              "caption_hit_count": 46,
+              "evidence_examples": [
+                {
+                  "srt_index": 9,
+                  "start": "00:00:13,390",
+                  "end": "00:00:16,190",
+                  "text": "能当抑菌器和新风机送驱蚊液送",
+                  "matched_terms": [
+                    "送驱蚊"
+                  ]
+                },
+                {
+                  "srt_index": 12,
+                  "start": "00:00:19,270",
+                  "end": "00:00:20,100",
+                  "text": "给你送驱蚊",
+                  "matched_terms": [
+                    "送驱蚊",
+                    "给你送驱蚊"
+                  ]
+                },
+                {
+                  "srt_index": 36,
+                  "start": "00:01:00,460",
+                  "end": "00:01:01,756",
+                  "text": "六买了给他送驱蚊",
+                  "matched_terms": [
+                    "送驱蚊",
+                    "给他送驱蚊"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "送驱蚊液",
+              "source_match_terms": [
+                "送驱蚊液"
+              ],
+              "caption_hit_count": 13,
+              "evidence_examples": [
+                {
+                  "srt_index": 9,
+                  "start": "00:00:13,390",
+                  "end": "00:00:16,190",
+                  "text": "能当抑菌器和新风机送驱蚊液送",
+                  "matched_terms": [
+                    "送驱蚊液"
+                  ]
+                },
+                {
+                  "srt_index": 116,
+                  "start": "00:02:56,750",
+                  "end": "00:02:58,312",
+                  "text": "给你也送驱蚊液和遥控器",
+                  "matched_terms": [
+                    "送驱蚊液"
+                  ]
+                },
+                {
+                  "srt_index": 299,
+                  "start": "00:07:49,230",
+                  "end": "00:07:53,432",
+                  "text": "等你30秒时间给咏这位哥给他送驱蚊液和遥控器",
+                  "matched_terms": [
+                    "送驱蚊液"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "送遥控",
+              "source_match_terms": [
+                "送遥控",
+                "送遥控器"
+              ],
+              "caption_hit_count": 26,
+              "evidence_examples": [
+                {
+                  "srt_index": 13,
+                  "start": "00:00:20,100",
+                  "end": "00:00:20,568",
+                  "text": "送遥控",
+                  "matched_terms": [
+                    "送遥控"
+                  ]
+                },
+                {
+                  "srt_index": 49,
+                  "start": "00:01:16,700",
+                  "end": "00:01:17,198",
+                  "text": "送遥控",
+                  "matched_terms": [
+                    "送遥控"
+                  ]
+                },
+                {
+                  "srt_index": 68,
+                  "start": "00:01:44,640",
+                  "end": "00:01:45,120",
+                  "text": "送遥控",
+                  "matched_terms": [
+                    "送遥控"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "名额",
+              "source_match_terms": [
+                "名额"
+              ],
+              "caption_hit_count": 6,
+              "evidence_examples": [
+                {
+                  "srt_index": 273,
+                  "start": "00:07:11,490",
+                  "end": "00:07:13,030",
+                  "text": "要么是你占单名额作废了",
+                  "matched_terms": [
+                    "名额"
+                  ]
+                },
+                {
+                  "srt_index": 300,
+                  "start": "00:07:53,700",
+                  "end": "00:07:55,328",
+                  "text": "来吧就这三个名额",
+                  "matched_terms": [
+                    "名额"
+                  ]
+                },
+                {
+                  "srt_index": 792,
+                  "start": "00:21:49,980",
+                  "end": "00:21:50,995",
+                  "text": "就这四个名额了",
+                  "matched_terms": [
+                    "名额"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "30秒",
+              "source_match_terms": [
+                "30秒"
+              ],
+              "caption_hit_count": 9,
+              "evidence_examples": [
+                {
+                  "srt_index": 20,
+                  "start": "00:00:30,420",
+                  "end": "00:00:31,596",
+                  "text": "我等你30秒时间",
+                  "matched_terms": [
+                    "30秒"
+                  ]
+                },
+                {
+                  "srt_index": 230,
+                  "start": "00:05:57,830",
+                  "end": "00:06:00,435",
+                  "text": "30秒时间琪琪买了给他也送上",
+                  "matched_terms": [
+                    "30秒"
+                  ]
+                },
+                {
+                  "srt_index": 299,
+                  "start": "00:07:49,230",
+                  "end": "00:07:53,432",
+                  "text": "等你30秒时间给咏这位哥给他送驱蚊液和遥控器",
+                  "matched_terms": [
+                    "30秒"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "一个人只能买一次",
+              "source_match_terms": [
+                "一个人只能买一次"
+              ],
+              "caption_hit_count": 1,
+              "evidence_examples": [
+                {
+                  "srt_index": 372,
+                  "start": "00:09:49,790",
+                  "end": "00:09:51,666",
+                  "text": "因为这个价格一个人只能买一次",
+                  "matched_terms": [
+                    "一个人只能买一次"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "35.1块钱",
+              "source_match_terms": [
+                "35.1块钱"
+              ],
+              "caption_hit_count": 1,
+              "evidence_examples": [
+                {
+                  "srt_index": 1269,
+                  "start": "00:35:18,940",
+                  "end": "00:35:24,798",
+                  "text": "然后就会给你再有个35.1块钱到手是198.9的价格就对了",
+                  "matched_terms": [
+                    "35.1块钱"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "198.9",
+              "source_match_terms": [
+                "198.9"
+              ],
+              "caption_hit_count": 2,
+              "evidence_examples": [
+                {
+                  "srt_index": 160,
+                  "start": "00:04:10,430",
+                  "end": "00:04:12,333",
+                  "text": "蓉姐姐买了198.9的",
+                  "matched_terms": [
+                    "198.9"
+                  ]
+                },
+                {
+                  "srt_index": 1269,
+                  "start": "00:35:18,940",
+                  "end": "00:35:24,798",
+                  "text": "然后就会给你再有个35.1块钱到手是198.9的价格就对了",
+                  "matched_terms": [
+                    "198.9"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "subcategory": "优惠券",
+          "keywords": []
+        },
+        {
+          "subcategory": "满减福利",
+          "keywords": []
+        }
+      ]
+    },
+    {
+      "category": "情绪价值",
+      "subcategories": [
+        {
+          "subcategory": "使用场景",
+          "keywords": [
+            {
+              "keyword": "南方",
+              "source_match_terms": [
+                "南方"
+              ],
+              "caption_hit_count": 1,
+              "evidence_examples": [
+                {
+                  "srt_index": 76,
+                  "start": "00:01:55,540",
+                  "end": "00:01:58,906",
+                  "text": "问一下咱直播间是不是有没有很多是南方的朋友们",
+                  "matched_terms": [
+                    "南方"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "下雨",
+              "source_match_terms": [
+                "下雨"
+              ],
+              "caption_hit_count": 9,
+              "evidence_examples": [
+                {
+                  "srt_index": 77,
+                  "start": "00:01:59,280",
+                  "end": "00:02:00,477",
+                  "text": "家里正在下雨的",
+                  "matched_terms": [
+                    "下雨"
+                  ]
+                },
+                {
+                  "srt_index": 280,
+                  "start": "00:07:23,690",
+                  "end": "00:07:25,494",
+                  "text": "尤其是家里面正在下雨的",
+                  "matched_terms": [
+                    "下雨"
+                  ]
+                },
+                {
+                  "srt_index": 430,
+                  "start": "00:11:29,790",
+                  "end": "00:11:31,722",
+                  "text": "像咱家里现在有没有正在下雨的",
+                  "matched_terms": [
+                    "下雨"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "梅雨季",
+              "source_match_terms": [
+                "梅雨季"
+              ],
+              "caption_hit_count": 6,
+              "evidence_examples": [
+                {
+                  "srt_index": 78,
+                  "start": "00:02:00,780",
+                  "end": "00:02:01,630",
+                  "text": "包括梅雨季",
+                  "matched_terms": [
+                    "梅雨季"
+                  ]
+                },
+                {
+                  "srt_index": 281,
+                  "start": "00:07:25,500",
+                  "end": "00:07:26,350",
+                  "text": "包括梅雨季",
+                  "matched_terms": [
+                    "梅雨季"
+                  ]
+                },
+                {
+                  "srt_index": 598,
+                  "start": "00:16:16,030",
+                  "end": "00:16:17,450",
+                  "text": "梅雨季回南天的",
+                  "matched_terms": [
+                    "梅雨季"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "回南天",
+              "source_match_terms": [
+                "回南天"
+              ],
+              "caption_hit_count": 6,
+              "evidence_examples": [
+                {
+                  "srt_index": 79,
+                  "start": "00:02:01,630",
+                  "end": "00:02:04,328",
+                  "text": "回南天我们专门升级防霉",
+                  "matched_terms": [
+                    "回南天"
+                  ]
+                },
+                {
+                  "srt_index": 282,
+                  "start": "00:07:26,350",
+                  "end": "00:07:27,030",
+                  "text": "回南天的",
+                  "matched_terms": [
+                    "回南天"
+                  ]
+                },
+                {
+                  "srt_index": 598,
+                  "start": "00:16:16,030",
+                  "end": "00:16:17,450",
+                  "text": "梅雨季回南天的",
+                  "matched_terms": [
+                    "回南天"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "早晚温差",
+              "source_match_terms": [
+                "早晚温差"
+              ],
+              "caption_hit_count": 8,
+              "evidence_examples": [
+                {
+                  "srt_index": 31,
+                  "start": "00:00:53,050",
+                  "end": "00:00:55,248",
+                  "text": "现在早晚温差比较大家里比较闷",
+                  "matched_terms": [
+                    "早晚温差"
+                  ]
+                },
+                {
+                  "srt_index": 238,
+                  "start": "00:06:12,000",
+                  "end": "00:06:13,395",
+                  "text": "然后早晚温差比较大",
+                  "matched_terms": [
+                    "早晚温差"
+                  ]
+                },
+                {
+                  "srt_index": 413,
+                  "start": "00:11:05,250",
+                  "end": "00:11:06,845",
+                  "text": "你现在早晚温差比较大的",
+                  "matched_terms": [
+                    "早晚温差"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "不想开空调",
+              "source_match_terms": [
+                "不想开空调"
+              ],
+              "caption_hit_count": 6,
+              "evidence_examples": [
+                {
+                  "srt_index": 32,
+                  "start": "00:00:55,260",
+                  "end": "00:00:57,602",
+                  "text": "3伏天有时候你真的不想开空调的",
+                  "matched_terms": [
+                    "不想开空调"
+                  ]
+                },
+                {
+                  "srt_index": 239,
+                  "start": "00:06:13,400",
+                  "end": "00:06:14,840",
+                  "text": "有时候就不想开空调了",
+                  "matched_terms": [
+                    "不想开空调"
+                  ]
+                },
+                {
+                  "srt_index": 415,
+                  "start": "00:11:07,830",
+                  "end": "00:11:09,846",
+                  "text": "你真的不想开空调的那我推荐你带它",
+                  "matched_terms": [
+                    "不想开空调"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "家里比较闷",
+              "source_match_terms": [
+                "家里比较闷",
+                "家里特别闷"
+              ],
+              "caption_hit_count": 7,
+              "evidence_examples": [
+                {
+                  "srt_index": 31,
+                  "start": "00:00:53,050",
+                  "end": "00:00:55,248",
+                  "text": "现在早晚温差比较大家里比较闷",
+                  "matched_terms": [
+                    "家里比较闷"
+                  ]
+                },
+                {
+                  "srt_index": 414,
+                  "start": "00:11:06,850",
+                  "end": "00:11:07,828",
+                  "text": "家里比较闷的",
+                  "matched_terms": [
+                    "家里比较闷"
+                  ]
+                },
+                {
+                  "srt_index": 575,
+                  "start": "00:15:34,020",
+                  "end": "00:15:34,986",
+                  "text": "家里特别闷的",
+                  "matched_terms": [
+                    "家里特别闷"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "霉味",
+              "source_match_terms": [
+                "霉味"
+              ],
+              "caption_hit_count": 5,
+              "evidence_examples": [
+                {
+                  "srt_index": 57,
+                  "start": "00:01:27,440",
+                  "end": "00:01:28,358",
+                  "text": "家里面有霉味",
+                  "matched_terms": [
+                    "霉味"
+                  ]
+                },
+                {
+                  "srt_index": 251,
+                  "start": "00:06:38,940",
+                  "end": "00:06:39,828",
+                  "text": "家里面有霉味",
+                  "matched_terms": [
+                    "霉味"
+                  ]
+                },
+                {
+                  "srt_index": 748,
+                  "start": "00:20:36,650",
+                  "end": "00:20:37,609",
+                  "text": "你们家有霉味儿",
+                  "matched_terms": [
+                    "霉味"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "潮味",
+              "source_match_terms": [
+                "潮味"
+              ],
+              "caption_hit_count": 3,
+              "evidence_examples": [
+                {
+                  "srt_index": 58,
+                  "start": "00:01:28,360",
+                  "end": "00:01:29,170",
+                  "text": "潮味散不掉",
+                  "matched_terms": [
+                    "潮味"
+                  ]
+                },
+                {
+                  "srt_index": 252,
+                  "start": "00:06:39,830",
+                  "end": "00:06:40,169",
+                  "text": "潮味儿",
+                  "matched_terms": [
+                    "潮味"
+                  ]
+                },
+                {
+                  "srt_index": 950,
+                  "start": "00:26:19,580",
+                  "end": "00:26:21,370",
+                  "text": "潮味开5到6档循环风",
+                  "matched_terms": [
+                    "潮味"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "老人",
+              "source_match_terms": [
+                "老人"
+              ],
+              "caption_hit_count": 22,
+              "evidence_examples": [
+                {
+                  "srt_index": 55,
+                  "start": "00:01:22,950",
+                  "end": "00:01:25,190",
+                  "text": "你们家老人开上一整天不带心疼",
+                  "matched_terms": [
+                    "老人"
+                  ]
+                },
+                {
+                  "srt_index": 82,
+                  "start": "00:02:07,070",
+                  "end": "00:02:09,314",
+                  "text": "你们家老人孩子他用起来是不是更安全",
+                  "matched_terms": [
+                    "老人"
+                  ]
+                },
+                {
+                  "srt_index": 202,
+                  "start": "00:05:19,250",
+                  "end": "00:05:20,530",
+                  "text": "你们家有老人孩子",
+                  "matched_terms": [
+                    "老人"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "孩子",
+              "source_match_terms": [
+                "孩子"
+              ],
+              "caption_hit_count": 13,
+              "evidence_examples": [
+                {
+                  "srt_index": 82,
+                  "start": "00:02:07,070",
+                  "end": "00:02:09,314",
+                  "text": "你们家老人孩子他用起来是不是更安全",
+                  "matched_terms": [
+                    "孩子"
+                  ]
+                },
+                {
+                  "srt_index": 202,
+                  "start": "00:05:19,250",
+                  "end": "00:05:20,530",
+                  "text": "你们家有老人孩子",
+                  "matched_terms": [
+                    "孩子"
+                  ]
+                },
+                {
+                  "srt_index": 292,
+                  "start": "00:07:38,140",
+                  "end": "00:07:40,460",
+                  "text": "你们家老人孩子用起来是不是更安全",
+                  "matched_terms": [
+                    "孩子"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "睡觉",
+              "source_match_terms": [
+                "睡觉"
+              ],
+              "caption_hit_count": 7,
+              "evidence_examples": [
+                {
+                  "srt_index": 56,
+                  "start": "00:01:25,420",
+                  "end": "00:01:27,080",
+                  "text": "睡觉能直接去开睡眠风",
+                  "matched_terms": [
+                    "睡觉"
+                  ]
+                },
+                {
+                  "srt_index": 250,
+                  "start": "00:06:36,730",
+                  "end": "00:06:38,545",
+                  "text": "睡觉还能直接去开睡眠风",
+                  "matched_terms": [
+                    "睡觉"
+                  ]
+                },
+                {
+                  "srt_index": 572,
+                  "start": "00:15:29,190",
+                  "end": "00:15:30,666",
+                  "text": "睡觉直接去开睡眠风",
+                  "matched_terms": [
+                    "睡觉"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "床头柜",
+              "source_match_terms": [
+                "床头柜"
+              ],
+              "caption_hit_count": 5,
+              "evidence_examples": [
+                {
+                  "srt_index": 295,
+                  "start": "00:07:44,120",
+                  "end": "00:07:45,914",
+                  "text": "你像我奶奶都放床头柜上用的",
+                  "matched_terms": [
+                    "床头柜"
+                  ]
+                },
+                {
+                  "srt_index": 610,
+                  "start": "00:16:35,660",
+                  "end": "00:16:38,936",
+                  "text": "你像我奶奶都放床头柜上用的是买199",
+                  "matched_terms": [
+                    "床头柜"
+                  ]
+                },
+                {
+                  "srt_index": 977,
+                  "start": "00:27:04,420",
+                  "end": "00:27:06,045",
+                  "text": "你像我奶奶都放床头柜上用的",
+                  "matched_terms": [
+                    "床头柜"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "开上一整天",
+              "source_match_terms": [
+                "开上一整天",
+                "开一天"
+              ],
+              "caption_hit_count": 5,
+              "evidence_examples": [
+                {
+                  "srt_index": 55,
+                  "start": "00:01:22,950",
+                  "end": "00:01:25,190",
+                  "text": "你们家老人开上一整天不带心疼",
+                  "matched_terms": [
+                    "开上一整天"
+                  ]
+                },
+                {
+                  "srt_index": 249,
+                  "start": "00:06:33,910",
+                  "end": "00:06:36,278",
+                  "text": "你们家老人开上一整天都不带心疼的",
+                  "matched_terms": [
+                    "开上一整天"
+                  ]
+                },
+                {
+                  "srt_index": 411,
+                  "start": "00:11:02,460",
+                  "end": "00:11:03,967",
+                  "text": "老人开一天也不带心疼的",
+                  "matched_terms": [
+                    "开一天"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "subcategory": "用户体验感受",
+          "keywords": [
+            {
+              "keyword": "凉快2到3倍",
+              "source_match_terms": [
+                "凉快2到3倍",
+                "凉快个2到3倍"
+              ],
+              "caption_hit_count": 4,
+              "evidence_examples": [
+                {
+                  "srt_index": 27,
+                  "start": "00:00:43,420",
+                  "end": "00:00:46,213",
+                  "text": "但是为什么我们能比普通风扇凉快2到3倍",
+                  "matched_terms": [
+                    "凉快2到3倍"
+                  ]
+                },
+                {
+                  "srt_index": 738,
+                  "start": "00:20:18,840",
+                  "end": "00:20:20,787",
+                  "text": "比普通风扇凉快2到3倍",
+                  "matched_terms": [
+                    "凉快2到3倍"
+                  ]
+                },
+                {
+                  "srt_index": 940,
+                  "start": "00:25:57,030",
+                  "end": "00:25:59,802",
+                  "text": "为什么循环扇会比普通风扇凉快2到3倍",
+                  "matched_terms": [
+                    "凉快2到3倍"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "舒服干净",
+              "source_match_terms": [
+                "舒服干净",
+                "舒服还干净"
+              ],
+              "caption_hit_count": 15,
+              "evidence_examples": [
+                {
+                  "srt_index": 8,
+                  "start": "00:00:11,990",
+                  "end": "00:00:13,390",
+                  "text": "吹的风舒服干净",
+                  "matched_terms": [
+                    "舒服干净"
+                  ]
+                },
+                {
+                  "srt_index": 200,
+                  "start": "00:05:17,020",
+                  "end": "00:05:18,259",
+                  "text": "它是舒服干净的",
+                  "matched_terms": [
+                    "舒服干净"
+                  ]
+                },
+                {
+                  "srt_index": 312,
+                  "start": "00:08:13,580",
+                  "end": "00:08:15,057",
+                  "text": "吹的风舒服干净",
+                  "matched_terms": [
+                    "舒服干净"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "山间海边清风",
+              "source_match_terms": [
+                "山间海边清风"
+              ],
+              "caption_hit_count": 4,
+              "evidence_examples": [
+                {
+                  "srt_index": 29,
+                  "start": "00:00:49,820",
+                  "end": "00:00:51,450",
+                  "text": "就像山间海边清风一样",
+                  "matched_terms": [
+                    "山间海边清风"
+                  ]
+                },
+                {
+                  "srt_index": 244,
+                  "start": "00:06:27,460",
+                  "end": "00:06:29,100",
+                  "text": "就像山间海边清风一样",
+                  "matched_terms": [
+                    "山间海边清风"
+                  ]
+                },
+                {
+                  "srt_index": 739,
+                  "start": "00:20:22,060",
+                  "end": "00:20:23,520",
+                  "text": "就像山间海边清风一样",
+                  "matched_terms": [
+                    "山间海边清风"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "围着你在吹",
+              "source_match_terms": [
+                "围着你在吹",
+                "包着你在吹"
+              ],
+              "caption_hit_count": 7,
+              "evidence_examples": [
+                {
+                  "srt_index": 30,
+                  "start": "00:00:51,450",
+                  "end": "00:00:52,619",
+                  "text": "是包着你在吹的",
+                  "matched_terms": [
+                    "包着你在吹"
+                  ]
+                },
+                {
+                  "srt_index": 243,
+                  "start": "00:06:25,570",
+                  "end": "00:06:27,231",
+                  "text": "这个风它是围着你在吹的",
+                  "matched_terms": [
+                    "围着你在吹"
+                  ]
+                },
+                {
+                  "srt_index": 409,
+                  "start": "00:10:59,470",
+                  "end": "00:11:01,153",
+                  "text": "这个风它是围着你在吹的",
+                  "matched_terms": [
+                    "围着你在吹"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "风大",
+              "source_match_terms": [
+                "风大"
+              ],
+              "caption_hit_count": 7,
+              "evidence_examples": [
+                {
+                  "srt_index": 222,
+                  "start": "00:05:43,600",
+                  "end": "00:05:45,008",
+                  "text": "但是如果你想要风大的话",
+                  "matched_terms": [
+                    "风大"
+                  ]
+                },
+                {
+                  "srt_index": 235,
+                  "start": "00:06:06,530",
+                  "end": "00:06:09,365",
+                  "text": "如果说你们也想要风大凉快耐用的",
+                  "matched_terms": [
+                    "风大"
+                  ]
+                },
+                {
+                  "srt_index": 301,
+                  "start": "00:07:55,640",
+                  "end": "00:07:57,370",
+                  "text": "如果说你也想要风大的",
+                  "matched_terms": [
+                    "风大"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "耐用",
+              "source_match_terms": [
+                "耐用"
+              ],
+              "caption_hit_count": 4,
+              "evidence_examples": [
+                {
+                  "srt_index": 201,
+                  "start": "00:05:18,260",
+                  "end": "00:05:18,968",
+                  "text": "而且耐用",
+                  "matched_terms": [
+                    "耐用"
+                  ]
+                },
+                {
+                  "srt_index": 235,
+                  "start": "00:06:06,530",
+                  "end": "00:06:09,365",
+                  "text": "如果说你们也想要风大凉快耐用的",
+                  "matched_terms": [
+                    "耐用"
+                  ]
+                },
+                {
+                  "srt_index": 988,
+                  "start": "00:27:20,790",
+                  "end": "00:27:22,380",
+                  "text": "你想要一个风大耐用的",
+                  "matched_terms": [
+                    "耐用"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "性价比高",
+              "source_match_terms": [
+                "性价比高"
+              ],
+              "caption_hit_count": 9,
+              "evidence_examples": [
+                {
+                  "srt_index": 34,
+                  "start": "00:00:58,780",
+                  "end": "00:00:59,568",
+                  "text": "性价比高",
+                  "matched_terms": [
+                    "性价比高"
+                  ]
+                },
+                {
+                  "srt_index": 134,
+                  "start": "00:03:34,000",
+                  "end": "00:03:34,868",
+                  "text": "性价比高",
+                  "matched_terms": [
+                    "性价比高"
+                  ]
+                },
+                {
+                  "srt_index": 337,
+                  "start": "00:08:56,340",
+                  "end": "00:08:57,180",
+                  "text": "性价比高",
+                  "matched_terms": [
+                    "性价比高"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "更安全",
+              "source_match_terms": [
+                "更安全"
+              ],
+              "caption_hit_count": 9,
+              "evidence_examples": [
+                {
+                  "srt_index": 82,
+                  "start": "00:02:07,070",
+                  "end": "00:02:09,314",
+                  "text": "你们家老人孩子他用起来是不是更安全",
+                  "matched_terms": [
+                    "更安全"
+                  ]
+                },
+                {
+                  "srt_index": 292,
+                  "start": "00:07:38,140",
+                  "end": "00:07:40,460",
+                  "text": "你们家老人孩子用起来是不是更安全",
+                  "matched_terms": [
+                    "更安全"
+                  ]
+                },
+                {
+                  "srt_index": 445,
+                  "start": "00:11:55,800",
+                  "end": "00:11:56,977",
+                  "text": "你用起来是不是更安全了",
+                  "matched_terms": [
+                    "更安全"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "更放心",
+              "source_match_terms": [
+                "更放心",
+                "放心"
+              ],
+              "caption_hit_count": 3,
+              "evidence_examples": [
+                {
+                  "srt_index": 480,
+                  "start": "00:12:54,480",
+                  "end": "00:12:56,150",
+                  "text": "这个榜单咱用着也放心",
+                  "matched_terms": [
+                    "放心"
+                  ]
+                },
+                {
+                  "srt_index": 873,
+                  "start": "00:24:06,400",
+                  "end": "00:24:08,314",
+                  "text": "不回家你可以真的放心用",
+                  "matched_terms": [
+                    "放心"
+                  ]
+                },
+                {
+                  "srt_index": 1373,
+                  "start": "00:38:19,180",
+                  "end": "00:38:20,958",
+                  "text": "你用起来是不是更安全更放心了",
+                  "matched_terms": [
+                    "更放心",
+                    "放心"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "不带心疼",
+              "source_match_terms": [
+                "不带心疼"
+              ],
+              "caption_hit_count": 7,
+              "evidence_examples": [
+                {
+                  "srt_index": 55,
+                  "start": "00:01:22,950",
+                  "end": "00:01:25,190",
+                  "text": "你们家老人开上一整天不带心疼",
+                  "matched_terms": [
+                    "不带心疼"
+                  ]
+                },
+                {
+                  "srt_index": 249,
+                  "start": "00:06:33,910",
+                  "end": "00:06:36,278",
+                  "text": "你们家老人开上一整天都不带心疼的",
+                  "matched_terms": [
+                    "不带心疼"
+                  ]
+                },
+                {
+                  "srt_index": 411,
+                  "start": "00:11:02,460",
+                  "end": "00:11:03,967",
+                  "text": "老人开一天也不带心疼的",
+                  "matched_terms": [
+                    "不带心疼"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "不影响你休息",
+              "source_match_terms": [
+                "不影响你休息"
+              ],
+              "caption_hit_count": 5,
+              "evidence_examples": [
+                {
+                  "srt_index": 294,
+                  "start": "00:07:42,340",
+                  "end": "00:07:43,474",
+                  "text": "它不影响你休息",
+                  "matched_terms": [
+                    "不影响你休息"
+                  ]
+                },
+                {
+                  "srt_index": 608,
+                  "start": "00:16:31,350",
+                  "end": "00:16:33,380",
+                  "text": "对轻音款它不影响你休息",
+                  "matched_terms": [
+                    "不影响你休息"
+                  ]
+                },
+                {
+                  "srt_index": 978,
+                  "start": "00:27:06,050",
+                  "end": "00:27:07,010",
+                  "text": "不影响你休息",
+                  "matched_terms": [
+                    "不影响你休息"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "带走家里的闷热感",
+              "source_match_terms": [
+                "带走家里的闷热感"
+              ],
+              "caption_hit_count": 2,
+              "evidence_examples": [
+                {
+                  "srt_index": 61,
+                  "start": "00:01:31,280",
+                  "end": "00:01:32,496",
+                  "text": "带走家里的闷热感",
+                  "matched_terms": [
+                    "带走家里的闷热感"
+                  ]
+                },
+                {
+                  "srt_index": 1121,
+                  "start": "00:31:10,640",
+                  "end": "00:31:13,280",
+                  "text": "还有八档暴风可以带走家里的闷热感",
+                  "matched_terms": [
+                    "带走家里的闷热感"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "用的时间久",
+              "source_match_terms": [
+                "用的时间久"
+              ],
+              "caption_hit_count": 1,
+              "evidence_examples": [
+                {
+                  "srt_index": 89,
+                  "start": "00:02:16,930",
+                  "end": "00:02:17,670",
+                  "text": "用的时间久",
+                  "matched_terms": [
+                    "用的时间久"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "服务价值",
+      "subcategories": [
+        {
+          "subcategory": "配送物流",
+          "keywords": [
+            {
+              "keyword": "现货",
+              "source_match_terms": [
+                "现货"
+              ],
+              "caption_hit_count": 18,
+              "evidence_examples": [
+                {
+                  "srt_index": 119,
+                  "start": "00:03:05,050",
+                  "end": "00:03:06,470",
+                  "text": "刚刚买的全部安排现货",
+                  "matched_terms": [
+                    "现货"
+                  ]
+                },
+                {
+                  "srt_index": 156,
+                  "start": "00:04:05,380",
+                  "end": "00:04:06,942",
+                  "text": "给刚刚买的全部安排现货",
+                  "matched_terms": [
+                    "现货"
+                  ]
+                },
+                {
+                  "srt_index": 187,
+                  "start": "00:04:54,360",
+                  "end": "00:04:55,410",
+                  "text": "我给你安排现货",
+                  "matched_terms": [
+                    "现货"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "安排现货",
+              "source_match_terms": [
+                "安排现货"
+              ],
+              "caption_hit_count": 14,
+              "evidence_examples": [
+                {
+                  "srt_index": 119,
+                  "start": "00:03:05,050",
+                  "end": "00:03:06,470",
+                  "text": "刚刚买的全部安排现货",
+                  "matched_terms": [
+                    "安排现货"
+                  ]
+                },
+                {
+                  "srt_index": 156,
+                  "start": "00:04:05,380",
+                  "end": "00:04:06,942",
+                  "text": "给刚刚买的全部安排现货",
+                  "matched_terms": [
+                    "安排现货"
+                  ]
+                },
+                {
+                  "srt_index": 187,
+                  "start": "00:04:54,360",
+                  "end": "00:04:55,410",
+                  "text": "我给你安排现货",
+                  "matched_terms": [
+                    "安排现货"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "发货",
+              "source_match_terms": [
+                "发货"
+              ],
+              "caption_hit_count": 18,
+              "evidence_examples": [
+                {
+                  "srt_index": 19,
+                  "start": "00:00:28,060",
+                  "end": "00:00:29,850",
+                  "text": "你先传单的发货25了",
+                  "matched_terms": [
+                    "发货"
+                  ]
+                },
+                {
+                  "srt_index": 154,
+                  "start": "00:04:00,260",
+                  "end": "00:04:01,640",
+                  "text": "那我们这就给你传单子发货",
+                  "matched_terms": [
+                    "发货"
+                  ]
+                },
+                {
+                  "srt_index": 184,
+                  "start": "00:04:48,940",
+                  "end": "00:04:50,449",
+                  "text": "29了给刚买的先发货",
+                  "matched_terms": [
+                    "发货"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "物流",
+              "source_match_terms": [
+                "物流"
+              ],
+              "caption_hit_count": 12,
+              "evidence_examples": [
+                {
+                  "srt_index": 279,
+                  "start": "00:07:21,500",
+                  "end": "00:07:23,249",
+                  "text": "35分之后你直接看物流",
+                  "matched_terms": [
+                    "物流"
+                  ]
+                },
+                {
+                  "srt_index": 355,
+                  "start": "00:09:20,200",
+                  "end": "00:09:23,000",
+                  "text": "你们直接看一下物流上面会显示啥时候能收到",
+                  "matched_terms": [
+                    "物流"
+                  ]
+                },
+                {
+                  "srt_index": 511,
+                  "start": "00:13:47,860",
+                  "end": "00:13:50,760",
+                  "text": "40分之后你们就可以看物流了",
+                  "matched_terms": [
+                    "物流"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "看物流",
+              "source_match_terms": [
+                "看物流",
+                "看一下物流",
+                "刷新看物流"
+              ],
+              "caption_hit_count": 11,
+              "evidence_examples": [
+                {
+                  "srt_index": 279,
+                  "start": "00:07:21,500",
+                  "end": "00:07:23,249",
+                  "text": "35分之后你直接看物流",
+                  "matched_terms": [
+                    "看物流"
+                  ]
+                },
+                {
+                  "srt_index": 355,
+                  "start": "00:09:20,200",
+                  "end": "00:09:23,000",
+                  "text": "你们直接看一下物流上面会显示啥时候能收到",
+                  "matched_terms": [
+                    "看一下物流"
+                  ]
+                },
+                {
+                  "srt_index": 511,
+                  "start": "00:13:47,860",
+                  "end": "00:13:50,760",
+                  "text": "40分之后你们就可以看物流了",
+                  "matched_terms": [
+                    "看物流"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "物流消息",
+              "source_match_terms": [
+                "物流消息"
+              ],
+              "caption_hit_count": 1,
+              "evidence_examples": [
+                {
+                  "srt_index": 1055,
+                  "start": "00:29:11,920",
+                  "end": "00:29:13,060",
+                  "text": "看物流消息就行了",
+                  "matched_terms": [
+                    "物流消息"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "啥时候能收到",
+              "source_match_terms": [
+                "啥时候能收到"
+              ],
+              "caption_hit_count": 1,
+              "evidence_examples": [
+                {
+                  "srt_index": 355,
+                  "start": "00:09:20,200",
+                  "end": "00:09:23,000",
+                  "text": "你们直接看一下物流上面会显示啥时候能收到",
+                  "matched_terms": [
+                    "啥时候能收到"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "什么时候能到",
+              "source_match_terms": [
+                "什么时候能到"
+              ],
+              "caption_hit_count": 1,
+              "evidence_examples": [
+                {
+                  "srt_index": 665,
+                  "start": "00:18:04,830",
+                  "end": "00:18:06,370",
+                  "text": "都给你说什么时候能到",
+                  "matched_terms": [
+                    "什么时候能到"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "付款成功",
+              "source_match_terms": [
+                "付款成功"
+              ],
+              "caption_hit_count": 1,
+              "evidence_examples": [
+                {
+                  "srt_index": 1329,
+                  "start": "00:37:04,950",
+                  "end": "00:37:07,585",
+                  "text": "03分之前付款成功都安排现货",
+                  "matched_terms": [
+                    "付款成功"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "subcategory": "全程售后",
+          "keywords": [
+            {
+              "keyword": "创维客服",
+              "source_match_terms": [
+                "创维客服"
+              ],
+              "caption_hit_count": 7,
+              "evidence_examples": [
+                {
+                  "srt_index": 152,
+                  "start": "00:03:56,330",
+                  "end": "00:03:58,795",
+                  "text": "直接联系我们创维客服来售后就可以了",
+                  "matched_terms": [
+                    "创维客服"
+                  ]
+                },
+                {
+                  "srt_index": 350,
+                  "start": "00:09:11,130",
+                  "end": "00:09:13,146",
+                  "text": "直接联系创维客服来之后就行了",
+                  "matched_terms": [
+                    "创维客服"
+                  ]
+                },
+                {
+                  "srt_index": 500,
+                  "start": "00:13:28,070",
+                  "end": "00:13:30,310",
+                  "text": "直接联系创维客服来收就可以了",
+                  "matched_terms": [
+                    "创维客服"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "售后",
+              "source_match_terms": [
+                "售后"
+              ],
+              "caption_hit_count": 5,
+              "evidence_examples": [
+                {
+                  "srt_index": 152,
+                  "start": "00:03:56,330",
+                  "end": "00:03:58,795",
+                  "text": "直接联系我们创维客服来售后就可以了",
+                  "matched_terms": [
+                    "售后"
+                  ]
+                },
+                {
+                  "srt_index": 670,
+                  "start": "00:18:15,660",
+                  "end": "00:18:17,804",
+                  "text": "直接联系我们创维客服来售后就行了",
+                  "matched_terms": [
+                    "售后"
+                  ]
+                },
+                {
+                  "srt_index": 852,
+                  "start": "00:23:28,720",
+                  "end": "00:23:30,249",
+                  "text": "直接联系创维客服来售后",
+                  "matched_terms": [
+                    "售后"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "两年整机质保",
+              "source_match_terms": [
+                "两年的整机质保",
+                "质保两年"
+              ],
+              "caption_hit_count": 8,
+              "evidence_examples": [
+                {
+                  "srt_index": 65,
+                  "start": "00:01:36,500",
+                  "end": "00:01:38,648",
+                  "text": "而且升级了两年的整机质保",
+                  "matched_terms": [
+                    "两年的整机质保"
+                  ]
+                },
+                {
+                  "srt_index": 147,
+                  "start": "00:03:49,950",
+                  "end": "00:03:52,026",
+                  "text": "而且升级了两年的整机质保",
+                  "matched_terms": [
+                    "两年的整机质保"
+                  ]
+                },
+                {
+                  "srt_index": 348,
+                  "start": "00:09:08,170",
+                  "end": "00:09:09,388",
+                  "text": "两年的整机质保",
+                  "matched_terms": [
+                    "两年的整机质保"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "随时联系创维客服",
+              "source_match_terms": [
+                "随时联系创维客服",
+                "直接联系创维客服",
+                "直接联系我们创维客服"
+              ],
+              "caption_hit_count": 7,
+              "evidence_examples": [
+                {
+                  "srt_index": 152,
+                  "start": "00:03:56,330",
+                  "end": "00:03:58,795",
+                  "text": "直接联系我们创维客服来售后就可以了",
+                  "matched_terms": [
+                    "直接联系我们创维客服"
+                  ]
+                },
+                {
+                  "srt_index": 350,
+                  "start": "00:09:11,130",
+                  "end": "00:09:13,146",
+                  "text": "直接联系创维客服来之后就行了",
+                  "matched_terms": [
+                    "直接联系创维客服"
+                  ]
+                },
+                {
+                  "srt_index": 500,
+                  "start": "00:13:28,070",
+                  "end": "00:13:30,310",
+                  "text": "直接联系创维客服来收就可以了",
+                  "matched_terms": [
+                    "直接联系创维客服"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "信任价值",
+      "subcategories": [
+        {
+          "subcategory": "质检报告",
+          "keywords": [
+            {
+              "keyword": "检测报告",
+              "source_match_terms": [
+                "检测报告"
+              ],
+              "caption_hit_count": 3,
+              "evidence_examples": [
+                {
+                  "srt_index": 634,
+                  "start": "00:17:15,020",
+                  "end": "00:17:15,810",
+                  "text": "有检测报告",
+                  "matched_terms": [
+                    "检测报告"
+                  ]
+                },
+                {
+                  "srt_index": 867,
+                  "start": "00:23:55,970",
+                  "end": "00:23:57,785",
+                  "text": "姐我给你看一下我们这个检测报告",
+                  "matched_terms": [
+                    "检测报告"
+                  ]
+                },
+                {
+                  "srt_index": 921,
+                  "start": "00:25:29,830",
+                  "end": "00:25:30,698",
+                  "text": "不是检测报告吗",
+                  "matched_terms": [
+                    "检测报告"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "subcategory": "资质证书",
+          "keywords": []
+        },
+        {
+          "subcategory": "品牌背书",
+          "keywords": [
+            {
+              "keyword": "创维",
+              "source_match_terms": [
+                "创维"
+              ],
+              "caption_hit_count": 15,
+              "evidence_examples": [
+                {
+                  "srt_index": 127,
+                  "start": "00:03:21,810",
+                  "end": "00:03:23,390",
+                  "text": "我们创维只有它这一款",
+                  "matched_terms": [
+                    "创维"
+                  ]
+                },
+                {
+                  "srt_index": 152,
+                  "start": "00:03:56,330",
+                  "end": "00:03:58,795",
+                  "text": "直接联系我们创维客服来售后就可以了",
+                  "matched_terms": [
+                    "创维"
+                  ]
+                },
+                {
+                  "srt_index": 331,
+                  "start": "00:08:43,830",
+                  "end": "00:08:50,060",
+                  "text": "而且我们创维只有它这一款可以在全平台全类目的五大榜单都能排到榜首的位置",
+                  "matched_terms": [
+                    "创维"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "榜单",
+              "source_match_terms": [
+                "榜单"
+              ],
+              "caption_hit_count": 16,
+              "evidence_examples": [
+                {
+                  "srt_index": 123,
+                  "start": "00:03:13,460",
+                  "end": "00:03:15,008",
+                  "text": "你们也可以看一下这个榜单",
+                  "matched_terms": [
+                    "榜单"
+                  ]
+                },
+                {
+                  "srt_index": 129,
+                  "start": "00:03:25,380",
+                  "end": "00:03:27,270",
+                  "text": "它在五大榜单的榜首",
+                  "matched_terms": [
+                    "榜单"
+                  ]
+                },
+                {
+                  "srt_index": 327,
+                  "start": "00:08:34,280",
+                  "end": "00:08:37,382",
+                  "text": "结束之前买过的可以看一下这个榜单我们也就下了",
+                  "matched_terms": [
+                    "榜单"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "五大榜单",
+              "source_match_terms": [
+                "五大榜单"
+              ],
+              "caption_hit_count": 8,
+              "evidence_examples": [
+                {
+                  "srt_index": 129,
+                  "start": "00:03:25,380",
+                  "end": "00:03:27,270",
+                  "text": "它在五大榜单的榜首",
+                  "matched_terms": [
+                    "五大榜单"
+                  ]
+                },
+                {
+                  "srt_index": 331,
+                  "start": "00:08:43,830",
+                  "end": "00:08:50,060",
+                  "text": "而且我们创维只有它这一款可以在全平台全类目的五大榜单都能排到榜首的位置",
+                  "matched_terms": [
+                    "五大榜单"
+                  ]
+                },
+                {
+                  "srt_index": 484,
+                  "start": "00:13:02,840",
+                  "end": "00:13:08,420",
+                  "text": "而且我们创维只有它这一款可以在全平台全联盟的五大榜单都在top 1的位置",
+                  "matched_terms": [
+                    "五大榜单"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "榜首",
+              "source_match_terms": [
+                "榜首"
+              ],
+              "caption_hit_count": 3,
+              "evidence_examples": [
+                {
+                  "srt_index": 129,
+                  "start": "00:03:25,380",
+                  "end": "00:03:27,270",
+                  "text": "它在五大榜单的榜首",
+                  "matched_terms": [
+                    "榜首"
+                  ]
+                },
+                {
+                  "srt_index": 331,
+                  "start": "00:08:43,830",
+                  "end": "00:08:50,060",
+                  "text": "而且我们创维只有它这一款可以在全平台全类目的五大榜单都能排到榜首的位置",
+                  "matched_terms": [
+                    "榜首"
+                  ]
+                },
+                {
+                  "srt_index": 833,
+                  "start": "00:23:00,560",
+                  "end": "00:23:06,500",
+                  "text": "我们创维只有它这一款可以在全平台全联盟的五大榜单都能排到榜首的位置",
+                  "matched_terms": [
+                    "榜首"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "top 1",
+              "source_match_terms": [
+                "top 1"
+              ],
+              "caption_hit_count": 4,
+              "evidence_examples": [
+                {
+                  "srt_index": 484,
+                  "start": "00:13:02,840",
+                  "end": "00:13:08,420",
+                  "text": "而且我们创维只有它这一款可以在全平台全联盟的五大榜单都在top 1的位置",
+                  "matched_terms": [
+                    "top 1"
+                  ]
+                },
+                {
+                  "srt_index": 651,
+                  "start": "00:17:41,550",
+                  "end": "00:17:47,202",
+                  "text": "而且我们创维只有它这一款可以在全平台全类目的五大榜单都在top 1的位置",
+                  "matched_terms": [
+                    "top 1"
+                  ]
+                },
+                {
+                  "srt_index": 1029,
+                  "start": "00:28:26,210",
+                  "end": "00:28:32,042",
+                  "text": "而且我们创维只有它是一款可以在全平台全联盟的五大榜单都在top 1的位置",
+                  "matched_terms": [
+                    "top 1"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "全平台全类目",
+              "source_match_terms": [
+                "全平台全类目"
+              ],
+              "caption_hit_count": 3,
+              "evidence_examples": [
+                {
+                  "srt_index": 128,
+                  "start": "00:03:23,390",
+                  "end": "00:03:25,194",
+                  "text": "你全平台全类目随便对比",
+                  "matched_terms": [
+                    "全平台全类目"
+                  ]
+                },
+                {
+                  "srt_index": 331,
+                  "start": "00:08:43,830",
+                  "end": "00:08:50,060",
+                  "text": "而且我们创维只有它这一款可以在全平台全类目的五大榜单都能排到榜首的位置",
+                  "matched_terms": [
+                    "全平台全类目"
+                  ]
+                },
+                {
+                  "srt_index": 651,
+                  "start": "00:17:41,550",
+                  "end": "00:17:47,202",
+                  "text": "而且我们创维只有它这一款可以在全平台全类目的五大榜单都在top 1的位置",
+                  "matched_terms": [
+                    "全平台全类目"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "全平台全联盟",
+              "source_match_terms": [
+                "全平台全联盟"
+              ],
+              "caption_hit_count": 4,
+              "evidence_examples": [
+                {
+                  "srt_index": 484,
+                  "start": "00:13:02,840",
+                  "end": "00:13:08,420",
+                  "text": "而且我们创维只有它这一款可以在全平台全联盟的五大榜单都在top 1的位置",
+                  "matched_terms": [
+                    "全平台全联盟"
+                  ]
+                },
+                {
+                  "srt_index": 833,
+                  "start": "00:23:00,560",
+                  "end": "00:23:06,500",
+                  "text": "我们创维只有它这一款可以在全平台全联盟的五大榜单都能排到榜首的位置",
+                  "matched_terms": [
+                    "全平台全联盟"
+                  ]
+                },
+                {
+                  "srt_index": 1029,
+                  "start": "00:28:26,210",
+                  "end": "00:28:32,042",
+                  "text": "而且我们创维只有它是一款可以在全平台全联盟的五大榜单都在top 1的位置",
+                  "matched_terms": [
+                    "全平台全联盟"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "26年新款",
+              "source_match_terms": [
+                "26年新款"
+              ],
+              "caption_hit_count": 7,
+              "evidence_examples": [
+                {
+                  "srt_index": 126,
+                  "start": "00:03:19,880",
+                  "end": "00:03:21,176",
+                  "text": "因为它是26年新款",
+                  "matched_terms": [
+                    "26年新款"
+                  ]
+                },
+                {
+                  "srt_index": 330,
+                  "start": "00:08:42,210",
+                  "end": "00:08:43,560",
+                  "text": "因为它是26年新款",
+                  "matched_terms": [
+                    "26年新款"
+                  ]
+                },
+                {
+                  "srt_index": 483,
+                  "start": "00:13:01,030",
+                  "end": "00:13:02,407",
+                  "text": "因为它是26年新款",
+                  "matched_terms": [
+                    "26年新款"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "subcategory": "答疑响应",
+          "keywords": [
+            {
+              "keyword": "当然可以了",
+              "source_match_terms": [
+                "当然可以了"
+              ],
+              "caption_hit_count": 1,
+              "evidence_examples": [
+                {
+                  "srt_index": 93,
+                  "start": "00:02:20,560",
+                  "end": "00:02:21,330",
+                  "text": "当然可以了",
+                  "matched_terms": [
+                    "当然可以了"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "我跟你说一下怎么买",
+              "source_match_terms": [
+                "我跟你说一下怎么买"
+              ],
+              "caption_hit_count": 1,
+              "evidence_examples": [
+                {
+                  "srt_index": 95,
+                  "start": "00:02:21,510",
+                  "end": "00:02:22,572",
+                  "text": "我跟你说一下怎么买",
+                  "matched_terms": [
+                    "我跟你说一下怎么买"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "我给你说一下怎么下单",
+              "source_match_terms": [
+                "我给你说一下怎么下单"
+              ],
+              "caption_hit_count": 1,
+              "evidence_examples": [
+                {
+                  "srt_index": 451,
+                  "start": "00:12:03,270",
+                  "end": "00:12:04,450",
+                  "text": "我给你说一下怎么下单",
+                  "matched_terms": [
+                    "我给你说一下怎么下单"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "我再说一下怎么下单",
+              "source_match_terms": [
+                "我再说一下怎么下单"
+              ],
+              "caption_hit_count": 1,
+              "evidence_examples": [
+                {
+                  "srt_index": 615,
+                  "start": "00:16:45,680",
+                  "end": "00:16:47,075",
+                  "text": "我再说一下怎么下单",
+                  "matched_terms": [
+                    "我再说一下怎么下单"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "我没明白你的意思",
+              "source_match_terms": [
+                "我没明白你的意思"
+              ],
+              "caption_hit_count": 1,
+              "evidence_examples": [
+                {
+                  "srt_index": 42,
+                  "start": "00:01:06,420",
+                  "end": "00:01:07,388",
+                  "text": "我没明白你的意思",
+                  "matched_terms": [
+                    "我没明白你的意思"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "你可以看一下",
+              "source_match_terms": [
+                "你可以看一下"
+              ],
+              "caption_hit_count": 2,
+              "evidence_examples": [
+                {
+                  "srt_index": 115,
+                  "start": "00:02:54,680",
+                  "end": "00:02:56,744",
+                  "text": "你可以看一下平安买的是吧",
+                  "matched_terms": [
+                    "你可以看一下"
+                  ]
+                },
+                {
+                  "srt_index": 241,
+                  "start": "00:06:18,880",
+                  "end": "00:06:20,750",
+                  "text": "你可以看一下它的风是不是断断续续的",
+                  "matched_terms": [
+                    "你可以看一下"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "对我再说一下怎么买",
+              "source_match_terms": [
+                "对我再说一下怎么买"
+              ],
+              "caption_hit_count": 1,
+              "evidence_examples": [
+                {
+                  "srt_index": 791,
+                  "start": "00:21:48,010",
+                  "end": "00:21:49,459",
+                  "text": "对我再说一下怎么买",
+                  "matched_terms": [
+                    "对我再说一下怎么买"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "subcategory": "退换货保障",
+          "keywords": [
+            {
+              "keyword": "七天无理由",
+              "source_match_terms": [
+                "七天无理由"
+              ],
+              "caption_hit_count": 13,
+              "evidence_examples": [
+                {
+                  "srt_index": 63,
+                  "start": "00:01:33,780",
+                  "end": "00:01:35,409",
+                  "text": "还有七天无理由回家",
+                  "matched_terms": [
+                    "七天无理由"
+                  ]
+                },
+                {
+                  "srt_index": 146,
+                  "start": "00:03:47,660",
+                  "end": "00:03:49,760",
+                  "text": "回到家全部都有七天无理由",
+                  "matched_terms": [
+                    "七天无理由"
+                  ]
+                },
+                {
+                  "srt_index": 257,
+                  "start": "00:06:48,320",
+                  "end": "00:06:49,440",
+                  "text": "有七天无理由",
+                  "matched_terms": [
+                    "七天无理由"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "回家可以自己体验",
+              "source_match_terms": [
+                "可以自己体验",
+                "你就可以体验一下"
+              ],
+              "caption_hit_count": 5,
+              "evidence_examples": [
+                {
+                  "srt_index": 64,
+                  "start": "00:01:35,410",
+                  "end": "00:01:36,250",
+                  "text": "可以自己体验",
+                  "matched_terms": [
+                    "可以自己体验"
+                  ]
+                },
+                {
+                  "srt_index": 509,
+                  "start": "00:13:45,320",
+                  "end": "00:13:46,794",
+                  "text": "回家咱可以自己体验一下",
+                  "matched_terms": [
+                    "可以自己体验"
+                  ]
+                },
+                {
+                  "srt_index": 853,
+                  "start": "00:23:30,570",
+                  "end": "00:23:32,143",
+                  "text": "回到家之后可以自己体验一下",
+                  "matched_terms": [
+                    "可以自己体验"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "不凉快咱不带留的",
+              "source_match_terms": [
+                "咱不带留的"
+              ],
+              "caption_hit_count": 3,
+              "evidence_examples": [
+                {
+                  "srt_index": 150,
+                  "start": "00:03:53,540",
+                  "end": "00:03:54,310",
+                  "text": "咱不带留的",
+                  "matched_terms": [
+                    "咱不带留的"
+                  ]
+                },
+                {
+                  "srt_index": 498,
+                  "start": "00:13:25,290",
+                  "end": "00:13:26,190",
+                  "text": "咱不带留的",
+                  "matched_terms": [
+                    "咱不带留的"
+                  ]
+                },
+                {
+                  "srt_index": 1319,
+                  "start": "00:36:49,730",
+                  "end": "00:36:50,480",
+                  "text": "咱不带留的",
+                  "matched_terms": [
+                    "咱不带留的"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "问题解答",
+      "subcategories": [
+        {
+          "subcategory": "问题解答",
+          "keywords": [
+            {
+              "keyword": "怎么变台式",
+              "source_match_terms": [
+                "怎么变台式"
+              ],
+              "caption_hit_count": 1,
+              "evidence_examples": [
+                {
+                  "srt_index": 39,
+                  "start": "00:01:03,180",
+                  "end": "00:01:04,170",
+                  "text": "怎么变台式吗",
+                  "matched_terms": [
+                    "怎么变台式"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "台式还是立式",
+              "source_match_terms": [
+                "台式还是要立式"
+              ],
+              "caption_hit_count": 1,
+              "evidence_examples": [
+                {
+                  "srt_index": 43,
+                  "start": "00:01:07,390",
+                  "end": "00:01:09,209",
+                  "text": "哥你要台式还是要立式",
+                  "matched_terms": [
+                    "台式还是要立式"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "怎么买",
+              "source_match_terms": [
+                "怎么买"
+              ],
+              "caption_hit_count": 3,
+              "evidence_examples": [
+                {
+                  "srt_index": 95,
+                  "start": "00:02:21,510",
+                  "end": "00:02:22,572",
+                  "text": "我跟你说一下怎么买",
+                  "matched_terms": [
+                    "怎么买"
+                  ]
+                },
+                {
+                  "srt_index": 137,
+                  "start": "00:03:36,150",
+                  "end": "00:03:36,840",
+                  "text": "怎么买不了",
+                  "matched_terms": [
+                    "怎么买"
+                  ]
+                },
+                {
+                  "srt_index": 791,
+                  "start": "00:21:48,010",
+                  "end": "00:21:49,459",
+                  "text": "对我再说一下怎么买",
+                  "matched_terms": [
+                    "怎么买"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "怎么买不了",
+              "source_match_terms": [
+                "怎么买不了"
+              ],
+              "caption_hit_count": 1,
+              "evidence_examples": [
+                {
+                  "srt_index": 137,
+                  "start": "00:03:36,150",
+                  "end": "00:03:36,840",
+                  "text": "怎么买不了",
+                  "matched_terms": [
+                    "怎么买不了"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "怎么下单",
+              "source_match_terms": [
+                "怎么下单"
+              ],
+              "caption_hit_count": 5,
+              "evidence_examples": [
+                {
+                  "srt_index": 451,
+                  "start": "00:12:03,270",
+                  "end": "00:12:04,450",
+                  "text": "我给你说一下怎么下单",
+                  "matched_terms": [
+                    "怎么下单"
+                  ]
+                },
+                {
+                  "srt_index": 615,
+                  "start": "00:16:45,680",
+                  "end": "00:16:47,075",
+                  "text": "我再说一下怎么下单",
+                  "matched_terms": [
+                    "怎么下单"
+                  ]
+                },
+                {
+                  "srt_index": 982,
+                  "start": "00:27:11,920",
+                  "end": "00:27:13,360",
+                  "text": "咱说一下活动怎么下单",
+                  "matched_terms": [
+                    "怎么下单"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "怎么进不去",
+              "source_match_terms": [
+                "怎么进不去"
+              ],
+              "caption_hit_count": 1,
+              "evidence_examples": [
+                {
+                  "srt_index": 1018,
+                  "start": "00:28:06,830",
+                  "end": "00:28:08,384",
+                  "text": "姐姐怎么进不去",
+                  "matched_terms": [
+                    "怎么进不去"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "怎么领",
+              "source_match_terms": [
+                "怎么领"
+              ],
+              "caption_hit_count": 1,
+              "evidence_examples": [
+                {
+                  "srt_index": 783,
+                  "start": "00:21:35,590",
+                  "end": "00:21:36,118",
+                  "text": "怎么领",
+                  "matched_terms": [
+                    "怎么领"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "不会买",
+              "source_match_terms": [
+                "不会买"
+              ],
+              "caption_hit_count": 4,
+              "evidence_examples": [
+                {
+                  "srt_index": 613,
+                  "start": "00:16:42,000",
+                  "end": "00:16:43,859",
+                  "text": "来这样所有还不会买的朋友们",
+                  "matched_terms": [
+                    "不会买"
+                  ]
+                },
+                {
+                  "srt_index": 684,
+                  "start": "00:18:53,260",
+                  "end": "00:18:54,529",
+                  "text": "所以我现在不会买的",
+                  "matched_terms": [
+                    "不会买"
+                  ]
+                },
+                {
+                  "srt_index": 894,
+                  "start": "00:24:38,780",
+                  "end": "00:24:40,364",
+                  "text": "如果你是刚来还不会买的",
+                  "matched_terms": [
+                    "不会买"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "买错",
+              "source_match_terms": [
+                "买错"
+              ],
+              "caption_hit_count": 7,
+              "evidence_examples": [
+                {
+                  "srt_index": 96,
+                  "start": "00:02:22,950",
+                  "end": "00:02:24,400",
+                  "text": "你们今天真的别买错了",
+                  "matched_terms": [
+                    "买错"
+                  ]
+                },
+                {
+                  "srt_index": 269,
+                  "start": "00:07:06,830",
+                  "end": "00:07:07,929",
+                  "text": "你别买错就好了",
+                  "matched_terms": [
+                    "买错"
+                  ]
+                },
+                {
+                  "srt_index": 371,
+                  "start": "00:09:48,660",
+                  "end": "00:09:49,560",
+                  "text": "你千万别买错",
+                  "matched_terms": [
+                    "买错"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "能不能买到",
+              "source_match_terms": [
+                "能不能买到",
+                "能不能买"
+              ],
+              "caption_hit_count": 6,
+              "evidence_examples": [
+                {
+                  "srt_index": 983,
+                  "start": "00:27:13,360",
+                  "end": "00:27:14,186",
+                  "text": "你看能不能买到",
+                  "matched_terms": [
+                    "能不能买到",
+                    "能不能买"
+                  ]
+                },
+                {
+                  "srt_index": 1056,
+                  "start": "00:29:26,950",
+                  "end": "00:29:28,420",
+                  "text": "江苏还能不能买",
+                  "matched_terms": [
+                    "能不能买"
+                  ]
+                },
+                {
+                  "srt_index": 1058,
+                  "start": "00:29:29,700",
+                  "end": "00:29:30,726",
+                  "text": "姐姐你看能不能买到",
+                  "matched_terms": [
+                    "能不能买到",
+                    "能不能买"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "江苏还能不能买",
+              "source_match_terms": [
+                "江苏还能不能买"
+              ],
+              "caption_hit_count": 1,
+              "evidence_examples": [
+                {
+                  "srt_index": 1056,
+                  "start": "00:29:26,950",
+                  "end": "00:29:28,420",
+                  "text": "江苏还能不能买",
+                  "matched_terms": [
+                    "江苏还能不能买"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "有没有",
+              "source_match_terms": [
+                "有没有"
+              ],
+              "caption_hit_count": 3,
+              "evidence_examples": [
+                {
+                  "srt_index": 76,
+                  "start": "00:01:55,540",
+                  "end": "00:01:58,906",
+                  "text": "问一下咱直播间是不是有没有很多是南方的朋友们",
+                  "matched_terms": [
+                    "有没有"
+                  ]
+                },
+                {
+                  "srt_index": 430,
+                  "start": "00:11:29,790",
+                  "end": "00:11:31,722",
+                  "text": "像咱家里现在有没有正在下雨的",
+                  "matched_terms": [
+                    "有没有"
+                  ]
+                },
+                {
+                  "srt_index": 676,
+                  "start": "00:18:40,580",
+                  "end": "00:18:43,011",
+                  "text": "为啥刚刚看还有现在没有没有",
+                  "matched_terms": [
+                    "有没有"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "收到货没看到遥控器",
+              "source_match_terms": [
+                "收到货没看到遥控器"
+              ],
+              "caption_hit_count": 1,
+              "evidence_examples": [
+                {
+                  "srt_index": 1034,
+                  "start": "00:28:37,290",
+                  "end": "00:28:39,514",
+                  "text": "你是收到货没看到遥控器还是啥情况",
+                  "matched_terms": [
+                    "收到货没看到遥控器"
+                  ]
+                }
+              ]
+            },
+            {
+              "keyword": "七天无理由吗",
+              "source_match_terms": [
+                "有七天无理由吗",
+                "七天无理由吗"
+              ],
+              "caption_hit_count": 1,
+              "evidence_examples": [
+                {
+                  "srt_index": 1317,
+                  "start": "00:36:44,810",
+                  "end": "00:36:48,594",
+                  "text": "你还可以直接去开八档暴风都可以有七天无理由吗",
+                  "matched_terms": [
+                    "有七天无理由吗",
+                    "七天无理由吗"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "flat_keyword_mapping": [
+    {
+      "keyword": "独立香薰",
+      "category": "功能价值",
+      "subcategory": "产品功能",
+      "caption_hit_count": 15,
+      "source_match_terms": [
+        "独立香薰"
+      ]
+    },
+    {
+      "keyword": "独立灯光",
+      "category": "功能价值",
+      "subcategory": "产品功能",
+      "caption_hit_count": 16,
+      "source_match_terms": [
+        "独立灯光"
+      ]
+    },
+    {
+      "keyword": "独立驱蚊",
+      "category": "功能价值",
+      "subcategory": "产品功能",
+      "caption_hit_count": 16,
+      "source_match_terms": [
+        "独立驱蚊"
+      ]
+    },
+    {
+      "keyword": "AI智能语音芯片",
+      "category": "功能价值",
+      "subcategory": "产品功能",
+      "caption_hit_count": 14,
+      "source_match_terms": [
+        "AI智能语音芯片",
+        "智能语音芯片"
+      ]
+    },
+    {
+      "keyword": "不用联网",
+      "category": "功能价值",
+      "subcategory": "产品功能",
+      "caption_hit_count": 2,
+      "source_match_terms": [
+        "不用联网"
+      ]
+    },
+    {
+      "keyword": "一机六用",
+      "category": "功能价值",
+      "subcategory": "产品功能",
+      "caption_hit_count": 17,
+      "source_match_terms": [
+        "一机六用"
+      ]
+    },
+    {
+      "keyword": "360度循环送风",
+      "category": "功能价值",
+      "subcategory": "产品功能",
+      "caption_hit_count": 7,
+      "source_match_terms": [
+        "360度循环送风",
+        "360度的循环送风"
+      ]
+    },
+    {
+      "keyword": "睡眠风",
+      "category": "功能价值",
+      "subcategory": "产品功能",
+      "caption_hit_count": 7,
+      "source_match_terms": [
+        "睡眠风"
+      ]
+    },
+    {
+      "keyword": "循环风",
+      "category": "功能价值",
+      "subcategory": "产品功能",
+      "caption_hit_count": 6,
+      "source_match_terms": [
+        "循环风"
+      ]
+    },
+    {
+      "keyword": "八档暴风",
+      "category": "功能价值",
+      "subcategory": "产品功能",
+      "caption_hit_count": 7,
+      "source_match_terms": [
+        "八档暴风"
+      ]
+    },
+    {
+      "keyword": "抑菌器",
+      "category": "功能价值",
+      "subcategory": "产品功能",
+      "caption_hit_count": 13,
+      "source_match_terms": [
+        "抑菌器"
+      ]
+    },
+    {
+      "keyword": "新风机",
+      "category": "功能价值",
+      "subcategory": "产品功能",
+      "caption_hit_count": 13,
+      "source_match_terms": [
+        "新风机"
+      ]
+    },
+    {
+      "keyword": "台式",
+      "category": "功能价值",
+      "subcategory": "产品功能",
+      "caption_hit_count": 4,
+      "source_match_terms": [
+        "台式"
+      ]
+    },
+    {
+      "keyword": "立式",
+      "category": "功能价值",
+      "subcategory": "产品功能",
+      "caption_hit_count": 2,
+      "source_match_terms": [
+        "立式"
+      ]
+    },
+    {
+      "keyword": "把杆子拧掉",
+      "category": "功能价值",
+      "subcategory": "产品功能",
+      "caption_hit_count": 1,
+      "source_match_terms": [
+        "把杆子拧掉"
+      ]
+    },
+    {
+      "keyword": "八个档位",
+      "category": "功能价值",
+      "subcategory": "硬件参数",
+      "caption_hit_count": 28,
+      "source_match_terms": [
+        "八个档位",
+        "八档风",
+        "八档"
+      ]
+    },
+    {
+      "keyword": "三种模式",
+      "category": "功能价值",
+      "subcategory": "硬件参数",
+      "caption_hit_count": 7,
+      "source_match_terms": [
+        "三种模式"
+      ]
+    },
+    {
+      "keyword": "40瓦",
+      "category": "功能价值",
+      "subcategory": "硬件参数",
+      "caption_hit_count": 8,
+      "source_match_terms": [
+        "40瓦"
+      ]
+    },
+    {
+      "keyword": "高转速罩极电机",
+      "category": "功能价值",
+      "subcategory": "硬件参数",
+      "caption_hit_count": 5,
+      "source_match_terms": [
+        "高转速罩极电机",
+        "罩极电机"
+      ]
+    },
+    {
+      "keyword": "防霉抗菌扇叶",
+      "category": "功能价值",
+      "subcategory": "硬件参数",
+      "caption_hit_count": 3,
+      "source_match_terms": [
+        "防霉抗菌的扇叶"
+      ]
+    },
+    {
+      "keyword": "防霉",
+      "category": "功能价值",
+      "subcategory": "硬件参数",
+      "caption_hit_count": 11,
+      "source_match_terms": [
+        "防霉"
+      ]
+    },
+    {
+      "keyword": "防潮",
+      "category": "功能价值",
+      "subcategory": "硬件参数",
+      "caption_hit_count": 8,
+      "source_match_terms": [
+        "防潮"
+      ]
+    },
+    {
+      "keyword": "防短路",
+      "category": "功能价值",
+      "subcategory": "硬件参数",
+      "caption_hit_count": 8,
+      "source_match_terms": [
+        "防短路"
+      ]
+    },
+    {
+      "keyword": "转速高",
+      "category": "功能价值",
+      "subcategory": "硬件参数",
+      "caption_hit_count": 8,
+      "source_match_terms": [
+        "转速高"
+      ]
+    },
+    {
+      "keyword": "动力强",
+      "category": "功能价值",
+      "subcategory": "硬件参数",
+      "caption_hit_count": 8,
+      "source_match_terms": [
+        "动力强"
+      ]
+    },
+    {
+      "keyword": "耐磨耐造",
+      "category": "功能价值",
+      "subcategory": "硬件参数",
+      "caption_hit_count": 8,
+      "source_match_terms": [
+        "耐磨耐造"
+      ]
+    },
+    {
+      "keyword": "耐高温",
+      "category": "功能价值",
+      "subcategory": "硬件参数",
+      "caption_hit_count": 8,
+      "source_match_terms": [
+        "耐高温"
+      ]
+    },
+    {
+      "keyword": "连开七天七夜",
+      "category": "功能价值",
+      "subcategory": "硬件参数",
+      "caption_hit_count": 6,
+      "source_match_terms": [
+        "连开七天七夜"
+      ]
+    },
+    {
+      "keyword": "不带发热发烫",
+      "category": "功能价值",
+      "subcategory": "硬件参数",
+      "caption_hit_count": 8,
+      "source_match_terms": [
+        "不带发热发烫"
+      ]
+    },
+    {
+      "keyword": "风力更大",
+      "category": "功能价值",
+      "subcategory": "硬件参数",
+      "caption_hit_count": 14,
+      "source_match_terms": [
+        "风力更大"
+      ]
+    },
+    {
+      "keyword": "顶配",
+      "category": "功能价值",
+      "subcategory": "硬件参数",
+      "caption_hit_count": 22,
+      "source_match_terms": [
+        "顶配"
+      ]
+    },
+    {
+      "keyword": "机械款",
+      "category": "功能价值",
+      "subcategory": "硬件参数",
+      "caption_hit_count": 7,
+      "source_match_terms": [
+        "机械款"
+      ]
+    },
+    {
+      "keyword": "清仓",
+      "category": "资产价值",
+      "subcategory": "平台活动",
+      "caption_hit_count": 17,
+      "source_match_terms": [
+        "清仓"
+      ]
+    },
+    {
+      "keyword": "国补",
+      "category": "资产价值",
+      "subcategory": "平台活动",
+      "caption_hit_count": 12,
+      "source_match_terms": [
+        "国补",
+        "国库",
+        "补补",
+        "国股",
+        "国五",
+        "果补"
+      ]
+    },
+    {
+      "keyword": "活动",
+      "category": "资产价值",
+      "subcategory": "平台活动",
+      "caption_hit_count": 4,
+      "source_match_terms": [
+        "活动"
+      ]
+    },
+    {
+      "keyword": "价格",
+      "category": "资产价值",
+      "subcategory": "平台活动",
+      "caption_hit_count": 10,
+      "source_match_terms": [
+        "价格"
+      ]
+    },
+    {
+      "keyword": "199",
+      "category": "资产价值",
+      "subcategory": "平台活动",
+      "caption_hit_count": 34,
+      "source_match_terms": [
+        "199",
+        "100 99"
+      ]
+    },
+    {
+      "keyword": "599",
+      "category": "资产价值",
+      "subcategory": "平台活动",
+      "caption_hit_count": 40,
+      "source_match_terms": [
+        "599"
+      ]
+    },
+    {
+      "keyword": "159",
+      "category": "资产价值",
+      "subcategory": "平台活动",
+      "caption_hit_count": 11,
+      "source_match_terms": [
+        "159"
+      ]
+    },
+    {
+      "keyword": "原价599",
+      "category": "资产价值",
+      "subcategory": "平台活动",
+      "caption_hit_count": 4,
+      "source_match_terms": [
+        "原价是599"
+      ]
+    },
+    {
+      "keyword": "省四百多块",
+      "category": "资产价值",
+      "subcategory": "平台活动",
+      "caption_hit_count": 6,
+      "source_match_terms": [
+        "省四百多块",
+        "省了四百多块",
+        "能省四百多块"
+      ]
+    },
+    {
+      "keyword": "升级",
+      "category": "资产价值",
+      "subcategory": "平台活动",
+      "caption_hit_count": 32,
+      "source_match_terms": [
+        "升级",
+        "升级发",
+        "直接升级"
+      ]
+    },
+    {
+      "keyword": "送驱蚊",
+      "category": "资产价值",
+      "subcategory": "平台活动",
+      "caption_hit_count": 46,
+      "source_match_terms": [
+        "送驱蚊",
+        "给他送驱蚊",
+        "给你送驱蚊"
+      ]
+    },
+    {
+      "keyword": "送驱蚊液",
+      "category": "资产价值",
+      "subcategory": "平台活动",
+      "caption_hit_count": 13,
+      "source_match_terms": [
+        "送驱蚊液"
+      ]
+    },
+    {
+      "keyword": "送遥控",
+      "category": "资产价值",
+      "subcategory": "平台活动",
+      "caption_hit_count": 26,
+      "source_match_terms": [
+        "送遥控",
+        "送遥控器"
+      ]
+    },
+    {
+      "keyword": "名额",
+      "category": "资产价值",
+      "subcategory": "平台活动",
+      "caption_hit_count": 6,
+      "source_match_terms": [
+        "名额"
+      ]
+    },
+    {
+      "keyword": "30秒",
+      "category": "资产价值",
+      "subcategory": "平台活动",
+      "caption_hit_count": 9,
+      "source_match_terms": [
+        "30秒"
+      ]
+    },
+    {
+      "keyword": "一个人只能买一次",
+      "category": "资产价值",
+      "subcategory": "平台活动",
+      "caption_hit_count": 1,
+      "source_match_terms": [
+        "一个人只能买一次"
+      ]
+    },
+    {
+      "keyword": "35.1块钱",
+      "category": "资产价值",
+      "subcategory": "平台活动",
+      "caption_hit_count": 1,
+      "source_match_terms": [
+        "35.1块钱"
+      ]
+    },
+    {
+      "keyword": "198.9",
+      "category": "资产价值",
+      "subcategory": "平台活动",
+      "caption_hit_count": 2,
+      "source_match_terms": [
+        "198.9"
+      ]
+    },
+    {
+      "keyword": "南方",
+      "category": "情绪价值",
+      "subcategory": "使用场景",
+      "caption_hit_count": 1,
+      "source_match_terms": [
+        "南方"
+      ]
+    },
+    {
+      "keyword": "下雨",
+      "category": "情绪价值",
+      "subcategory": "使用场景",
+      "caption_hit_count": 9,
+      "source_match_terms": [
+        "下雨"
+      ]
+    },
+    {
+      "keyword": "梅雨季",
+      "category": "情绪价值",
+      "subcategory": "使用场景",
+      "caption_hit_count": 6,
+      "source_match_terms": [
+        "梅雨季"
+      ]
+    },
+    {
+      "keyword": "回南天",
+      "category": "情绪价值",
+      "subcategory": "使用场景",
+      "caption_hit_count": 6,
+      "source_match_terms": [
+        "回南天"
+      ]
+    },
+    {
+      "keyword": "早晚温差",
+      "category": "情绪价值",
+      "subcategory": "使用场景",
+      "caption_hit_count": 8,
+      "source_match_terms": [
+        "早晚温差"
+      ]
+    },
+    {
+      "keyword": "不想开空调",
+      "category": "情绪价值",
+      "subcategory": "使用场景",
+      "caption_hit_count": 6,
+      "source_match_terms": [
+        "不想开空调"
+      ]
+    },
+    {
+      "keyword": "家里比较闷",
+      "category": "情绪价值",
+      "subcategory": "使用场景",
+      "caption_hit_count": 7,
+      "source_match_terms": [
+        "家里比较闷",
+        "家里特别闷"
+      ]
+    },
+    {
+      "keyword": "霉味",
+      "category": "情绪价值",
+      "subcategory": "使用场景",
+      "caption_hit_count": 5,
+      "source_match_terms": [
+        "霉味"
+      ]
+    },
+    {
+      "keyword": "潮味",
+      "category": "情绪价值",
+      "subcategory": "使用场景",
+      "caption_hit_count": 3,
+      "source_match_terms": [
+        "潮味"
+      ]
+    },
+    {
+      "keyword": "老人",
+      "category": "情绪价值",
+      "subcategory": "使用场景",
+      "caption_hit_count": 22,
+      "source_match_terms": [
+        "老人"
+      ]
+    },
+    {
+      "keyword": "孩子",
+      "category": "情绪价值",
+      "subcategory": "使用场景",
+      "caption_hit_count": 13,
+      "source_match_terms": [
+        "孩子"
+      ]
+    },
+    {
+      "keyword": "睡觉",
+      "category": "情绪价值",
+      "subcategory": "使用场景",
+      "caption_hit_count": 7,
+      "source_match_terms": [
+        "睡觉"
+      ]
+    },
+    {
+      "keyword": "床头柜",
+      "category": "情绪价值",
+      "subcategory": "使用场景",
+      "caption_hit_count": 5,
+      "source_match_terms": [
+        "床头柜"
+      ]
+    },
+    {
+      "keyword": "开上一整天",
+      "category": "情绪价值",
+      "subcategory": "使用场景",
+      "caption_hit_count": 5,
+      "source_match_terms": [
+        "开上一整天",
+        "开一天"
+      ]
+    },
+    {
+      "keyword": "凉快2到3倍",
+      "category": "情绪价值",
+      "subcategory": "用户体验感受",
+      "caption_hit_count": 4,
+      "source_match_terms": [
+        "凉快2到3倍",
+        "凉快个2到3倍"
+      ]
+    },
+    {
+      "keyword": "舒服干净",
+      "category": "情绪价值",
+      "subcategory": "用户体验感受",
+      "caption_hit_count": 15,
+      "source_match_terms": [
+        "舒服干净",
+        "舒服还干净"
+      ]
+    },
+    {
+      "keyword": "山间海边清风",
+      "category": "情绪价值",
+      "subcategory": "用户体验感受",
+      "caption_hit_count": 4,
+      "source_match_terms": [
+        "山间海边清风"
+      ]
+    },
+    {
+      "keyword": "围着你在吹",
+      "category": "情绪价值",
+      "subcategory": "用户体验感受",
+      "caption_hit_count": 7,
+      "source_match_terms": [
+        "围着你在吹",
+        "包着你在吹"
+      ]
+    },
+    {
+      "keyword": "风大",
+      "category": "情绪价值",
+      "subcategory": "用户体验感受",
+      "caption_hit_count": 7,
+      "source_match_terms": [
+        "风大"
+      ]
+    },
+    {
+      "keyword": "耐用",
+      "category": "情绪价值",
+      "subcategory": "用户体验感受",
+      "caption_hit_count": 4,
+      "source_match_terms": [
+        "耐用"
+      ]
+    },
+    {
+      "keyword": "性价比高",
+      "category": "情绪价值",
+      "subcategory": "用户体验感受",
+      "caption_hit_count": 9,
+      "source_match_terms": [
+        "性价比高"
+      ]
+    },
+    {
+      "keyword": "更安全",
+      "category": "情绪价值",
+      "subcategory": "用户体验感受",
+      "caption_hit_count": 9,
+      "source_match_terms": [
+        "更安全"
+      ]
+    },
+    {
+      "keyword": "更放心",
+      "category": "情绪价值",
+      "subcategory": "用户体验感受",
+      "caption_hit_count": 3,
+      "source_match_terms": [
+        "更放心",
+        "放心"
+      ]
+    },
+    {
+      "keyword": "不带心疼",
+      "category": "情绪价值",
+      "subcategory": "用户体验感受",
+      "caption_hit_count": 7,
+      "source_match_terms": [
+        "不带心疼"
+      ]
+    },
+    {
+      "keyword": "不影响你休息",
+      "category": "情绪价值",
+      "subcategory": "用户体验感受",
+      "caption_hit_count": 5,
+      "source_match_terms": [
+        "不影响你休息"
+      ]
+    },
+    {
+      "keyword": "带走家里的闷热感",
+      "category": "情绪价值",
+      "subcategory": "用户体验感受",
+      "caption_hit_count": 2,
+      "source_match_terms": [
+        "带走家里的闷热感"
+      ]
+    },
+    {
+      "keyword": "用的时间久",
+      "category": "情绪价值",
+      "subcategory": "用户体验感受",
+      "caption_hit_count": 1,
+      "source_match_terms": [
+        "用的时间久"
+      ]
+    },
+    {
+      "keyword": "现货",
+      "category": "服务价值",
+      "subcategory": "配送物流",
+      "caption_hit_count": 18,
+      "source_match_terms": [
+        "现货"
+      ]
+    },
+    {
+      "keyword": "安排现货",
+      "category": "服务价值",
+      "subcategory": "配送物流",
+      "caption_hit_count": 14,
+      "source_match_terms": [
+        "安排现货"
+      ]
+    },
+    {
+      "keyword": "发货",
+      "category": "服务价值",
+      "subcategory": "配送物流",
+      "caption_hit_count": 18,
+      "source_match_terms": [
+        "发货"
+      ]
+    },
+    {
+      "keyword": "物流",
+      "category": "服务价值",
+      "subcategory": "配送物流",
+      "caption_hit_count": 12,
+      "source_match_terms": [
+        "物流"
+      ]
+    },
+    {
+      "keyword": "看物流",
+      "category": "服务价值",
+      "subcategory": "配送物流",
+      "caption_hit_count": 11,
+      "source_match_terms": [
+        "看物流",
+        "看一下物流",
+        "刷新看物流"
+      ]
+    },
+    {
+      "keyword": "物流消息",
+      "category": "服务价值",
+      "subcategory": "配送物流",
+      "caption_hit_count": 1,
+      "source_match_terms": [
+        "物流消息"
+      ]
+    },
+    {
+      "keyword": "啥时候能收到",
+      "category": "服务价值",
+      "subcategory": "配送物流",
+      "caption_hit_count": 1,
+      "source_match_terms": [
+        "啥时候能收到"
+      ]
+    },
+    {
+      "keyword": "什么时候能到",
+      "category": "服务价值",
+      "subcategory": "配送物流",
+      "caption_hit_count": 1,
+      "source_match_terms": [
+        "什么时候能到"
+      ]
+    },
+    {
+      "keyword": "付款成功",
+      "category": "服务价值",
+      "subcategory": "配送物流",
+      "caption_hit_count": 1,
+      "source_match_terms": [
+        "付款成功"
+      ]
+    },
+    {
+      "keyword": "创维客服",
+      "category": "服务价值",
+      "subcategory": "全程售后",
+      "caption_hit_count": 7,
+      "source_match_terms": [
+        "创维客服"
+      ]
+    },
+    {
+      "keyword": "售后",
+      "category": "服务价值",
+      "subcategory": "全程售后",
+      "caption_hit_count": 5,
+      "source_match_terms": [
+        "售后"
+      ]
+    },
+    {
+      "keyword": "两年整机质保",
+      "category": "服务价值",
+      "subcategory": "全程售后",
+      "caption_hit_count": 8,
+      "source_match_terms": [
+        "两年的整机质保",
+        "质保两年"
+      ]
+    },
+    {
+      "keyword": "随时联系创维客服",
+      "category": "服务价值",
+      "subcategory": "全程售后",
+      "caption_hit_count": 7,
+      "source_match_terms": [
+        "随时联系创维客服",
+        "直接联系创维客服",
+        "直接联系我们创维客服"
+      ]
+    },
+    {
+      "keyword": "检测报告",
+      "category": "信任价值",
+      "subcategory": "质检报告",
+      "caption_hit_count": 3,
+      "source_match_terms": [
+        "检测报告"
+      ]
+    },
+    {
+      "keyword": "创维",
+      "category": "信任价值",
+      "subcategory": "品牌背书",
+      "caption_hit_count": 15,
+      "source_match_terms": [
+        "创维"
+      ]
+    },
+    {
+      "keyword": "榜单",
+      "category": "信任价值",
+      "subcategory": "品牌背书",
+      "caption_hit_count": 16,
+      "source_match_terms": [
+        "榜单"
+      ]
+    },
+    {
+      "keyword": "五大榜单",
+      "category": "信任价值",
+      "subcategory": "品牌背书",
+      "caption_hit_count": 8,
+      "source_match_terms": [
+        "五大榜单"
+      ]
+    },
+    {
+      "keyword": "榜首",
+      "category": "信任价值",
+      "subcategory": "品牌背书",
+      "caption_hit_count": 3,
+      "source_match_terms": [
+        "榜首"
+      ]
+    },
+    {
+      "keyword": "top 1",
+      "category": "信任价值",
+      "subcategory": "品牌背书",
+      "caption_hit_count": 4,
+      "source_match_terms": [
+        "top 1"
+      ]
+    },
+    {
+      "keyword": "全平台全类目",
+      "category": "信任价值",
+      "subcategory": "品牌背书",
+      "caption_hit_count": 3,
+      "source_match_terms": [
+        "全平台全类目"
+      ]
+    },
+    {
+      "keyword": "全平台全联盟",
+      "category": "信任价值",
+      "subcategory": "品牌背书",
+      "caption_hit_count": 4,
+      "source_match_terms": [
+        "全平台全联盟"
+      ]
+    },
+    {
+      "keyword": "26年新款",
+      "category": "信任价值",
+      "subcategory": "品牌背书",
+      "caption_hit_count": 7,
+      "source_match_terms": [
+        "26年新款"
+      ]
+    },
+    {
+      "keyword": "当然可以了",
+      "category": "信任价值",
+      "subcategory": "答疑响应",
+      "caption_hit_count": 1,
+      "source_match_terms": [
+        "当然可以了"
+      ]
+    },
+    {
+      "keyword": "我跟你说一下怎么买",
+      "category": "信任价值",
+      "subcategory": "答疑响应",
+      "caption_hit_count": 1,
+      "source_match_terms": [
+        "我跟你说一下怎么买"
+      ]
+    },
+    {
+      "keyword": "我给你说一下怎么下单",
+      "category": "信任价值",
+      "subcategory": "答疑响应",
+      "caption_hit_count": 1,
+      "source_match_terms": [
+        "我给你说一下怎么下单"
+      ]
+    },
+    {
+      "keyword": "我再说一下怎么下单",
+      "category": "信任价值",
+      "subcategory": "答疑响应",
+      "caption_hit_count": 1,
+      "source_match_terms": [
+        "我再说一下怎么下单"
+      ]
+    },
+    {
+      "keyword": "我没明白你的意思",
+      "category": "信任价值",
+      "subcategory": "答疑响应",
+      "caption_hit_count": 1,
+      "source_match_terms": [
+        "我没明白你的意思"
+      ]
+    },
+    {
+      "keyword": "你可以看一下",
+      "category": "信任价值",
+      "subcategory": "答疑响应",
+      "caption_hit_count": 2,
+      "source_match_terms": [
+        "你可以看一下"
+      ]
+    },
+    {
+      "keyword": "对我再说一下怎么买",
+      "category": "信任价值",
+      "subcategory": "答疑响应",
+      "caption_hit_count": 1,
+      "source_match_terms": [
+        "对我再说一下怎么买"
+      ]
+    },
+    {
+      "keyword": "七天无理由",
+      "category": "信任价值",
+      "subcategory": "退换货保障",
+      "caption_hit_count": 13,
+      "source_match_terms": [
+        "七天无理由"
+      ]
+    },
+    {
+      "keyword": "回家可以自己体验",
+      "category": "信任价值",
+      "subcategory": "退换货保障",
+      "caption_hit_count": 5,
+      "source_match_terms": [
+        "可以自己体验",
+        "你就可以体验一下"
+      ]
+    },
+    {
+      "keyword": "不凉快咱不带留的",
+      "category": "信任价值",
+      "subcategory": "退换货保障",
+      "caption_hit_count": 3,
+      "source_match_terms": [
+        "咱不带留的"
+      ]
+    },
+    {
+      "keyword": "怎么变台式",
+      "category": "问题解答",
+      "subcategory": "问题解答",
+      "caption_hit_count": 1,
+      "source_match_terms": [
+        "怎么变台式"
+      ]
+    },
+    {
+      "keyword": "台式还是立式",
+      "category": "问题解答",
+      "subcategory": "问题解答",
+      "caption_hit_count": 1,
+      "source_match_terms": [
+        "台式还是要立式"
+      ]
+    },
+    {
+      "keyword": "怎么买",
+      "category": "问题解答",
+      "subcategory": "问题解答",
+      "caption_hit_count": 3,
+      "source_match_terms": [
+        "怎么买"
+      ]
+    },
+    {
+      "keyword": "怎么买不了",
+      "category": "问题解答",
+      "subcategory": "问题解答",
+      "caption_hit_count": 1,
+      "source_match_terms": [
+        "怎么买不了"
+      ]
+    },
+    {
+      "keyword": "怎么下单",
+      "category": "问题解答",
+      "subcategory": "问题解答",
+      "caption_hit_count": 5,
+      "source_match_terms": [
+        "怎么下单"
+      ]
+    },
+    {
+      "keyword": "怎么进不去",
+      "category": "问题解答",
+      "subcategory": "问题解答",
+      "caption_hit_count": 1,
+      "source_match_terms": [
+        "怎么进不去"
+      ]
+    },
+    {
+      "keyword": "怎么领",
+      "category": "问题解答",
+      "subcategory": "问题解答",
+      "caption_hit_count": 1,
+      "source_match_terms": [
+        "怎么领"
+      ]
+    },
+    {
+      "keyword": "不会买",
+      "category": "问题解答",
+      "subcategory": "问题解答",
+      "caption_hit_count": 4,
+      "source_match_terms": [
+        "不会买"
+      ]
+    },
+    {
+      "keyword": "买错",
+      "category": "问题解答",
+      "subcategory": "问题解答",
+      "caption_hit_count": 7,
+      "source_match_terms": [
+        "买错"
+      ]
+    },
+    {
+      "keyword": "能不能买到",
+      "category": "问题解答",
+      "subcategory": "问题解答",
+      "caption_hit_count": 6,
+      "source_match_terms": [
+        "能不能买到",
+        "能不能买"
+      ]
+    },
+    {
+      "keyword": "江苏还能不能买",
+      "category": "问题解答",
+      "subcategory": "问题解答",
+      "caption_hit_count": 1,
+      "source_match_terms": [
+        "江苏还能不能买"
+      ]
+    },
+    {
+      "keyword": "有没有",
+      "category": "问题解答",
+      "subcategory": "问题解答",
+      "caption_hit_count": 3,
+      "source_match_terms": [
+        "有没有"
+      ]
+    },
+    {
+      "keyword": "收到货没看到遥控器",
+      "category": "问题解答",
+      "subcategory": "问题解答",
+      "caption_hit_count": 1,
+      "source_match_terms": [
+        "收到货没看到遥控器"
+      ]
+    },
+    {
+      "keyword": "七天无理由吗",
+      "category": "问题解答",
+      "subcategory": "问题解答",
+      "caption_hit_count": 1,
+      "source_match_terms": [
+        "有七天无理由吗",
+        "七天无理由吗"
+      ]
+    }
+  ],
+  "empty_subcategories": [
+    {
+      "category": "资产价值",
+      "subcategory": "优惠券",
+      "reason": "在本次SRT原稿中未识别到明确、可直接归入该二级分类的真实口播关键词。"
+    },
+    {
+      "category": "资产价值",
+      "subcategory": "满减福利",
+      "reason": "在本次SRT原稿中未识别到明确、可直接归入该二级分类的真实口播关键词。"
+    },
+    {
+      "category": "信任价值",
+      "subcategory": "资质证书",
+      "reason": "在本次SRT原稿中未识别到明确、可直接归入该二级分类的真实口播关键词。"
+    }
+  ],
+  "classification_notes": [
+    "两年整机质保归入“服务价值 > 全程售后”；七天无理由归入“信任价值 > 退换货保障”，避免售后与退换保障重复计数。",
+    "清仓、国补、价格优惠、升级顶配、赠送驱蚊液/遥控器等归入“资产价值 > 平台活动”。",
+    "“答疑响应”用于主播对用户进行即时回应/解释的响应型话术；“问题解答”用于具体问题主题（如怎么买、怎么下单、台式还是立式等），两者按话术功能拆分。",
+    "本稿未出现可明确识别的“优惠券”“满减福利”“资质证书”关键词，因此对应数组为空。"
+  ]
+}
