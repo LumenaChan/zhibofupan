@@ -16,3 +16,4 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - Use a data table, not cards. Upload uses a modal, not a drawer.
 - Later workspace: three resizable columns; left and center collapsible, right fixed; transcript is central, content compass expands from a button.
 - AI quick actions are called “AI快捷功能” rather than encoding a fixed count. Data-dependent questions remain visible but disabled until business data is connected.
+- 内容分类与高频词均采用最终的六个一级分类（功能价值、资产价值、情绪价值、服务价值、信任价值、问题解答）及其二级分类；映射来源为项目根目录的 `AI直播复盘_真实口播关键词分类映射_最新版.json`。高频词默认选择“功能价值”，可按一级分类或单选二级分类统计关键词；清除关键词筛选不重置当前分类。

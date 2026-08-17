@@ -67,6 +67,40 @@
 .frequency-category-tabs button.active b{color:#3478ef!important}
 .frequency-keyword-grid>button{gap:6px!important;padding:0 9px!important}
 .frequency-keyword-grid>button strong{max-width:205px!important}
+
+/* 高频词：与最终两级话术分类联动 */
+.frequency-panel-v2{
+  left:auto!important;
+  right:10px!important;
+  top:50px!important;
+  width:540px!important;
+  max-width:calc(100% - 20px)!important;
+  height:410px!important;
+  max-height:410px!important;
+  display:block!important;
+  overflow-x:hidden!important;
+  overflow-y:auto!important;
+}
+.frequency-panel-v2>header{height:42px!important;min-height:42px!important}
+.frequency-panel-v2>header strong{font-size:12px}
+.frequency-panel-v2 .frequency-classification{padding:10px 12px 9px;border-bottom:1px solid #edf1f5}
+.frequency-panel-v2 .frequency-classification>strong{display:block;color:#55657a;font-size:10px;font-weight:600}
+.frequency-panel-v2 .frequency-primary-tags,.frequency-panel-v2 .frequency-secondary-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:7px}
+.frequency-panel-v2 .frequency-primary-tags button,.frequency-panel-v2 .frequency-secondary-tags button{display:inline-flex;align-items:center;gap:5px;height:26px;border:1px solid #dfe6ef;border-radius:13px;background:#fff;color:#64748b;padding:0 9px;font-size:10px;white-space:nowrap}
+.frequency-panel-v2 .frequency-primary-tags button:hover,.frequency-panel-v2 .frequency-secondary-tags button:hover{border-color:#9abcf8;color:#3478ef;background:#f5f9ff}
+.frequency-panel-v2 .frequency-primary-tags button.active,.frequency-panel-v2 .frequency-secondary-tags button.active{border-color:#8fb5fb;background:#eef5ff;color:#3478ef}
+.frequency-panel-v2 .frequency-primary-tags button b,.frequency-panel-v2 .frequency-secondary-tags button b{font-size:10px;font-weight:500;color:inherit}
+.frequency-panel-v2 .frequency-secondary-title{margin-top:11px!important}
+.frequency-panel-v2 .frequency-list-head{height:34px!important;min-height:34px!important;display:flex!important;align-items:center!important;justify-content:space-between!important;padding:0 12px!important;border-bottom:1px solid #edf1f5!important}
+.frequency-panel-v2 .frequency-list-head>strong{font-size:11px!important}
+.frequency-panel-v2 .frequency-list-head>span{display:inline-flex;align-items:center;gap:3px;color:#8a96a7;font-size:10px}
+.frequency-panel-v2 .frequency-list-head svg{font-size:8px}
+.frequency-panel-v2 .frequency-keyword-grid{display:flex!important;flex:initial!important;flex-wrap:wrap!important;align-content:flex-start!important;gap:6px!important;min-height:auto!important;overflow:visible!important;padding:9px 12px 12px!important}
+.frequency-panel-v2 .frequency-keyword-grid>button{display:inline-flex!important;flex:0 0 auto!important;flex-direction:row!important;align-items:center!important;gap:6px!important;height:28px!important;min-height:28px!important;max-width:100%!important;border:1px solid #e1e7ef!important;border-radius:5px!important;background:#fff!important;padding:0 9px!important;color:#536174!important;text-align:left!important}
+.frequency-panel-v2 .frequency-keyword-grid>button:hover,.frequency-panel-v2 .frequency-keyword-grid>button.active{border-color:#91b5fa!important;background:#f2f7ff!important;color:#3478ef!important}
+.frequency-panel-v2 .frequency-keyword-grid>button strong{max-width:205px!important;font-size:10px!important;font-weight:500!important;line-height:1!important;overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important}
+.frequency-panel-v2 .frequency-keyword-grid>button span{flex:none;color:#7a8798;font-size:10px;white-space:nowrap!important}
+.frequency-panel-v2 .frequency-empty{width:100%;padding:34px 0!important;text-align:center;color:#929cab;font-size:11px}
 .utterance-meta em.sensitive-tag{border-color:#f2b7b2;background:#fff1f0;color:#d84a42}
 
 /* 真实直播画面：竖向撑满预览区，左右留白保持深色底。 */
@@ -86,3 +120,6 @@
 .message{min-width:0}.message.assistant .bubble{width:88%;min-width:0;box-sizing:border-box}.answer-text,.markdown-answer{min-width:0;max-width:100%}.markdown-answer{overflow-x:hidden}.markdown-answer .report-table-wrap{display:block;width:100%;max-width:100%;margin:10px 0}.markdown-answer .report-table-wrap.columns-2{width:78%}.markdown-answer .report-grid{display:grid;width:100%;max-width:100%;border-top:1px solid #e0e6ee;border-left:1px solid #e0e6ee;font-size:10px;line-height:1.6}.markdown-answer .report-grid-cell{min-width:0;box-sizing:border-box;border-right:1px solid #e0e6ee;border-bottom:1px solid #e0e6ee;padding:6px 7px;white-space:normal;overflow-wrap:anywhere;word-break:break-word;color:#566276}.markdown-answer .report-grid-cell.head{background:#f4f7fb;color:#526177;font-weight:600}
 .reasoning p{white-space:pre-line}
 .utterance-meta em{cursor:pointer}.utterance-meta em.active{outline:1px solid #77a5f5;background:#eaf3ff;color:#286bd8}.utterance-meta em.sensitive-tag.active{outline-color:#eb8f88;background:#ffe7e4;color:#c83e36}
+
+/* 内容分类：6 个一级分类 + 雷达图 + 二级分类明细。 */
+.compass-panel-v2{left:10px;right:10px;top:50px;max-height:calc(100% - 62px);overflow:auto}.compass-panel-v2 .compass-section-title{display:block;color:#445267;font-size:12px;line-height:1.2}.primary-overview{padding:13px 16px 12px}.primary-overview-main{display:flex;align-items:center;gap:18px;margin-top:10px}.radar-wrap{flex:0 0 214px;padding:3px 0}.radar-wrap svg{display:block;width:214px;height:190px;overflow:visible}.radar-grid{fill:none;stroke:#e4ebf3;stroke-width:1}.radar-axis{stroke:#edf1f6;stroke-width:1}.radar-shape{fill:rgba(91,143,249,.18);stroke:#5b8ff9;stroke-width:1.5}.radar-node{cursor:pointer}.radar-node:hover circle{stroke:#fff;stroke-width:2;filter:drop-shadow(0 1px 2px rgba(50,80,120,.3))}.radar-node text{fill:#718095;font-size:9px;dominant-baseline:middle;pointer-events:none}.primary-category-list{display:flex;flex:1;min-width:0;flex-direction:column;gap:3px}.primary-category-list>button{display:grid;grid-template-columns:8px 66px 58px minmax(48px,1fr);align-items:center;gap:6px;min-height:24px;border:0;border-radius:4px;background:transparent;padding:3px 6px;color:#536174;text-align:left;font-size:10px}.primary-category-list>button:hover,.primary-category-list>button.active{background:#f0f6ff;color:#2d70df}.primary-category-list>button.active strong{font-weight:700}.primary-category-list .primary-dot{width:6px;height:6px;border-radius:50%}.primary-category-list em,.secondary-category-list em{font-style:normal;color:#7c899b;white-space:nowrap}.primary-category-list i,.secondary-category-list i{display:block;height:4px;border-radius:4px;background:#eaf0f6;overflow:hidden}.primary-category-list i b,.secondary-category-list i b{display:block;height:100%;border-radius:inherit}.secondary-overview{border-top:1px solid #e9eef4;padding:12px 16px 13px}.secondary-current{display:flex;align-items:baseline;gap:6px;margin:8px 0 7px;color:#69768a;font-size:10px}.secondary-current b{color:#3d4d64}.secondary-current span{color:#8a96a7}.secondary-category-list{display:flex;flex-direction:column;gap:3px}.secondary-category-list>button{display:grid;grid-template-columns:112px 55px minmax(56px,1fr);align-items:center;gap:8px;min-height:24px;border:0;border-radius:4px;background:transparent;padding:3px 6px;color:#536174;text-align:left;font-size:10px}.secondary-category-list>button:hover,.secondary-category-list>button.active{background:#f0f6ff;color:#2d70df}.secondary-category-list>button.active strong{font-weight:700}.compass-panel-v2 footer{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 15px}.compass-panel-v2 footer span{font-size:10px;color:#8b96a6}.compass-panel-v2 footer button{border:0;background:transparent;color:#3478ef;font-size:10px;white-space:nowrap;padding:0;cursor:pointer}

@@ -2,6 +2,7 @@
 import { ArrowLeftOutlined, CaretDownFilled, CheckOutlined, CloseOutlined, CopyOutlined, DownOutlined, EditOutlined, ExclamationCircleOutlined, LeftOutlined, LinkOutlined, MenuFoldOutlined, MenuUnfoldOutlined, MessageOutlined, MoreOutlined, PauseCircleFilled, PlayCircleFilled, PlusOutlined, SearchOutlined, SendOutlined, SettingOutlined, SwapOutlined, UserOutlined } from '@ant-design/icons';
 import transcript from './transcript-data';
 import { categoryOrder, speechCategoryKeywords } from './speech-category-keywords';
+import latestContentClassification from '../../AI直播复盘_真实口播关键词分类映射_最新版.json';
 import naturalQuestionReport from '../report/natural-question.md?raw';
 import overallDiagnosisReport from '../report/overall-diagnosis.md?raw';
 import danmuDiagnosisReport from '../report/danmu-diagnosis.md?raw';
@@ -37,6 +38,11 @@ const comments = [
 ];
 
 const categoryColors = ['#5b8ff9','#61d9a8','#f6bd4a','#7666f2','#6dc8ec','#a78bfa','#f38f5d','#52b7a8'];
+const contentClassification = latestContentClassification.taxonomy.map((category,index)=>({
+  name:category.category,
+  color:categoryColors[index],
+  children:category.subcategories.map(subcategory=>({name:subcategory.subcategory, keywords:subcategory.keywords}))
+}));
 const danmuCategoryKeywords = {
   '购买成交':['刚拍了','怎么拍','下单了','买了','已下单','怎么拍不了','我也买了','买对了','拍哪一个','刚拍了199','已拍','199不能买','买完了','我也买199的','我买的是199的','怎么进不去','我买了'],
   '价格优惠':['279','199','179','196','158元','158的'],
@@ -69,6 +75,17 @@ const findKeywordMatches = text => {
   candidates.forEach(hit=>{ if(!accepted.some(item=>hit.start<item.end&&item.start<hit.end)) accepted.push(hit); });
   return accepted.sort((a,b)=>a.start-b.start);
 };
+const contentClassificationCandidates = contentClassification.flatMap(category=>category.children.flatMap(subcategory=>subcategory.keywords.flatMap(keyword=>keyword.source_match_terms.map(term=>({category:category.name,subcategory:subcategory.name,keyword:keyword.keyword,term}))))).sort((a,b)=>b.term.length-a.term.length || a.term.localeCompare(b.term));
+const findContentClassificationMatches = text => {
+  const candidates = contentClassificationCandidates.flatMap(({category,subcategory,keyword,term})=>{
+    const hits=[]; let start=text.indexOf(term);
+    while(start!==-1){ hits.push({category,subcategory,keyword,term,start,end:start+term.length}); start=text.indexOf(term,start+term.length); }
+    return hits;
+  }).sort((a,b)=>b.term.length-a.term.length || a.start-b.start);
+  const accepted=[];
+  candidates.forEach(hit=>{if(!accepted.some(item=>hit.start<item.end&&item.start<hit.end))accepted.push(hit);});
+  return accepted.sort((a,b)=>a.start-b.start);
+};
 const riskCandidates = Object.entries(sensitiveRiskKeywords).flatMap(([riskType,keywords])=>keywords.map(keyword=>({riskType,keyword}))).sort((a,b)=>b.keyword.length-a.keyword.length || a.keyword.localeCompare(b.keyword));
 const findRiskMatches = text => {
   const candidates = riskCandidates.flatMap(({riskType,keyword}) => {
@@ -89,9 +106,13 @@ const findDanmuMatches = text => {
 const categorizedComments = comments.map(item=>{const danmuMatches=findDanmuMatches(item.text);return {...item,danmuMatches,danmuCategories:[...new Set(danmuMatches.map(match=>match.category))]};});
 const categorizedTranscript = transcript.map(item => {
   const keywordMatches = findKeywordMatches(item.text);
+  const contentMatches = findContentClassificationMatches(item.text);
   const riskMatches = findRiskMatches(item.text);
   const categoryMatches = categoryOrder.reduce((result,category)=>{ const words=[...new Set(keywordMatches.filter(hit=>hit.category===category).map(hit=>hit.keyword))]; if(words.length) result[category]=words; return result; },{});
-  return { ...item, tags: Object.keys(categoryMatches), categoryMatches, keywordMatches, riskMatches, hasRisk:riskMatches.length>0 };
+  const legacyTags = Object.keys(categoryMatches);
+  const contentTags = [...new Set(contentMatches.map(hit=>hit.category))];
+  const contentSubcategories = [...new Set(contentMatches.map(hit=>hit.subcategory))];
+  return { ...item, tags:contentSubcategories, legacyTags, categoryMatches, keywordMatches, contentMatches, contentTags, riskMatches, hasRisk:riskMatches.length>0 };
 });
 
 const reviewVideos = [
@@ -147,10 +168,14 @@ export function Workspace({ video, onBack }) {
   const [leftWidth, setLeftWidth] = useState(15);
   const [rightWidth, setRightWidth] = useState(30);
   const [compassOpen, setCompassOpen] = useState(false);
+  const [selectedCompassPrimary, setSelectedCompassPrimary] = useState('');
+  const [selectedCompassSecondary, setSelectedCompassSecondary] = useState('');
   const [highFreqOpen, setHighFreqOpen] = useState(false);
-  const [frequencyCategory, setFrequencyCategory] = useState(categoryOrder[0]);
+  const [frequencyCategory, setFrequencyCategory] = useState(contentClassification[0].name);
+  const [frequencySubcategory, setFrequencySubcategory] = useState('');
   const [sensitiveOn, setSensitiveOn] = useState(false);
   const [selectedWord, setSelectedWord] = useState('');
+  const [selectedWordScope, setSelectedWordScope] = useState(null);
   const [inlineHighlight, setInlineHighlight] = useState(null);
   const [linked, setLinked] = useState(true);
   const [linkConfigOpen, setLinkConfigOpen] = useState(false);
@@ -195,15 +220,29 @@ export function Workspace({ video, onBack }) {
   const inputRef = useRef(null);
   const fabDraggedRef = useRef(false);
 
-  const compass = useMemo(() => {
-    const counts = Object.fromEntries(categoryOrder.map(category=>[category,0]));
-    categorizedTranscript.forEach(item=>item.tags.forEach(tag=>{ counts[tag] += 1; }));
-    const total = Object.values(counts).reduce((sum,count)=>sum+count,0);
-    return categoryOrder.map((name,index)=>[name,total?Math.round(counts[name]/total*100):0,categoryColors[index],counts[name]]).sort((a,b)=>b[1]-a[1] || b[3]-a[3]);
-  }, []);
-  const topCompassCategories = compass.slice(0,5).map(([name])=>name);
+  const primaryCompassStats = useMemo(() => contentClassification.map(category => {
+    const count = categorizedTranscript.filter(item=>item.contentTags.includes(category.name)).length;
+    return {...category,count,percent:Math.round(count / categorizedTranscript.length * 100)};
+  }).sort((a,b)=>b.percent-a.percent || b.count-a.count), []);
+  const activeCompassPrimary = primaryCompassStats.find(item=>item.name===selectedCompassPrimary) || primaryCompassStats[0];
+  const activeCompassSegments = useMemo(() => categorizedTranscript.filter(item=>item.contentTags.includes(activeCompassPrimary.name)), [activeCompassPrimary]);
+  const compassSecondaryStats = useMemo(() => activeCompassPrimary.children.map((subcategory,index)=>{
+    const items = activeCompassSegments.filter(item=>item.contentMatches.some(hit=>hit.category===activeCompassPrimary.name&&hit.subcategory===subcategory.name));
+    return {name:subcategory.name,index,count:items.length,percent:activeCompassSegments.length?Math.round(items.length/activeCompassSegments.length*100):0,items,keywords:subcategory.keywords};
+  }), [activeCompassPrimary,activeCompassSegments]);
+  const activeCompassSecondaryData = compassSecondaryStats.find(item=>item.name===selectedCompassSecondary);
+  const topSecondaryCategories = useMemo(() => contentClassification.flatMap(category=>category.children.map(subcategory=>({
+    name:subcategory.name,
+    category:category.name,
+    count:categorizedTranscript.filter(item=>item.contentMatches.some(hit=>hit.category===category.name&&hit.subcategory===subcategory.name)).length
+  }))).sort((a,b)=>b.count-a.count || a.name.localeCompare(b.name)).slice(0,5), []);
+  const radarPoints = primaryCompassStats.map((item,index)=>{
+    const angle=(-90+index*60)*Math.PI/180;
+    const radius=30 + (item.percent/Math.max(...primaryCompassStats.map(stat=>stat.percent),1))*42;
+    return { ...item, x:100+Math.cos(angle)*radius, y:94+Math.sin(angle)*radius, labelX:100+Math.cos(angle)*82, labelY:98+Math.sin(angle)*82 };
+  });
 
-  const categorySegmentCounts = useMemo(() => Object.fromEntries(categoryOrder.map(category=>[category,categorizedTranscript.filter(item=>item.tags.includes(category)).length])), []);
+  const categorySegmentCounts = useMemo(() => Object.fromEntries(categoryOrder.map(category=>[category,categorizedTranscript.filter(item=>item.legacyTags.includes(category)).length])), []);
   const danmuCompass = useMemo(() => {
     const counts=Object.fromEntries(danmuCategoryOrder.map(category=>[category,categorizedComments.filter(item=>item.danmuCategories.includes(category)).length]));
     const total=Object.values(counts).reduce((sum,count)=>sum+count,0);
@@ -221,12 +260,33 @@ export function Workspace({ video, onBack }) {
     }));
     return [...stats.values()].map(item=>({...item,segmentCount:item.segmentTimes.size})).sort((a,b)=>b.occurrenceCount-a.occurrenceCount || b.segmentCount-a.segmentCount || a.keyword.localeCompare(b.keyword));
   }, []);
-  const visibleKeywordStats = keywordStats.filter(item=>item.category===frequencyCategory);
-  const frequencyCategoryOptions = categoryOrder;
+  const activeFrequencyCategory = contentClassification.find(category=>category.name===frequencyCategory) || contentClassification[0];
+  const frequencyPrimaryStats = useMemo(() => contentClassification.map(category=>({
+    ...category,
+    count:categorizedTranscript.filter(item=>item.contentMatches.some(hit=>hit.category===category.name)).length
+  })), []);
+  const frequencySecondaryStats = useMemo(() => activeFrequencyCategory.children.map(subcategory=>({
+    ...subcategory,
+    count:categorizedTranscript.filter(item=>item.contentMatches.some(hit=>hit.category===activeFrequencyCategory.name&&hit.subcategory===subcategory.name)).length
+  })), [activeFrequencyCategory]);
+  const frequencyScopeMatches = useMemo(() => categorizedTranscript.flatMap(item=>item.contentMatches.filter(hit=>hit.category===activeFrequencyCategory.name&&(!frequencySubcategory||hit.subcategory===frequencySubcategory)).map(hit=>({...hit,time:item.time}))), [activeFrequencyCategory,frequencySubcategory]);
+  const frequencyScopeSegmentCount = useMemo(() => new Set(frequencyScopeMatches.map(hit=>hit.time)).size, [frequencyScopeMatches]);
+  const visibleKeywordStats = useMemo(() => {
+    const stats=new Map();
+    frequencyScopeMatches.forEach(hit=>{
+      const key=`${hit.category}::${hit.subcategory}::${hit.keyword}`;
+      const current=stats.get(key)||{keyword:hit.keyword,category:hit.category,subcategory:hit.subcategory,occurrenceCount:0,segmentTimes:new Set()};
+      current.occurrenceCount+=1; current.segmentTimes.add(hit.time); stats.set(key,current);
+    });
+    return [...stats.values()].map(item=>({...item,segmentCount:item.segmentTimes.size})).sort((a,b)=>b.occurrenceCount-a.occurrenceCount||b.segmentCount-a.segmentCount||a.keyword.localeCompare(b.keyword));
+  }, [frequencyScopeMatches]);
+  const frequencyScopeLabel = frequencySubcategory ? `${activeFrequencyCategory.name} > ${frequencySubcategory}` : activeFrequencyCategory.name;
 
-  const applyFrequencyCategory = category => { setFrequencyCategory(category); setSelectedWord(''); setActiveTag(category); setTranscriptPage(1); };
+  const applyFrequencyCategory = category => { setFrequencyCategory(category); setFrequencySubcategory(''); setSelectedWord(''); setSelectedWordScope(null); setActiveTag('全部口播'); setTranscriptPage(1); };
+  const toggleFrequencySubcategory = subcategory => { setFrequencySubcategory(current=>current===subcategory?'':subcategory); setSelectedWord(''); setSelectedWordScope(null); setActiveTag('全部口播'); setTranscriptPage(1); };
   const clearFrequencyFilter = () => {
     setSelectedWord('');
+    setSelectedWordScope(null);
     setActiveTag('全部口播');
     setTranscriptPage(1);
   };
@@ -234,12 +294,14 @@ export function Workspace({ video, onBack }) {
   const filteredTranscript = useMemo(() => categorizedTranscript.filter(item => {
     const searchOk = !search || item.text.includes(search);
     if (sensitiveOn) return searchOk && item.hasRisk;
-    const tagOk = activeTag === '全部口播' || item.tags?.includes(activeTag);
+    const primaryFilter = primaryCompassStats.find(category=>category.name===activeTag);
+    const tagOk = activeTag === '全部口播' || (primaryFilter ? item.contentTags.includes(primaryFilter.name) : item.legacyTags?.includes(activeTag));
+    const secondaryOk = !selectedCompassSecondary || !primaryFilter || activeCompassSecondaryData?.items.includes(item);
     const highlightFilters = [];
-    if (selectedWord) highlightFilters.push(item.text.includes(selectedWord));
+    if (selectedWord) highlightFilters.push(selectedWordScope ? item.contentMatches.some(hit=>hit.keyword===selectedWord&&hit.category===selectedWordScope.category&&(!selectedWordScope.subcategory||hit.subcategory===selectedWordScope.subcategory)) : item.text.includes(selectedWord));
     const highlightOk = highlightFilters.length === 0 || highlightFilters.some(Boolean);
-    return searchOk && tagOk && highlightOk;
-  }), [search, activeTag, selectedWord, sensitiveOn]);
+    return searchOk && tagOk && secondaryOk && highlightOk;
+  }), [search, activeTag, selectedWord, selectedWordScope, sensitiveOn, primaryCompassStats, selectedCompassSecondary, activeCompassSecondaryData]);
 
   const commentPageSize = 50;
   const transcriptPageSize = 30;
@@ -267,10 +329,16 @@ export function Workspace({ video, onBack }) {
   const nearestCommentTime = comments.reduce((best,item)=>Math.abs(toSeconds(item.time)-toSeconds(currentTime))<Math.abs(toSeconds(best)-toSeconds(currentTime))?item.time:best,comments[0].time);
 
   const renderText = (text, item) => {
-    const shouldHighlight = hit => selectedWord ? hit.keyword===selectedWord : activeTag!=='全部口播' && hit.category===activeTag;
-    const categoryMatches=item.keywordMatches.filter(shouldHighlight).map(hit=>({...hit,kind:'category'}));
+    const activePrimaryFilter = primaryCompassStats.find(category=>category.name===activeTag);
+    const categoryMatches = selectedWord
+      ? selectedWordScope
+        ? item.contentMatches.filter(hit=>hit.keyword===selectedWord&&hit.category===selectedWordScope.category&&(!selectedWordScope.subcategory||hit.subcategory===selectedWordScope.subcategory)).map(hit=>({...hit,kind:'category'}))
+        : item.keywordMatches.filter(hit=>hit.keyword===selectedWord).map(hit=>({...hit,kind:'category'}))
+      : activePrimaryFilter
+        ? item.contentMatches.filter(hit=>hit.category===activePrimaryFilter.name && (!selectedCompassSecondary || hit.subcategory===selectedCompassSecondary)).map(hit=>({...hit,kind:'category'}))
+        : activeTag!=='全部口播' ? item.keywordMatches.filter(hit=>hit.category===activeTag).map(hit=>({...hit,kind:'category'})) : [];
     const riskMatches=sensitiveOn ? item.riskMatches.map(hit=>({...hit,kind:'risk'})) : [];
-    const inlineMatches=inlineHighlight?.time===item.time ? (inlineHighlight.type==='risk'?item.riskMatches.map(hit=>({...hit,kind:'risk'})):item.keywordMatches.filter(hit=>hit.category===inlineHighlight.value).map(hit=>({...hit,kind:'category'}))) : [];
+    const inlineMatches=inlineHighlight?.time===item.time ? (inlineHighlight.type==='risk'?item.riskMatches.map(hit=>({...hit,kind:'risk'})):item.contentMatches.filter(hit=>hit.category===inlineHighlight.value||hit.subcategory===inlineHighlight.value).map(hit=>({...hit,kind:'category'}))) : [];
     const matches=[...riskMatches,...categoryMatches,...inlineMatches].sort((a,b)=>(a.kind==='risk'?0:1)-(b.kind==='risk'?0:1) || (b.end-b.start)-(a.end-a.start) || a.start-b.start).reduce((accepted,hit)=>accepted.some(item=>hit.start<item.end&&item.start<hit.end)?accepted:[...accepted,hit],[]).sort((a,b)=>a.start-b.start);
     if(!matches.length && !search) return text;
     const parts=[]; let cursor=0;
@@ -364,11 +432,11 @@ export function Workspace({ video, onBack }) {
       <main className={'transcript-panel '+(centerCollapsed?'collapsed':'')}>
         <button className="collapse-btn" aria-label={centerCollapsed?'展开口播与内容分析':'收起口播与内容分析'} onClick={()=>setCenterCollapsed(v=>{const next=!v;if(next)setRightCollapsed(false);return next;})}>{centerCollapsed?<MenuUnfoldOutlined/>:<MenuFoldOutlined/>}</button>
         {centerCollapsed ? <span className="vertical-label">口播与内容分析</span> : <><div className="transcript-toolbar"><div className="toolbar-locate"><strong>口播稿</strong><span className="locator-label"><SwapOutlined/>快速定位</span><input aria-label="小时" type="number" min="0" max="99" value={locateHour} onFocus={e=>e.currentTarget.select()} onChange={e=>setLocateHour(e.target.value)}/><b>:</b><input aria-label="分钟" type="number" min="0" max="59" value={locateMinute} onFocus={e=>e.currentTarget.select()} onChange={e=>setLocateMinute(e.target.value)}/><b>:</b><input aria-label="秒" type="number" min="0" max="59" value={locateSecond} onFocus={e=>e.currentTarget.select()} onChange={e=>setLocateSecond(e.target.value)}/><button onClick={()=>jumpToTime(`${String(locateHour).padStart(2,'0')}:${String(locateMinute).padStart(2,'0')}:${String(locateSecond).padStart(2,'0')}`)}>跳转</button></div><div className="analysis-actions"><div className="transcript-search"><button aria-label="搜索口播稿" className={searchOpen||search?'active':''} onClick={()=>setSearchOpen(v=>!v)}><SearchOutlined/></button>{searchOpen&&<div className="transcript-search-popover"><SearchOutlined/><input autoFocus placeholder="搜索全部口播" value={search} onChange={event=>{setSearch(event.target.value);setTranscriptPage(1)}}/><button onClick={()=>{setSearch('');setSearchOpen(false);setTranscriptPage(1)}}>清空</button></div>}</div><button className={'compass-toggle '+(compassOpen?'active':'')} onClick={()=>{setCompassOpen(v=>!v);setHighFreqOpen(false)}}>内容分类 <CaretDownFilled/></button><button className={highFreqOpen||selectedWord?'active':''} onClick={()=>{setHighFreqOpen(v=>!v);setCompassOpen(false)}}>高频词{selectedWord&&<em>1</em>}</button><button className={sensitiveOn?'active':''} onClick={()=>{setSensitiveOn(v=>!v);setTranscriptPage(1)}}>敏感词 <em>{sensitiveSegmentCount}</em></button></div></div>
-        {compassOpen && <section className="compass-panel"><header><div><strong>内容分类</strong><span>基于关键词命中的内容构成</span></div><button onClick={()=>setCompassOpen(false)}>收起 <CaretDownFilled/></button></header><div className="compass-body"><div className="donut"><strong>100%</strong><span>已分类内容</span></div><div className="compass-bars">{compass.map(([name,val,color,count])=><button key={name} onClick={()=>{setActiveTag(name);setTranscriptPage(1);setCompassOpen(false)}}><span>{name}</span><i><b style={{width:val*2.5+'px',background:color}}></b></i><em>{val}% · {count}</em></button>)}</div></div><footer>多标签口播按命中分类分别计入占比。</footer></section>}
+        {compassOpen && <section className="compass-panel compass-panel-v2"><header><div><strong>内容分类</strong><span>基于关键词命中的口播内容构成</span></div><button onClick={()=>setCompassOpen(false)}>收起 <CaretDownFilled/></button></header><section className="primary-overview"><strong className="compass-section-title">一级分类总览</strong><div className="primary-overview-main"><div className="radar-wrap"><svg viewBox="0 0 200 188" role="img" aria-label="六维内容分类雷达图"><title>六维内容分类雷达图</title>{[28,46,64].map(radius=><polygon key={radius} className="radar-grid" points={Array.from({length:6},(_,index)=>{const angle=(-90+index*60)*Math.PI/180;return `${100+Math.cos(angle)*radius},${94+Math.sin(angle)*radius}`}).join(' ')}/>)}{radarPoints.map(point=><line className="radar-axis" key={`axis-${point.name}`} x1="100" y1="94" x2={point.labelX} y2={point.labelY}/>)}<polygon className="radar-shape" points={radarPoints.map(point=>`${point.x},${point.y}`).join(' ')}/>{radarPoints.map(point=><g className="radar-node" key={point.name} onClick={()=>{setSelectedCompassPrimary(point.name);setSelectedCompassSecondary('');setActiveTag(point.name);setTranscriptPage(1)}}><title>{`${point.name}：${point.percent}% · ${point.count} 条`}</title><circle cx={point.x} cy={point.y} r="3" fill={point.color}/><text x={point.labelX} y={point.labelY} textAnchor={point.labelX<88?'end':point.labelX>112?'start':'middle'}>{point.name}</text></g>)}</svg></div><div className="primary-category-list">{primaryCompassStats.map(category=><button key={category.name} className={activeCompassPrimary.name===category.name?'active':''} onClick={()=>{setSelectedCompassPrimary(category.name);setSelectedCompassSecondary('');setActiveTag(category.name);setSelectedWord('');setTranscriptPage(1)}}><span className="primary-dot" style={{background:category.color}}></span><strong>{category.name}</strong><em>{category.percent}% · {category.count}</em><i><b style={{width:`${Math.min(100,category.percent*3)}%`,background:category.color}}></b></i></button>)}</div></div></section><section className="secondary-overview"><strong className="compass-section-title">二级分类明细</strong><div className="secondary-current">当前分类：<b>{activeCompassPrimary.name}</b><span>共命中 {activeCompassPrimary.count} 条 · 占全部口播 {activeCompassPrimary.percent}%</span></div><div className="secondary-category-list">{compassSecondaryStats.map(item=><button title={`${item.name}\n典型命中词：${item.keywords.slice(0,6).map(keyword=>keyword.keyword).join('、') || '暂无命中词'}`} className={selectedCompassSecondary===item.name?'active':''} key={item.name} onClick={()=>{const isSelected=selectedCompassSecondary===item.name;setSelectedCompassSecondary(isSelected?'':item.name);setActiveTag(activeCompassPrimary.name);setSelectedWord('');setTranscriptPage(1);setCompassOpen(false)}}><strong>{item.name}</strong><em>{item.percent}% · {item.count}</em><i><b style={{width:`${item.percent}%`,background:activeCompassPrimary.color}}></b></i></button>)}</div></section><footer><span>同一条口播可命中多个分类，各分类占比独立计算</span><button onClick={()=>{setSelectedCompassPrimary('');setSelectedCompassSecondary('');setSelectedWord('');setActiveTag('全部口播');setTranscriptPage(1);setCompassOpen(false)}}>清除筛选</button></footer></section>}
         <div className="transcript-quick-locate"><strong>快速定位</strong><div><input aria-label="口播稿快速定位" type="range" min="0" max={toSeconds(videoDuration)} step="60" value={Math.min(videoSeconds,toSeconds(videoDuration))} onChange={event=>jumpToTime(toTime(Number(event.target.value)))}/><span className="current-locate">{toTime(Math.min(videoSeconds,toSeconds(videoDuration))).slice(0,5)}</span><div className="locate-ticks">{['00:00','5min','10min','15min','20min','25min','30min','35min','40min'].map(label=><span key={label}>{label}</span>)}</div></div>
         </div>
-{highFreqOpen&&<section className="frequency-panel"><header><div><strong>高频词</strong><span>{frequencyCategory} · {categorySegmentCounts[frequencyCategory]} 条口播命中</span></div><button onClick={clearFrequencyFilter}>清除关键词筛选</button></header><div className="frequency-category-tabs" role="tablist" aria-label="高频词分类">{frequencyCategoryOptions.map(category=>{const count=categorySegmentCounts[category];return <button key={category} role="tab" aria-selected={frequencyCategory===category} className={frequencyCategory===category?'active':''} onClick={()=>applyFrequencyCategory(category)}>{category}<b>{count}</b></button>})}</div><div className="frequency-list-head"><strong>高频关键词</strong></div><div className="frequency-keyword-grid">{visibleKeywordStats.length?visibleKeywordStats.map(item=><button title={`出现${item.occurrenceCount}次，涉及${item.segmentCount}条口播`} className={selectedWord===item.keyword?'active':''} key={`${item.category}-${item.keyword}`} onClick={()=>{setActiveTag(item.category);setSelectedWord(item.keyword);setTranscriptPage(1)}}><strong>{item.keyword}</strong><span>{item.occurrenceCount}次</span></button>):<div className="frequency-empty">该分类暂无命中关键词</div>}</div></section>}
-        <div className="locate-strip"><button className={activeTag==='全部口播'?'active':''} onClick={()=>{setActiveTag('全部口播');setSelectedWord('');setFrequencyCategory(categoryOrder[0]);setTranscriptPage(1)}}>全部口播</button>{topCompassCategories.map(tag=><button key={tag} className={activeTag===tag?'active':''} onClick={()=>{setActiveTag(tag);setSelectedWord('');setFrequencyCategory(tag);setTranscriptPage(1)}}>{tag}</button>)}<span>{selectedWord?<><b>{frequencyCategory} &gt; {selectedWord}</b> · 共命中 {filteredTranscript.length} 条口播 / 出现 {keywordStats.find(item=>item.keyword===selectedWord&&item.category===frequencyCategory)?.occurrenceCount||0} 次 <button onClick={clearFrequencyFilter}>清除筛选</button></>:<>定位结果 {filteredTranscript.length} 条</>}</span></div>
+{highFreqOpen&&<section className="frequency-panel frequency-panel-v2"><header><div><strong>高频词</strong><span>{frequencyScopeLabel} · {frequencyScopeSegmentCount} 条口播命中</span></div><button onClick={()=>{clearFrequencyFilter();setHighFreqOpen(false)}}>清除关键词筛选</button></header><section className="frequency-classification"><strong>话术分类</strong><div className="frequency-primary-tags" role="tablist" aria-label="高频词一级分类">{frequencyPrimaryStats.map(category=><button key={category.name} role="tab" aria-selected={frequencyCategory===category.name} className={frequencyCategory===category.name?'active':''} onClick={()=>applyFrequencyCategory(category.name)}>{category.name}<b>{category.count}</b></button>)}</div>{activeFrequencyCategory.name!=='问题解答'&&<><strong className="frequency-secondary-title">{activeFrequencyCategory.name}</strong><div className="frequency-secondary-tags" role="tablist" aria-label="高频词二级分类">{frequencySecondaryStats.map(subcategory=><button key={subcategory.name} role="tab" aria-selected={frequencySubcategory===subcategory.name} className={frequencySubcategory===subcategory.name?'active':''} onClick={()=>toggleFrequencySubcategory(subcategory.name)}>{subcategory.name}<b>{subcategory.count}</b></button>)}</div></>}</section><div className="frequency-list-head"><strong>高频关键词</strong><span>出现次数 <DownOutlined/></span></div><div className="frequency-keyword-grid">{visibleKeywordStats.length?visibleKeywordStats.map(item=><button title={`出现${item.occurrenceCount}次，涉及${item.segmentCount}条口播`} className={selectedWordScope&&selectedWord===item.keyword&&selectedWordScope.category===item.category&&selectedWordScope.subcategory===item.subcategory?'active':''} key={`${item.category}-${item.subcategory}-${item.keyword}`} onClick={()=>{const isSelected=selectedWord===item.keyword&&selectedWordScope?.category===item.category&&selectedWordScope?.subcategory===item.subcategory;if(isSelected){clearFrequencyFilter()}else{setActiveTag('全部口播');setSelectedWord(item.keyword);setSelectedWordScope({category:item.category,subcategory:item.subcategory});setTranscriptPage(1)}setHighFreqOpen(false)}}><strong>{item.keyword}</strong><span>{item.occurrenceCount}次</span></button>):<div className="frequency-empty">该分类暂无命中关键词</div>}</div></section>}
+        <div className="locate-strip"><button className={activeTag==='全部口播'?'active':''} onClick={()=>{setActiveTag('全部口播');setSelectedCompassPrimary('');setSelectedCompassSecondary('');setSelectedWord('');setSelectedWordScope(null);setTranscriptPage(1)}}>全部口播</button>{topSecondaryCategories.map(item=><button key={`${item.category}-${item.name}`} className={activeTag===item.category&&selectedCompassSecondary===item.name?'active':''} onClick={()=>{setSelectedCompassPrimary(item.category);setSelectedCompassSecondary(item.name);setActiveTag(item.category);setSelectedWord('');setSelectedWordScope(null);setTranscriptPage(1)}}>{item.name}</button>)}<span>{selectedWord?<><b>{selectedWordScope?frequencyScopeLabel:frequencyCategory} &gt; {selectedWord}</b> · 共命中 {filteredTranscript.length} 条口播 / 出现 {(selectedWordScope?visibleKeywordStats.find(item=>item.keyword===selectedWord&&item.category===selectedWordScope.category&&item.subcategory===selectedWordScope.subcategory):keywordStats.find(item=>item.keyword===selectedWord&&item.category===frequencyCategory))?.occurrenceCount||0} 次 <button onClick={clearFrequencyFilter}>清除筛选</button></>:<>定位结果 {filteredTranscript.length} 条</>}</span></div>
         <div className="transcript-list">{visibleTranscript.map((item,index)=>{const isMinuteMarker=index===0||visibleTranscript[index-1]?.minute!==item.minute;const toggleInline=(type,value)=>setInlineHighlight(current=>current?.time===item.time&&current.type===type&&current.value===value?null:{time:item.time,type,value});return <article key={item.time} className={nearestTranscriptTime===item.time?'current ':''} onClick={()=>{setVideoSeconds(toSeconds(item.time));if(linked){const [h,m,s]=item.time.split(':');setCurrentTime(item.time);setLocateHour(h);setLocateMinute(m);setLocateSecond(s)}}}><div className="minute minute-anchor" onMouseEnter={()=>transcriptAnchorEnabled&&isMinuteMarker&&setTranscriptAnchorMinute(item.minute)} onMouseLeave={()=>transcriptAnchorEnabled&&setTranscriptAnchorMinute('')}>{isMinuteMarker?item.minute:''}{transcriptAnchorEnabled&&isMinuteMarker&&transcriptAnchorMinute===item.minute&&<section className="transcript-anchor-popover" onClick={event=>event.stopPropagation()}><strong>点击时间点快速跳转</strong><div className="transcript-anchor-times">{transcriptAnchorTimes.map(time=><button key={time} onClick={()=>{jumpToTime(time);setTranscriptAnchorMinute('')}}>{time.slice(0,5)}</button>)}</div><div className="anchor-quick-locate"><span>快速定位</span><input aria-label="小时" type="number" min="0" max="99" value={locateHour} onFocus={event=>event.currentTarget.select()} onChange={event=>setLocateHour(event.target.value)}/><b>:</b><input aria-label="分钟" type="number" min="0" max="59" value={locateMinute} onFocus={event=>event.currentTarget.select()} onChange={event=>setLocateMinute(event.target.value)}/><b>:</b><input aria-label="秒" type="number" min="0" max="59" value={locateSecond} onFocus={event=>event.currentTarget.select()} onChange={event=>setLocateSecond(event.target.value)}/><button onClick={()=>{jumpToTime(`${String(locateHour).padStart(2,'0')}:${String(locateMinute).padStart(2,'0')}:${String(locateSecond).padStart(2,'0')}`);setTranscriptAnchorMinute('')}}>跳转</button></div></section>}</div><div className="utterance"><div className="utterance-meta"><button>{item.time}</button>{(item.tags.length>0||item.hasRisk)&&<span>{item.tags.map(t=><em className={inlineHighlight?.time===item.time&&inlineHighlight.type==='category'&&inlineHighlight.value===t?'active':''} key={t} onClick={event=>{event.stopPropagation();toggleInline('category',t)}}>{t}</em>)}{item.hasRisk&&<em className={'sensitive-tag '+(inlineHighlight?.time===item.time&&inlineHighlight.type==='risk'?'active':'')} onClick={event=>{event.stopPropagation();toggleInline('risk','敏感')}}>敏感</em>}</span>}</div><p>{renderText(item.text,item)}</p></div></article>})}</div><div className="evidence-pagination transcript-pagination"><button disabled={transcriptPage===1} onClick={()=>setTranscriptPage(p=>p-1)}><LeftOutlined/></button><span>{transcriptPage}/{transcriptPages}</span><button disabled={transcriptPage===transcriptPages} onClick={()=>setTranscriptPage(p=>p+1)}><DownOutlined/></button></div></>}
       </main>
       <div className="resizer" role="separator" aria-label="调整AI助手栏宽度" aria-orientation="vertical" onMouseDown={e=>startResize('right',e)}></div>
