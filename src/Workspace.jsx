@@ -2,7 +2,7 @@
 import { ArrowLeftOutlined, CaretDownFilled, CheckOutlined, CloseOutlined, CopyOutlined, DownOutlined, EditOutlined, ExclamationCircleOutlined, LeftOutlined, LinkOutlined, MenuFoldOutlined, MenuUnfoldOutlined, MessageOutlined, MoreOutlined, PauseCircleFilled, PlayCircleFilled, PlusOutlined, SearchOutlined, SendOutlined, SettingOutlined, SwapOutlined, UserOutlined } from '@ant-design/icons';
 import transcript from './transcript-data';
 import { categoryOrder, speechCategoryKeywords } from './speech-category-keywords';
-import latestContentClassification from '../../AI直播复盘_真实口播关键词分类映射_最新版.json';
+import latestContentClassification from './AI直播复盘_真实口播关键词分类映射_最新版.json';
 import naturalQuestionReport from '../report/natural-question.md?raw';
 import overallDiagnosisReport from '../report/overall-diagnosis.md?raw';
 import danmuDiagnosisReport from '../report/danmu-diagnosis.md?raw';
